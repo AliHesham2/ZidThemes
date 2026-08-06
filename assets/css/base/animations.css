@@ -1,86 +1,91 @@
 /* Scroll Reveal Engine — Shared Motion Standard (req/ui-standard.md §9) */
 
-@keyframes reveal-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+@layer components {
+  @keyframes reveal-fade-up {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-@keyframes reveal-deco-expand {
-  from {
-    opacity: 0;
-    transform: scaleX(0);
+  @keyframes reveal-deco-expand {
+    from {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+    to {
+      opacity: 1;
+      transform: scaleX(1);
+    }
   }
-  to {
+
+  @keyframes reveal-card-rise {
+    from {
+      opacity: 0;
+      transform: translateY(60px) scale(0.93);
+      filter: blur(2px);
+    }
+    60% {
+      filter: blur(0);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      filter: blur(0);
+    }
+  }
+
+  /* Hidden pre-state: applied only when JS scripting is enabled */
+  @media (scripting: enabled) {
+    [data-reveal]:not(.is-revealed) [data-reveal-item] {
+      opacity: 0;
+    }
+    [data-reveal]:not(.is-revealed) [data-reveal-item="deco"] {
+      transform: scaleX(0);
+      transform-origin: center;
+    }
+  }
+
+  /* State 2: Triggered Keyframe Animations */
+  [data-reveal].is-revealing [data-reveal-item="eyebrow"] {
+    animation: reveal-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
+  }
+
+  [data-reveal].is-revealing [data-reveal-item="heading"] {
+    animation: reveal-fade-up 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
+  }
+
+  [data-reveal].is-revealing [data-reveal-item="deco"] {
+    transform-origin: center;
+    animation: reveal-deco-expand 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
+  }
+
+  [data-reveal].is-revealing [data-reveal-item="card"] {
+    animation: reveal-card-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1)
+      calc(var(--i, 0) * 0.12s + 0.35s) both;
+  }
+
+  /* State 3: Released State (Clears animation clamping to unblock CSS :hover) */
+  [data-reveal].is-revealed [data-reveal-item] {
     opacity: 1;
+    animation: none;
+  }
+
+  [data-reveal].is-revealed [data-reveal-item="deco"] {
     transform: scaleX(1);
   }
-}
 
-@keyframes reveal-card-rise {
-  from {
-    opacity: 0;
-    transform: translateY(60px) scale(0.93);
-    filter: blur(2px);
-  }
-  60% {
-    filter: blur(0);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-    filter: blur(0);
-  }
-}
-
-/* Hidden pre-state: applied only when JS scripting is enabled */
-@media (scripting: enabled) {
-  [data-reveal]:not(.is-revealed) [data-reveal-item] {
-    opacity: 0;
-  }
-  [data-reveal]:not(.is-revealed) [data-reveal-item="deco"] {
-    transform: scaleX(0);
-    transform-origin: center;
-  }
-}
-
-/* State 2: Triggered Keyframe Animations */
-[data-reveal].is-revealing [data-reveal-item="eyebrow"] {
-  animation: reveal-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) 0.05s both;
-}
-
-[data-reveal].is-revealing [data-reveal-item="heading"] {
-  animation: reveal-fade-up 0.72s cubic-bezier(0.22, 1, 0.36, 1) 0.18s both;
-}
-
-[data-reveal].is-revealing [data-reveal-item="deco"] {
-  animation: reveal-deco-expand 0.55s cubic-bezier(0.22, 1, 0.36, 1) 0.3s both;
-}
-
-[data-reveal].is-revealing [data-reveal-item="card"] {
-  animation: reveal-card-rise 0.75s cubic-bezier(0.22, 1, 0.36, 1) calc(var(--i, 0) * 0.12s + 0.35s)
-    both;
-}
-
-/* State 3: Released State (Clears animation clamping to unblock CSS :hover) */
-[data-reveal].is-revealed [data-reveal-item] {
-  opacity: 1 !important;
-  transform: none !important;
-  animation: none !important;
-  filter: none !important;
-}
-
-/* Reduced Motion Override */
-@media (prefers-reduced-motion: reduce) {
-  [data-reveal] [data-reveal-item] {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-    filter: none !important;
+  /* Reduced Motion Override */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal] [data-reveal-item] {
+      opacity: 1 !important;
+      transform: none !important;
+      animation: none !important;
+      filter: none !important;
+    }
   }
 }

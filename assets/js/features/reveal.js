@@ -4,6 +4,19 @@ const observedContainers = new WeakSet();
 let sharedObserver = null;
 
 /**
+ * Check if an element is currently intersecting the visible viewport
+ * @param {Element} el
+ * @returns {boolean}
+ */
+function isIntersectingViewport(el) {
+  if (!el || typeof el.getBoundingClientRect !== "function") return false;
+  const rect = el.getBoundingClientRect();
+  const vh = window.innerHeight || document.documentElement.clientHeight;
+  const vw = window.innerWidth || document.documentElement.clientWidth;
+  return rect.top < vh && rect.bottom > 0 && rect.left < vw && rect.right > 0;
+}
+
+/**
  * Reveal container immediately without animation (used for reduced motion, unsupported observer, or fallback)
  * @param {Element} container
  */
@@ -54,7 +67,6 @@ function activateContainer(container) {
   };
 
   const handleAnimationEnd = (e) => {
-    // Animation events bubble. Wait 50ms after the last animationend event to ensure staggered items settle.
     if (e.target.closest("[data-reveal]") === container) {
       if (debounceTimer) clearTimeout(debounceTimer);
       debounceTimer = setTimeout(markRevealed, 50);
@@ -64,7 +76,6 @@ function activateContainer(container) {
   container.addEventListener("animationend", handleAnimationEnd);
 
   // Hard fallback timer (2500ms): guarantees .is-revealed release even if animationend does not fire.
-  // 2500ms covers max stagger duration (e.g. 10 cards = 0.35s + 9 * 0.12s + 0.75s = 2.18s).
   fallbackTimer = setTimeout(markRevealed, 2500);
 }
 
@@ -104,7 +115,6 @@ export function initScrollReveal() {
 
     const containers = document.querySelectorAll("[data-reveal]");
     containers.forEach((container) => {
-      // Warn on unsupported nested [data-reveal] containers
       if (container.parentElement && container.parentElement.closest("[data-reveal]")) {
         console.warn(
           "[ScrollReveal] Nested [data-reveal] container detected and unsupported:",
@@ -137,11 +147,14 @@ listenEvent("content:loaded", () => {
   initScrollReveal();
 });
 
-// Global backstop: reveal any container still un-revealed 3000ms after window load
+// Viewport-only backstop: 3000ms after load, reveal ONLY un-revealed containers that are currently within the visible viewport.
+// Containers below the fold remain observed so they animate naturally on scroll arrival.
 window.addEventListener("load", () => {
   setTimeout(() => {
     document.querySelectorAll("[data-reveal]:not(.is-revealed)").forEach((container) => {
-      activateContainer(container);
+      if (isIntersectingViewport(container)) {
+        activateContainer(container);
+      }
     });
   }, 3000);
 });
