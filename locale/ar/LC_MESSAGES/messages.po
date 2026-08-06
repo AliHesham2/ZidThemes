@@ -15,62 +15,62 @@ msgstr ""
 # ============================================================================
 # ZidMirvela — Arabic catalogue
 #
-# Arabic is the PRIMARY language of this store. Every empty msgstr below
-# renders as English on the live site, so an empty entry is a visible bug.
+# English needs no catalogue: the msgid IS the English source.
 #
 # RULES
 #   - msgid must match the template byte-for-byte, punctuation included.
-#     "All Rights Reserved" and "All Rights Reserved." are DIFFERENT strings.
-#     Do not edit any msgid — only fill in msgstr.
-#   - Keep %(name)s placeholders exactly as-is; you may move them within the
-#     sentence (that is the point of gettext — Arabic word order is yours).
-#   - Never letter-space Arabic. Do not add Latin punctuation runs.
+#     "Save" and "Save." are DIFFERENT strings.
+#   - Never edit a msgid here without editing the template in the same commit,
+#     and vice versa — a drift silently reverts that string to English.
+#   - %(name)s placeholders may MOVE within a sentence but must not change.
 #
-# STATUS: 3 of 31 translated. 28 remaining, marked TODO.
+# Tone: Mirvela is a beauty retailer with a mostly female audience, so the
+# customer-facing calls to action use the feminine imperative (ابحثي / اكتشفي /
+# ابدئي). Switch to neutral phrasing if the brand voice changes.
 # ============================================================================
 
 
-# ── Header · icon labels (screen-reader only, keep them short) ──────────────
+# ── Header · icon labels (screen-reader only) ───────────────────────────────
 
 #: header.jinja:14
 msgid "Open main menu"
-msgstr ""
+msgstr "فتح القائمة الرئيسية"
 
 #: header.jinja:44
 msgid "Open search"
-msgstr ""
+msgstr "فتح البحث"
 
 #: header.jinja:83
 msgid "Open cart"
-msgstr ""
+msgstr "فتح سلة التسوق"
 
 #: header.jinja:63 footer.jinja:102 components/layout/mobile_drawer.jinja:137
 msgid "My Account"
-msgstr ""
+msgstr "حسابي"
 
 #: footer.jinja:110 components/layout/mobile_drawer.jinja:155
 msgid "Wishlist"
-msgstr ""
+msgstr "المفضلة"
 
 #: components/layout/nav.jinja:1
 msgid "Main Navigation"
-msgstr ""
+msgstr "التنقل الرئيسي"
 
 
 # ── Mobile drawer ───────────────────────────────────────────────────────────
 
 #: components/layout/mobile_drawer.jinja:59
 msgid "Mobile Menu"
-msgstr ""
+msgstr "قائمة الجوال"
 
 #: components/layout/mobile_drawer.jinja:24
 msgid "Close menu"
-msgstr ""
+msgstr "إغلاق القائمة"
 
 #. Opens the country/currency + language dialog.
 #: components/layout/mobile_drawer.jinja:178
 msgid "Country & Language"
-msgstr ""
+msgstr "الدولة واللغة"
 
 
 # ── Search drawer ───────────────────────────────────────────────────────────
@@ -78,113 +78,108 @@ msgstr ""
 #. Heading at the top of the search drawer.
 #: components/layout/search_drawer.jinja:21
 msgid "Search Products"
-msgstr ""
+msgstr "ابحثي عن المنتجات"
 
-#. Submit BUTTON label — keep it to one word if possible.
+#. Submit BUTTON label — keep it to one word.
 #: components/layout/search_drawer.jinja:66
 msgid "Search"
-msgstr ""
+msgstr "بحث"
 
 #: components/layout/search_drawer.jinja:47
 msgid "Search for skincare, makeup, perfumes..."
-msgstr ""
+msgstr "ابحثي عن العناية بالبشرة، المكياج، العطور..."
 
-#. Placeholder on the mobile drawer's search box. Already translated.
 #: components/layout/mobile_drawer.jinja:55
 msgid "Search products..."
 msgstr "البحث عن المنتجات..."
 
 #: components/layout/search_drawer.jinja:27
 msgid "Close search"
-msgstr ""
+msgstr "إغلاق البحث"
 
 
 # ── Cart drawer ─────────────────────────────────────────────────────────────
 
 #: components/layout/cart_drawer.jinja:22
 msgid "Shopping Cart"
-msgstr ""
+msgstr "سلة التسوق"
 
 #: components/layout/cart_drawer.jinja:31
 msgid "Close cart"
-msgstr ""
+msgstr "إغلاق السلة"
 
 #: components/layout/cart_drawer.jinja:65
 msgid "Your cart is empty"
-msgstr ""
+msgstr "سلتك فارغة"
 
 #: components/layout/cart_drawer.jinja:66
 msgid "Explore our products and start shopping"
-msgstr ""
+msgstr "اكتشفي منتجاتنا وابدئي التسوق"
 
 #. Button in the empty-cart state.
 #: components/layout/cart_drawer.jinja:72
 msgid "Continue Shopping"
-msgstr ""
+msgstr "مواصلة التسوق"
 
 #. Primary checkout CTA — the most important string in the cart.
 #: components/layout/cart_drawer.jinja:93
 msgid "View Cart & Checkout"
-msgstr ""
+msgstr "عرض السلة وإتمام الطلب"
 
 #: components/layout/cart_drawer.jinja:83
 msgid "Taxes and shipping calculated at checkout."
-msgstr ""
+msgstr "تُحتسب الضريبة والشحن عند إتمام الطلب."
 
 
 # ── Footer · column headings ────────────────────────────────────────────────
 
 #: footer.jinja:37
 msgid "Quick Links"
-msgstr ""
+msgstr "روابط سريعة"
 
 #: footer.jinja:78
 msgid "Customer Service"
-msgstr ""
+msgstr "خدمة العملاء"
 
 
 # ── Footer · links ──────────────────────────────────────────────────────────
 
-#. Already translated.
 #: footer.jinja:45
 msgid "Home"
 msgstr "الرئيسية"
 
 #: footer.jinja:53
 msgid "All Products"
-msgstr ""
+msgstr "جميع المنتجات"
 
 #: footer.jinja:61
 msgid "Categories"
-msgstr ""
+msgstr "التصنيفات"
 
 #: footer.jinja:69
 msgid "Blog"
-msgstr ""
+msgstr "المدونة"
 
 #: footer.jinja:86
 msgid "FAQs"
-msgstr ""
+msgstr "الأسئلة الشائعة"
 
 #: footer.jinja:94
 msgid "Shipping & Payment"
-msgstr ""
+msgstr "الشحن والدفع"
 
 
 # ── Footer · brand + legal ──────────────────────────────────────────────────
 
-#. Brand tagline under the logo. Marketing copy — this one wants real
-#. Arabic beauty-retail voice, not a literal translation.
+#. Brand tagline under the logo — marketing copy, not a literal translation.
 #: footer.jinja:27
 msgid ""
 "Your premier destination for skincare, makeup, perfume, and organic beauty "
 "products."
-msgstr ""
+msgstr "وجهتك الأولى لمنتجات العناية بالبشرة والمكياج والعطور والجمال العضوي."
 
 #. Copyright line. %(name)s is the store name.
-#. IMPORTANT: put the Arabic text FIRST so the line reads correctly in RTL —
-#. starting with "©" strands the symbol at the right edge of the page.
-#. Suggested shape:  جميع الحقوق محفوظة © %(name)s
+#. The Arabic leads so the "©" is not stranded at the page edge in RTL.
 #: footer.jinja:139
 msgid "© %(name)s — All Rights Reserved."
-msgstr ""
+msgstr "جميع الحقوق محفوظة © %(name)s"

@@ -1,9 +1,6 @@
 import { listenEvent, notifyContentLoaded } from "../utils/events.js";
 import { esc } from "../utils/escape.js";
-
-/**
- * Wait for Zid SDK readiness helper
- */
+import { waitForZid } from "../utils/zid.js";
 
 const initializedTriggers = new WeakSet();
 
@@ -17,7 +14,7 @@ export class CartManager {
   }
 
   async init() {
-    const ready = await waitForZid();
+    const ready = await waitForZid("cart.get");
     if (!ready) return;
 
     this.bindTriggers();
@@ -75,13 +72,11 @@ export class CartManager {
   }
 
   updateBadgeCount(count) {
+    // Visibility is owned by .is-visible (see header.css) — Tailwind's `hidden`
+    // loses to `inline-flex` in v4's output order, which left an empty blob.
     document.querySelectorAll(".js-cart-count-badge").forEach((el) => {
-      el.textContent = count;
-      if (count > 0) {
-        el.classList.remove("hidden");
-      } else {
-        el.classList.add("hidden");
-      }
+      el.textContent = count > 0 ? count : "";
+      el.classList.toggle("is-visible", count > 0);
     });
   }
 

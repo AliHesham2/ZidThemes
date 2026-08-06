@@ -1,7 +1,7 @@
-<nav class="header__nav hidden items-center gap-6 lg:flex" aria-label="{{ _('Main Navigation') }}">
+<nav class="header__nav hidden items-center gap-8 lg:flex" aria-label="{{ _('Main Navigation') }}">
   {% set menu_items = store.settings.menus.main_menu.items %}
   {% if menu_items and menu_items is iterable %}
-    <ul class="m-0 flex list-none items-center gap-6 p-0">
+    <ul class="m-0 flex list-none items-center gap-8 p-0">
       {% for menu in menu_items %}
         {% set has_children = menu.items is defined and menu.items is iterable and menu.items|length > 0 %}
         {% set nav_url = menu.url | localized_url if menu.resource_type != 'url' else menu.url %}
