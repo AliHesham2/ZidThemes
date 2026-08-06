@@ -9,24 +9,6 @@
       "icon": "layout-bottom-line",
       "settings": [
         {
-          "id": "show_newsletter",
-          "type": "checkbox",
-          "label": {
-            "ar": "إظهار النشرة البريدية",
-            "en": "Show Newsletter Section"
-          },
-          "default": true
-        },
-        {
-          "id": "newsletter_title",
-          "type": "text",
-          "label": {
-            "ar": "عنوان النشرة البريدية",
-            "en": "Newsletter Title"
-          },
-          "default": "اشتركي في نشرتنا البريدية"
-        },
-        {
           "id": "show_social_links",
           "type": "checkbox",
           "label": {

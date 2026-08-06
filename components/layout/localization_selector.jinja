@@ -1,0 +1,99 @@
+<div
+  class="hdr-loc-group text-foreground hidden items-center gap-3 text-xs font-medium lg:flex"
+  data-localization-group
+>
+  <!-- Currency Control -->
+  <div class="group relative" data-loc-currency-wrapper>
+    <button
+      type="button"
+      class="hdr-loc-btn hover:bg-secondary/40 focus-visible:ring-ring flex items-center gap-1 rounded px-2 py-1 transition-colors focus-visible:ring-1 focus-visible:outline-none"
+      data-loc-trigger="currency"
+      data-current-currency="{{ session.currency.code | default('SAR', true) }}"
+      aria-expanded="false"
+    >
+      <span class="font-bold">{{ session.currency.symbol | default('﷼', true) }}</span>
+      <span>{{ session.currency.code | default('SAR', true) }}</span>
+      <svg
+        class="js-loc-chevron h-2.5 w-2.5 transition-transform group-hover:rotate-180"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 12 12"
+        aria-hidden="true"
+      >
+        <path
+          d="M2.5 4.5L6 8L9.5 4.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+    </button>
+    <div
+      class="hdr-loc-dropdown bg-surface border-border z-dropdown absolute start-0 top-full mt-1 hidden min-w-[140px] rounded-md border p-1.5 shadow-md"
+      data-loc-dropdown="currency"
+    >
+      <div class="js-loc-currency-list space-y-1">
+        <!-- Rendered via JS if >1 option -->
+      </div>
+    </div>
+  </div>
+
+  <span class="text-border">|</span>
+
+  <!-- Language Control -->
+  <div class="group relative" data-loc-language-wrapper>
+    <button
+      type="button"
+      class="hdr-loc-btn hover:bg-secondary/40 focus-visible:ring-ring flex items-center gap-1 rounded px-2 py-1 transition-colors focus-visible:ring-1 focus-visible:outline-none"
+      data-loc-trigger="language"
+      data-current-lang="{{ session.lang | default('ar', true) }}"
+      aria-expanded="false"
+    >
+      <svg
+        class="text-muted h-3.5 w-3.5"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+        aria-hidden="true"
+      >
+        <circle
+          cx="12"
+          cy="12"
+          r="9"
+          stroke="currentColor"
+          stroke-width="var(--icon-stroke-width, 1.25)"
+        />
+        <path
+          d="M3.6 9h16.8M3.6 15h16.8"
+          stroke="currentColor"
+          stroke-width="var(--icon-stroke-width, 1.25)"
+          stroke-linecap="round"
+        />
+        <path d="M11.5 3a17 17 0 0 0 0 18M12.5 3a17 17 0 0 1 0 18" stroke="currentColor" />
+      </svg>
+      <span class="font-bold uppercase">{{ session.lang | default('ar', true) }}</span>
+      <svg
+        class="js-loc-chevron h-2.5 w-2.5 transition-transform group-hover:rotate-180"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 12 12"
+        aria-hidden="true"
+      >
+        <path
+          d="M2.5 4.5L6 8L9.5 4.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+        />
+      </svg>
+    </button>
+    <div
+      class="hdr-loc-dropdown bg-surface border-border z-dropdown absolute start-0 top-full mt-1 hidden min-w-[120px] rounded-md border p-1.5 shadow-md"
+      data-loc-dropdown="language"
+    >
+      <div class="js-loc-language-list space-y-1">
+        <!-- Rendered via JS if >1 option -->
+      </div>
+    </div>
+  </div>
+</div>

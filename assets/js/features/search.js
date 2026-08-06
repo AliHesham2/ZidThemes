@@ -1,28 +1,24 @@
 import { listenEvent } from "../utils/events.js";
 
-const initializedForms = new WeakSet();
+function initSearchForm() {
+  const searchInput = document.querySelector("[data-search-input]");
+  const searchForm = searchInput?.closest("form");
 
-function initSearch() {
-  document.querySelectorAll(".search-drawer__form").forEach((form) => {
-    if (initializedForms.has(form)) return;
-    initializedForms.add(form);
+  if (!searchForm || !searchInput) return;
 
-    const input = form.querySelector("[data-search-input]");
-    if (!input) return;
-
-    form.addEventListener("submit", (e) => {
-      if (!input.value.trim()) {
-        e.preventDefault();
-        input.focus();
-      }
-    });
+  searchForm.addEventListener("submit", (e) => {
+    const query = searchInput.value.trim();
+    if (!query) {
+      e.preventDefault();
+      searchInput.focus();
+    }
   });
 }
 
 if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initSearch);
+  document.addEventListener("DOMContentLoaded", initSearchForm);
 } else {
-  initSearch();
+  initSearchForm();
 }
 
-listenEvent("content:loaded", initSearch);
+listenEvent("content:loaded", initSearchForm);

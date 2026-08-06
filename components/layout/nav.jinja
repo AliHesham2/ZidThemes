@@ -4,28 +4,37 @@
     <ul class="m-0 flex list-none items-center gap-6 p-0">
       {% for menu in menu_items %}
         {% set has_children = menu.items is defined and menu.items is iterable and menu.items|length > 0 %}
+        {% set nav_url = menu.url | localized_url if menu.resource_type != 'url' else menu.url %}
+        {% set current_path = session.url.path | default('/', true) %}
+        {#- Reduce an absolute or relative menu URL to a bare path, then compare
+            exactly. A suffix match ("endswith") lights up every menu item whose
+            URL happens to end with "/" on the home page. -#}
+        {% set _host_stripped = (nav_url | string).split('?')[0].split('://')[-1] %}
+        {% set nav_path = ('/' ~ _host_stripped.split('/', 1)[1]) if '/' in _host_stripped else '/' %}
+        {% set is_active = nav_path.rstrip('/') == (current_path | string).rstrip('/') %}
+
         <li class="group relative py-2">
           {% if has_children %}
             <button
               type="button"
-              class="header__nav-link text-foreground hover:text-primary focus-visible:ring-ring inline-flex items-center gap-1.5 px-1 py-2 text-base font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none"
+              class="header__nav-link text-foreground hover:text-primary focus-visible:ring-ring {{ 'is-active' if is_active }} inline-flex items-center gap-1.5 px-1 py-2 text-base font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none"
               aria-expanded="false"
               aria-haspopup="true"
               data-menu-toggle
             >
               <span>{{ menu.label }}</span>
               <svg
-                class="h-4 w-4 transition-transform duration-200 group-hover:rotate-180"
+                class="h-3 w-3 transition-transform duration-200 group-hover:rotate-180"
                 fill="none"
                 stroke="currentColor"
-                viewBox="0 0 24 24"
+                viewBox="0 0 12 12"
                 aria-hidden="true"
               >
                 <path
+                  d="M2.5 4.5L6 8L9.5 4.5"
                   stroke-linecap="round"
                   stroke-linejoin="round"
                   stroke-width="2"
-                  d="M19 9l-7 7-7-7"
                 />
               </svg>
             </button>
@@ -35,18 +44,21 @@
               <ul class="m-0 flex list-none flex-col gap-1 p-0">
                 {% for submenu in menu.items %}
                   {% set has_sub_children = submenu.items is defined and submenu.items is iterable and submenu.items|length > 0 %}
+                  {% set sub_url = submenu.url | localized_url if submenu.resource_type != 'url' else submenu.url %}
+                  {% set is_sub_active = (sub_url != '/' and sub_url and (sub_url|string).endswith(current_path)) %}
                   <li>
                     <a
-                      href="{{ submenu.url | localized_url if submenu.resource_type != 'url' else submenu.url }}"
-                      class="header__dropdown-link text-foreground hover:text-primary hover:bg-secondary/40 block rounded px-3 py-2 text-sm font-medium transition-colors duration-150"
+                      href="{{ sub_url }}"
+                      class="header__dropdown-link text-foreground hover:text-primary hover:bg-secondary/40 {{ 'is-active' if is_sub_active }} block rounded px-3 py-2 text-sm font-medium transition-colors duration-150"
                     >
                       {{ submenu.label }}
                     </a>
                     {% if has_sub_children %}
                       <div class="flex flex-col gap-1 py-1 ps-3">
                         {% for leaf in submenu.items %}
+                          {% set leaf_url = leaf.url | localized_url if leaf.resource_type != 'url' else leaf.url %}
                           <a
-                            href="{{ leaf.url | localized_url if leaf.resource_type != 'url' else leaf.url }}"
+                            href="{{ leaf_url }}"
                             class="header__dropdown-link text-muted hover:text-primary block px-3 py-1.5 text-xs transition-colors duration-150"
                           >
                             {{ leaf.label }}
@@ -60,8 +72,8 @@
             </div>
           {% else %}
             <a
-              href="{{ menu.url | localized_url if menu.resource_type != 'url' else menu.url }}"
-              class="header__nav-link text-foreground hover:text-primary focus-visible:ring-ring inline-flex items-center gap-1.5 px-1 py-2 text-base font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none"
+              href="{{ nav_url }}"
+              class="header__nav-link text-foreground hover:text-primary focus-visible:ring-ring {{ 'is-active' if is_active }} inline-flex items-center gap-1.5 px-1 py-2 text-base font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none"
             >
               <span>{{ menu.label }}</span>
             </a>

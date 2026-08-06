@@ -20,6 +20,13 @@
 
 /* Tailwind Theme Inline Mapping */
 @theme inline {
+  /* 🚨 LOAD-BEARING. reset.css sets html{font-size:62.5%} so 1rem = 10px.
+     Tailwind's default --spacing is 0.25rem, which at a 10px root makes every
+     gap, padding, width and icon 2.5px per unit instead of 4px — the whole UI
+     renders at 62.5% scale. 0.4rem restores 1 unit = 4px.
+     Do not change this without changing the root font-size too. */
+  --spacing: 0.4rem;
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-surface: var(--surface);

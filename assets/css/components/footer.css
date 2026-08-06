@@ -1,32 +1,49 @@
 @layer components {
   .site-footer {
-    background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+    background-color: var(--color-secondary);
+
+    @supports (color: color-mix(in lab, red, red)) {
+      background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+    }
+
     border-block-start: 1px solid var(--color-border);
   }
 
+  /* Footer Navigation Title — Letter-spacing & uppercase scoped to English only */
+  html[lang="en"] .footer__nav-title {
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+  }
+
+  /* Link list hover nudge — logical padding-inline-start for RTL */
+  .footer__nav-link {
+    transition:
+      transform var(--transition-fast, 150ms ease),
+      color var(--transition-fast, 150ms ease),
+      padding-inline-start var(--transition-fast, 150ms ease);
+
+    &:hover {
+      color: var(--color-primary);
+      padding-inline-start: 6px;
+    }
+  }
+
+  /* Social Icons — Circular 44x44 target with 17px glyphs */
   .footer__social-link {
     min-width: 44px;
     min-height: 44px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius, 4px);
+    border-radius: 9999px;
     background-color: var(--color-surface);
     border: 1px solid var(--color-border);
     transition: all var(--transition-fast, 150ms ease);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       border-color: var(--color-primary);
       color: var(--color-primary);
       transform: translateY(-2px);
-    }
-  }
-
-  .footer__nav-link {
-    transition: color var(--transition-fast, 150ms ease);
-
-    &:hover {
-      color: var(--color-primary);
     }
   }
 }

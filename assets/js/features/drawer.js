@@ -64,9 +64,12 @@ function setBackgroundInert(isInert) {
  * @param {string} drawerId
  */
 export function openDrawer(drawerId) {
-  // Capture active trigger element BEFORE closing other drawers
+  // Capture active element BEFORE closing drawers, but preserve original trigger if switching between drawers
   if (document.activeElement && typeof document.activeElement.focus === "function") {
-    lastFocusedElement = document.activeElement;
+    const isInsideActiveDrawer = document.activeElement.closest("[data-drawer].is-open");
+    if (!isInsideActiveDrawer) {
+      lastFocusedElement = document.activeElement;
+    }
   }
 
   // Close any other open drawers first
@@ -165,6 +168,18 @@ function initDrawers() {
       e.preventDefault();
       const drawerEl = closeBtn.closest("[data-drawer]");
       closeDrawer(drawerEl);
+    });
+  });
+
+  // Bind Accessible Nav Menu Dropdown Toggle Buttons (Section E2)
+  document.querySelectorAll("[data-menu-toggle]").forEach((toggleBtn) => {
+    if (initializedTriggers.has(toggleBtn)) return;
+    initializedTriggers.add(toggleBtn);
+
+    toggleBtn.addEventListener("click", (e) => {
+      e.preventDefault();
+      const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
+      toggleBtn.setAttribute("aria-expanded", isExpanded ? "false" : "true");
     });
   });
 

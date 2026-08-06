@@ -1,28 +1,9 @@
 import { listenEvent, notifyContentLoaded } from "../utils/events.js";
+import { esc } from "../utils/escape.js";
 
 /**
  * Wait for Zid SDK readiness helper
  */
-async function waitForZid(maxAttempts = 20) {
-  for (let i = 0; i < maxAttempts; i++) {
-    if (window.zid?.cart?.get) return true;
-    await new Promise((r) => setTimeout(r, 100 * Math.min(i + 1, 10)));
-  }
-  return false;
-}
-
-/**
- * Safe HTML string escape helper
- */
-function esc(str) {
-  if (!str) return "";
-  return String(str)
-    .replace(/&/g, "&amp;")
-    .replace(/</g, "&lt;")
-    .replace(/>/g, "&gt;")
-    .replace(/"/g, "&quot;")
-    .replace(/'/g, "&#039;");
-}
 
 const initializedTriggers = new WeakSet();
 

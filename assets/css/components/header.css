@@ -14,18 +14,35 @@
     &::after {
       content: "";
       position: absolute;
-      bottom: 0;
       inset-inline-start: 0;
-      width: 0;
-      height: 2px;
-      background-color: var(--color-primary);
-      transition: width var(--transition-fast, 150ms ease);
+      bottom: 0;
+      width: 100%;
+      height: 1.5px;
+      background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition:
+        transform var(--transition-base, 250ms ease),
+        opacity var(--transition-base, 250ms ease);
+      opacity: 0;
     }
 
     &:hover::after,
-    &[aria-expanded="true"]::after {
-      width: 100%;
+    &:focus-visible::after,
+    &.is-active::after {
+      transform: scaleX(1);
+      opacity: 1;
     }
+
+    &.is-active {
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+  }
+
+  html[dir="rtl"] .header__nav-link::after {
+    transform-origin: right center;
+    background: linear-gradient(270deg, var(--color-primary) 0%, var(--color-secondary) 100%);
   }
 
   .header__icon-button {
@@ -46,7 +63,8 @@
       visibility var(--transition-base, 250ms ease);
   }
 
-  .header__nav .group:hover .header__dropdown {
+  .header__nav .group:hover .header__dropdown,
+  .header__nav .group:focus-within .header__dropdown {
     transform: translateY(0);
   }
 }

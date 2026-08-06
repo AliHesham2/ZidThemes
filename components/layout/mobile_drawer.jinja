@@ -23,12 +23,12 @@
         data-drawer-close
         aria-label="{{ _('Close menu') }}"
       >
-        <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 20 20">
           <path
+            d="m5 5 10 10M15 5 5 15"
             stroke-linecap="round"
             stroke-linejoin="round"
-            stroke-width="2"
-            d="M6 18L18 6M6 6l12 12"
+            stroke-width="1.5"
           />
         </svg>
       </button>
@@ -42,13 +42,15 @@
         class="bg-secondary/30 text-muted flex w-full items-center gap-3 rounded-md px-4 py-3 text-sm"
         data-drawer-trigger="search"
       >
-        <svg class="text-foreground h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
-          />
+        <svg
+          class="text-foreground h-5 w-5"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          stroke-width="var(--icon-stroke-width, 1.25)"
+        >
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="M15.5 15.5L21 21" stroke-linecap="round" />
         </svg>
         <span>{{ _("Search products...") }}</span>
       </button>
@@ -66,16 +68,16 @@
                 >
                   <span>{{ menu.label }}</span>
                   <svg
-                    class="h-5 w-5 transition-transform duration-200 group-open:rotate-180"
+                    class="h-3 w-3 transition-transform duration-200 group-open:rotate-180"
                     fill="none"
                     stroke="currentColor"
-                    viewBox="0 0 24 24"
+                    viewBox="0 0 12 12"
                   >
                     <path
+                      d="M2.5 4.5L6 8L9.5 4.5"
                       stroke-linecap="round"
                       stroke-linejoin="round"
                       stroke-width="2"
-                      d="M19 9l-7 7-7-7"
                     />
                   </svg>
                 </summary>
@@ -120,14 +122,17 @@
         <a
           href="{{ url_for('profile') }}"
           class="text-foreground hover:text-primary flex min-h-[44px] items-center gap-3 py-2 text-sm"
+          data-account-trigger
         >
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
-            />
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            stroke-width="var(--icon-stroke-width, 1.25)"
+          >
+            <circle cx="12" cy="8" r="3.5" />
+            <path d="M5 20c0-3.866 3.134-7 7-7s7 3.134 7 7" stroke-linecap="round" />
           </svg>
           <span>{{ _("My Account") }}</span>
         </a>
@@ -135,12 +140,16 @@
           href="{{ url_for('wishlist') }}"
           class="text-foreground hover:text-primary flex min-h-[44px] items-center gap-3 py-2 text-sm"
         >
-          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <svg
+            class="h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            stroke-width="var(--icon-stroke-width, 1.25)"
+          >
             <path
+              d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
               stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
             />
           </svg>
           <span>{{ _("Wishlist") }}</span>
@@ -155,13 +164,16 @@
           class="bg-secondary/20 text-foreground flex min-h-[44px] w-full items-center justify-between rounded-md px-4 py-3 text-sm font-medium"
         >
           <span class="flex items-center gap-2">
-            <svg class="text-primary h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5a2.5 2.5 0 002.5-2.5V7.414a2.5 2.5 0 00-.732-1.768l-1.074-1.074A2.5 2.5 0 0015.414 3.935H8z"
-              />
+            <svg
+              class="text-primary h-5 w-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              stroke-width="var(--icon-stroke-width, 1.25)"
+            >
+              <circle cx="12" cy="12" r="9" stroke="currentColor" />
+              <path d="M3.6 9h16.8M3.6 15h16.8" stroke="currentColor" stroke-linecap="round" />
+              <path d="M11.5 3a17 17 0 0 0 0 18M12.5 3a17 17 0 0 1 0 18" stroke="currentColor" />
             </svg>
             <span>{{ _("Country & Language") }}</span>
           </span>

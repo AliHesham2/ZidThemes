@@ -12,11 +12,179 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 && n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
+# ============================================================================
+# ZidMirvela — Arabic catalogue
+#
+# Arabic is the PRIMARY language of this store. Every empty msgstr below
+# renders as English on the live site, so an empty entry is a visible bug.
+#
+# RULES
+#   - msgid must match the template byte-for-byte, punctuation included.
+#     "All Rights Reserved" and "All Rights Reserved." are DIFFERENT strings.
+#     Do not edit any msgid — only fill in msgstr.
+#   - Keep %(name)s placeholders exactly as-is; you may move them within the
+#     sentence (that is the point of gettext — Arabic word order is yours).
+#   - Never letter-space Arabic. Do not add Latin punctuation runs.
+#
+# STATUS: 3 of 31 translated. 28 remaining, marked TODO.
+# ============================================================================
+
+
+# ── Header · icon labels (screen-reader only, keep them short) ──────────────
+
+#: header.jinja:14
+msgid "Open main menu"
+msgstr ""
+
+#: header.jinja:44
+msgid "Open search"
+msgstr ""
+
+#: header.jinja:83
+msgid "Open cart"
+msgstr ""
+
+#: header.jinja:63 footer.jinja:102 components/layout/mobile_drawer.jinja:137
+msgid "My Account"
+msgstr ""
+
+#: footer.jinja:110 components/layout/mobile_drawer.jinja:155
+msgid "Wishlist"
+msgstr ""
+
+#: components/layout/nav.jinja:1
+msgid "Main Navigation"
+msgstr ""
+
+
+# ── Mobile drawer ───────────────────────────────────────────────────────────
+
+#: components/layout/mobile_drawer.jinja:59
+msgid "Mobile Menu"
+msgstr ""
+
+#: components/layout/mobile_drawer.jinja:24
+msgid "Close menu"
+msgstr ""
+
+#. Opens the country/currency + language dialog.
+#: components/layout/mobile_drawer.jinja:178
+msgid "Country & Language"
+msgstr ""
+
+
+# ── Search drawer ───────────────────────────────────────────────────────────
+
+#. Heading at the top of the search drawer.
+#: components/layout/search_drawer.jinja:21
+msgid "Search Products"
+msgstr ""
+
+#. Submit BUTTON label — keep it to one word if possible.
+#: components/layout/search_drawer.jinja:66
+msgid "Search"
+msgstr ""
+
+#: components/layout/search_drawer.jinja:47
+msgid "Search for skincare, makeup, perfumes..."
+msgstr ""
+
+#. Placeholder on the mobile drawer's search box. Already translated.
+#: components/layout/mobile_drawer.jinja:55
+msgid "Search products..."
+msgstr "البحث عن المنتجات..."
+
+#: components/layout/search_drawer.jinja:27
+msgid "Close search"
+msgstr ""
+
+
+# ── Cart drawer ─────────────────────────────────────────────────────────────
+
+#: components/layout/cart_drawer.jinja:22
+msgid "Shopping Cart"
+msgstr ""
+
+#: components/layout/cart_drawer.jinja:31
+msgid "Close cart"
+msgstr ""
+
+#: components/layout/cart_drawer.jinja:65
+msgid "Your cart is empty"
+msgstr ""
+
+#: components/layout/cart_drawer.jinja:66
+msgid "Explore our products and start shopping"
+msgstr ""
+
+#. Button in the empty-cart state.
+#: components/layout/cart_drawer.jinja:72
+msgid "Continue Shopping"
+msgstr ""
+
+#. Primary checkout CTA — the most important string in the cart.
+#: components/layout/cart_drawer.jinja:93
+msgid "View Cart & Checkout"
+msgstr ""
+
+#: components/layout/cart_drawer.jinja:83
+msgid "Taxes and shipping calculated at checkout."
+msgstr ""
+
+
+# ── Footer · column headings ────────────────────────────────────────────────
+
+#: footer.jinja:37
+msgid "Quick Links"
+msgstr ""
+
+#: footer.jinja:78
+msgid "Customer Service"
+msgstr ""
+
+
+# ── Footer · links ──────────────────────────────────────────────────────────
+
+#. Already translated.
+#: footer.jinja:45
 msgid "Home"
 msgstr "الرئيسية"
 
-msgid "All Rights Reserved"
-msgstr "جميع الحقوق محفوظة"
+#: footer.jinja:53
+msgid "All Products"
+msgstr ""
 
-msgid "Search products..."
-msgstr "البحث عن المنتجات..."
+#: footer.jinja:61
+msgid "Categories"
+msgstr ""
+
+#: footer.jinja:69
+msgid "Blog"
+msgstr ""
+
+#: footer.jinja:86
+msgid "FAQs"
+msgstr ""
+
+#: footer.jinja:94
+msgid "Shipping & Payment"
+msgstr ""
+
+
+# ── Footer · brand + legal ──────────────────────────────────────────────────
+
+#. Brand tagline under the logo. Marketing copy — this one wants real
+#. Arabic beauty-retail voice, not a literal translation.
+#: footer.jinja:27
+msgid ""
+"Your premier destination for skincare, makeup, perfume, and organic beauty "
+"products."
+msgstr ""
+
+#. Copyright line. %(name)s is the store name.
+#. IMPORTANT: put the Arabic text FIRST so the line reads correctly in RTL —
+#. starting with "©" strands the symbol at the right edge of the page.
+#. Suggested shape:  جميع الحقوق محفوظة © %(name)s
+#: footer.jinja:139
+msgid "© %(name)s — All Rights Reserved."
+msgstr ""
