@@ -1,0 +1,181 @@
+{
+  "template": "sections/hero.jinja",
+  "name": {
+    "ar": "البانر الرئيسي (المتحرك)",
+    "en": "Hero Banner (Morphing)"
+  },
+  "icon": "home-2-line",
+  "settings": [
+    {
+      "id": "is_primary_hero",
+      "type": "checkbox",
+      "label": {
+        "ar": "البانر الرئيسي للصفحة",
+        "en": "Primary Page Hero"
+      },
+      "default": true
+    },
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": {
+        "ar": "النص العلوي (العنوان الفرعي)",
+        "en": "Eyebrow Text"
+      },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": {
+        "ar": "العنوان الرئيسي (اسم الماركة)",
+        "en": "Heading (Brand Name)"
+      },
+      "info": {
+        "ar": "يظهر اسم الماركة داخل الرسوم المتحركة SVG. يُنصح بأن لا يتجاوز 12 حرفاً (مثل Mirvela) لتجنب التداخل.",
+        "en": "Rendered as SVG brand text. Recommended length <= 12 characters (e.g., Mirvela) to prevent overflow."
+      },
+      "default": ""
+    },
+    {
+      "id": "subheading",
+      "type": "textarea",
+      "label": {
+        "ar": "الوصف",
+        "en": "Subheading"
+      },
+      "default": ""
+    },
+    {
+      "id": "cta_1_label",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر الأول",
+        "en": "First Button Text"
+      },
+      "default": ""
+    },
+    {
+      "id": "cta_1_url",
+      "type": "url",
+      "label": {
+        "ar": "رابط الزر الأول",
+        "en": "First Button URL"
+      },
+      "default": ""
+    },
+    {
+      "id": "cta_2_label",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر الثاني",
+        "en": "Second Button Text"
+      },
+      "default": ""
+    },
+    {
+      "id": "cta_2_url",
+      "type": "url",
+      "label": {
+        "ar": "رابط الزر الثاني",
+        "en": "Second Button URL"
+      },
+      "default": ""
+    },
+    {
+      "id": "height_desktop",
+      "type": "select",
+      "label": {
+        "ar": "ارتفاع البانر (سطح المكتب)",
+        "en": "Desktop Height"
+      },
+      "options": [
+        {
+          "value": "70vh",
+          "label": {
+            "ar": "متوسط (70vh)",
+            "en": "Medium (70vh)"
+          }
+        },
+        {
+          "value": "85vh",
+          "label": {
+            "ar": "كبير (85vh)",
+            "en": "Large (85vh)"
+          }
+        },
+        {
+          "value": "100vh",
+          "label": {
+            "ar": "كامل الشاشة (100vh)",
+            "en": "Full Viewport (100vh)"
+          }
+        }
+      ],
+      "default": "85vh"
+    },
+    {
+      "id": "height_tablet",
+      "type": "select",
+      "label": {
+        "ar": "ارتفاع البانر (الأجهزة اللوحية)",
+        "en": "Tablet Height"
+      },
+      "info": {
+        "ar": "الارتفاع المخصص للأجهزة اللوحية (768px - 1279px)",
+        "en": "Custom height for tablet viewports (768px - 1279px)"
+      },
+      "options": [
+        {
+          "value": "70vh",
+          "label": {
+            "ar": "متوسط (70vh)",
+            "en": "Medium (70vh)"
+          }
+        },
+        {
+          "value": "85vh",
+          "label": {
+            "ar": "كبير (85vh)",
+            "en": "Large (85vh)"
+          }
+        },
+        {
+          "value": "100vh",
+          "label": {
+            "ar": "كامل الشاشة (100vh)",
+            "en": "Full Viewport (100vh)"
+          }
+        }
+      ],
+      "default": "70vh"
+    },
+    {
+      "id": "enable_motion",
+      "type": "checkbox",
+      "label": {
+        "ar": "تفعيل التموج والحركة",
+        "en": "Enable Animations"
+      },
+      "default": true
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": {
+        "ar": "إظهار على سطح المكتب",
+        "en": "Show on Desktop"
+      },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": {
+        "ar": "إظهار على الجوال",
+        "en": "Show on Mobile"
+      },
+      "default": true
+    }
+  ]
+}

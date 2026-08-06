@@ -1,0 +1,42 @@
+{
+  "components": {
+    "ar": [
+      {
+        "template": "sections/hero.jinja",
+        "settings": {
+          "is_primary_hero": true,
+          "eyebrow": "جمال فاخر",
+          "subheading": "اكتشفي تشكيلتنا الفاخرة من منتجات العناية بالبشرة والمكياج والعطور الطبيعية.",
+          "cta_1_label": "تسوقي الآن",
+          "cta_1_url": "/products",
+          "cta_2_label": "اكتشفي التشكيلة",
+          "cta_2_url": "/categories",
+          "height_desktop": "85vh",
+          "height_tablet": "70vh",
+          "enable_motion": true,
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      }
+    ],
+    "en": [
+      {
+        "template": "sections/hero.jinja",
+        "settings": {
+          "is_primary_hero": true,
+          "eyebrow": "Luxury Beauty",
+          "subheading": "Discover our premier collection of skincare, makeup, and organic beauty rituals.",
+          "cta_1_label": "Shop Now",
+          "cta_1_url": "/products",
+          "cta_2_label": "Explore Collection",
+          "cta_2_url": "/categories",
+          "height_desktop": "85vh",
+          "height_tablet": "70vh",
+          "enable_motion": true,
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      }
+    ]
+  }
+}
