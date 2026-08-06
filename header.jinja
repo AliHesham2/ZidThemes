@@ -5,9 +5,7 @@
   class="site-header {{ 'sticky top-0 z-sticky' if safeget(settings, 'header_enable_sticky', true) else 'relative' }} bg-background border-border/60 border-b transition-shadow duration-200"
   data-header
 >
-  <div
-    class="header__container flex w-full items-center justify-between gap-6 px-[var(--page-margin)]"
-  >
+  <div class="header__container flex w-full items-center justify-between gap-6">
     <!-- Mobile Hamburger Trigger (below lg) -->
     <button
       type="button"
@@ -37,9 +35,6 @@
     <div class="header__icons flex items-center gap-1">
       <!-- Inline Currency & Language Selector (Desktop) -->
       {% include 'components/layout/localization_selector.jinja' %}
-
-      <!-- Divider sits between the localisation group and the icons -->
-      <span class="text-border/70 me-1 hidden select-none lg:inline" aria-hidden="true">|</span>
 
       <!-- Search Icon -->
       <button
@@ -102,9 +97,7 @@
           />
           <path d="M9 8V6.5a3 3 0 0 1 6 0V8" stroke-linecap="round" />
         </svg>
-        <span
-          class="cart-badge js-cart-count-badge bg-primary text-primary-foreground absolute end-0.5 top-0.5 h-5 min-w-[20px] rounded-full px-1 font-sans text-[11px] leading-none font-bold"
-        ></span>
+        <span class="cart-badge js-cart-count-badge"></span>
       </button>
     </div>
   </div>

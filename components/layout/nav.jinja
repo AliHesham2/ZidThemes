@@ -13,7 +13,7 @@
         {% set nav_path = ('/' ~ _host_stripped.split('/', 1)[1]) if '/' in _host_stripped else '/' %}
         {% set is_active = nav_path.rstrip('/') == (current_path | string).rstrip('/') %}
 
-        <li class="group relative py-2">
+        <li class="header__nav-item group relative py-2" style="--ni: {{ loop.index0 }}">
           {% if has_children %}
             <button
               type="button"
@@ -38,32 +38,47 @@
                 />
               </svg>
             </button>
-            <div
-              class="header__dropdown bg-surface border-border z-dropdown invisible absolute start-0 top-full min-w-[220px] rounded-md border p-2 opacity-0 shadow-md transition-all duration-200 group-focus-within:visible group-focus-within:opacity-100 group-hover:visible group-hover:opacity-100"
-            >
-              <ul class="m-0 flex list-none flex-col gap-1 p-0">
+            <div class="header__dropdown">
+              <ul class="m-0 flex list-none flex-col p-0">
                 {% for submenu in menu.items %}
                   {% set has_sub_children = submenu.items is defined and submenu.items is iterable and submenu.items|length > 0 %}
                   {% set sub_url = submenu.url | localized_url if submenu.resource_type != 'url' else submenu.url %}
                   {% set is_sub_active = (sub_url != '/' and sub_url and (sub_url|string).endswith(current_path)) %}
-                  <li>
+                  <li class="header__dropdown-item relative">
                     <a
                       href="{{ sub_url }}"
-                      class="header__dropdown-link text-foreground hover:text-primary hover:bg-secondary/40 {{ 'is-active' if is_sub_active }} block rounded px-3 py-2 text-sm font-medium transition-colors duration-150"
+                      class="header__dropdown-link {{ 'is-active' if is_sub_active }}"
                     >
-                      {{ submenu.label }}
+                      <span>{{ submenu.label }}</span>
+                      {% if has_sub_children %}
+                        <svg
+                          class="h-2.5 w-2.5 opacity-50"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 12 12"
+                          aria-hidden="true"
+                        >
+                          <path
+                            d="M4.5 2.5L8 6L4.5 9.5"
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            stroke-width="2"
+                          />
+                        </svg>
+                      {% endif %}
                     </a>
                     {% if has_sub_children %}
-                      <div class="flex flex-col gap-1 py-1 ps-3">
-                        {% for leaf in submenu.items %}
-                          {% set leaf_url = leaf.url | localized_url if leaf.resource_type != 'url' else leaf.url %}
-                          <a
-                            href="{{ leaf_url }}"
-                            class="header__dropdown-link text-muted hover:text-primary block px-3 py-1.5 text-xs transition-colors duration-150"
-                          >
-                            {{ leaf.label }}
-                          </a>
-                        {% endfor %}
+                      <div class="header__dropdown-submenu">
+                        <ul class="m-0 flex list-none flex-col p-0">
+                          {% for leaf in submenu.items %}
+                            {% set leaf_url = leaf.url | localized_url if leaf.resource_type != 'url' else leaf.url %}
+                            <li>
+                              <a href="{{ leaf_url }}" class="header__dropdown-link">
+                                <span>{{ leaf.label }}</span>
+                              </a>
+                            </li>
+                          {% endfor %}
+                        </ul>
                       </div>
                     {% endif %}
                   </li>

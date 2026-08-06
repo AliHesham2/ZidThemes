@@ -75,8 +75,20 @@ export class CartManager {
     // Visibility is owned by .is-visible (see header.css) — Tailwind's `hidden`
     // loses to `inline-flex` in v4's output order, which left an empty blob.
     document.querySelectorAll(".js-cart-count-badge").forEach((el) => {
-      el.textContent = count > 0 ? count : "";
+      const newText = count > 0 ? String(count) : "";
+      const textChanged = el.textContent !== newText;
+      el.textContent = newText;
+
+      const wasVisible = el.classList.contains("is-visible");
       el.classList.toggle("is-visible", count > 0);
+
+      // Re-trigger cart-badge-pop animation when count changes while visible.
+      // Force a reflow reading offsetWidth so browser restarts keyframe animation.
+      if (count > 0 && wasVisible && textChanged) {
+        el.classList.remove("is-visible");
+        void el.offsetWidth; // Force layout reflow to restart CSS animation
+        el.classList.add("is-visible");
+      }
     });
   }
 

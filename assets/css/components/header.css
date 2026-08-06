@@ -101,25 +101,266 @@
      flex` behaves the opposite way, which is what makes this so easy to miss.)
      Visibility is owned by .is-visible, toggled in cart/badge.js. */
   .cart-badge {
+    min-width: 18px;
+    height: 18px;
+    padding-inline: 5px;
+    border-radius: 10px;
+    background: linear-gradient(
+      135deg,
+      var(--color-primary) 0%,
+      color-mix(in oklch, var(--color-primary) 82%, white) 100%
+    );
+    border: 1px solid color-mix(in srgb, var(--gold) 45%, transparent);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--color-primary) 50%, transparent);
+    color: var(--color-primary-foreground);
+    font-size: 1.05rem;
+    font-weight: 700;
+    line-height: 16px;
+    pointer-events: none;
+    z-index: 3;
+
     display: none;
     align-items: center;
     justify-content: center;
 
     &.is-visible {
       display: inline-flex;
+      animation: cart-badge-pop 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
   }
 
-  .header__dropdown {
-    transform: translateY(4px);
-    transition:
-      opacity var(--transition-base, 250ms ease),
-      transform var(--transition-base, 250ms ease),
-      visibility var(--transition-base, 250ms ease);
+  .header__cart-trigger .cart-badge {
+    position: absolute;
+    inset-block-start: -6px;
+    inset-inline-end: -8px;
   }
 
-  .header__nav .group:hover .header__dropdown,
-  .header__nav .group:focus-within .header__dropdown {
+  @keyframes cart-badge-pop {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.2);
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  /* Nav Dropdown */
+  .header__dropdown {
+    position: absolute;
+    inset-block-start: calc(100% + 4px);
+    inset-inline-start: 0;
+    min-width: 230px;
+    padding: 10px 0;
+    border-radius: 16px;
+    background: var(--color-surface);
+    border: 1px solid color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.45);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      visibility 0.22s ease;
+    z-index: var(--z-dropdown);
+  }
+
+  .header__dropdown > ul > li:first-child > .header__dropdown-link {
+    border-start-start-radius: 6px;
+  }
+
+  .header__dropdown > ul > li:last-child > .header__dropdown-link {
+    border-end-start-radius: 6px;
+  }
+
+  .header__nav-item:hover .header__dropdown,
+  .header__nav-item:focus-within .header__dropdown {
+    opacity: 1;
+    visibility: visible;
     transform: translateY(0);
+  }
+
+  .header__dropdown-item {
+    position: relative;
+  }
+
+  .header__dropdown-link {
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 1.4;
+    letter-spacing: 0.03em;
+    padding: 13px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    color: var(--color-foreground);
+    text-decoration: none;
+    border-inline-start: 3.5px solid transparent;
+    transition:
+      color 0.18s ease,
+      background-color 0.18s ease,
+      padding-inline-start 0.18s ease;
+  }
+
+  .header__dropdown-link:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    color: var(--color-primary);
+    border-inline-start-color: var(--color-primary);
+    padding-inline-start: 28px;
+  }
+
+  .header__dropdown-link.is-active {
+    color: var(--color-primary);
+    background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
+    border-inline-start-color: var(--color-primary);
+  }
+
+  /* Third-level flyout submenu */
+  .header__dropdown-submenu {
+    position: absolute;
+    inset-inline-start: calc(100% + 4px);
+    inset-block-start: 0;
+    min-width: 210px;
+    padding: 8px 0;
+    border-radius: 12px;
+    background: var(--color-surface);
+    border: 1px solid color-mix(in srgb, var(--color-foreground) 12%, transparent);
+    box-shadow: 0 20px 48px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(6px);
+    transition:
+      opacity 0.22s ease,
+      transform 0.22s ease,
+      visibility 0.22s ease;
+    z-index: var(--z-dropdown);
+  }
+
+  .header__dropdown-submenu > ul > li:first-child > .header__dropdown-link {
+    border-start-start-radius: 6px;
+  }
+
+  .header__dropdown-submenu > ul > li:last-child > .header__dropdown-link {
+    border-end-start-radius: 6px;
+  }
+
+  html[dir="rtl"] .header__dropdown-submenu {
+    transform: translateX(-6px);
+  }
+
+  .header__dropdown-item:hover .header__dropdown-submenu,
+  .header__dropdown-item:focus-within .header__dropdown-submenu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+  }
+
+  /* Localisation Hairline Divider */
+  .hdr-loc-group {
+    position: relative;
+  }
+
+  @media (min-width: 64rem) {
+    .hdr-loc-group::after {
+      content: "";
+      width: 1px;
+      height: 24px;
+      background: linear-gradient(
+        180deg,
+        transparent 0%,
+        color-mix(in srgb, var(--color-primary) 80%, transparent) 18%,
+        color-mix(in srgb, var(--color-primary) 80%, transparent) 82%,
+        transparent 100%
+      );
+      align-self: center;
+      flex-shrink: 0;
+      margin-inline-start: 1rem;
+    }
+  }
+
+  /* Entrance Animations */
+  @keyframes hdr-from-left {
+    from {
+      opacity: 0;
+      transform: translateX(-20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes hdr-from-right {
+    from {
+      opacity: 0;
+      transform: translateX(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+
+  @keyframes hdr-rise {
+    from {
+      opacity: 0;
+      transform: translateY(-12px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes hdr-logo-aura {
+    0%,
+    100% {
+      filter: none;
+    }
+    50% {
+      filter: drop-shadow(0 0 16px color-mix(in srgb, var(--color-primary) 38%, transparent))
+        drop-shadow(0 0 32px color-mix(in srgb, var(--color-secondary) 18%, transparent));
+    }
+  }
+
+  .header__logo {
+    animation: hdr-from-left 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+  }
+
+  .header__logo-link {
+    animation: hdr-logo-aura 3.8s ease-in-out 3;
+    animation-delay: 1.6s;
+  }
+
+  /* Note: fill-mode MUST stay `backwards` (never `both`) on .header__nav-item to avoid turning <li> into a containing block for descendants */
+  .header__nav-item {
+    animation: hdr-rise 0.6s cubic-bezier(0.16, 1, 0.3, 1) calc(0.28s + var(--ni, 0) * 0.07s)
+      backwards;
+  }
+
+  .header__icons {
+    animation: hdr-from-right 0.75s cubic-bezier(0.16, 1, 0.3, 1) 0.55s both;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header__logo,
+    .header__logo-link,
+    .header__nav-item,
+    .header__icons,
+    .cart-badge.is-visible {
+      animation: none !important;
+    }
+
+    .header__dropdown,
+    .header__dropdown-submenu {
+      transition: none !important;
+    }
   }
 }

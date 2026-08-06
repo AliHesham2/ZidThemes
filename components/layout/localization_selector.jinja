@@ -15,6 +15,8 @@
 {% set multiple_languages = languages | length > 1 %}
 {% set multiple_countries = countries | length > 1 %}
 
+{# setRegion requires BOTH language and country_code on every call, so the
+   current value of whichever one isn't changing has to travel with it. #}
 <div
   class="hdr-loc-group text-foreground hidden items-center gap-3 text-xs font-medium lg:flex"
   data-localization-group
