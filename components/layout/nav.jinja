@@ -17,7 +17,7 @@
           {% if has_children %}
             <button
               type="button"
-              class="header__nav-link text-foreground hover:text-primary focus-visible:ring-ring {{ 'is-active' if is_active }} inline-flex items-center gap-1.5 px-1 py-2 text-base font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none"
+              class="header__nav-link text-foreground hover:text-primary focus-visible:ring-ring {{ 'is-active' if is_active }} inline-flex items-center gap-1.5 px-1 py-2 text-base font-normal transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none"
               aria-expanded="false"
               aria-haspopup="true"
               data-menu-toggle
@@ -73,7 +73,7 @@
           {% else %}
             <a
               href="{{ nav_url }}"
-              class="header__nav-link text-foreground hover:text-primary focus-visible:ring-ring {{ 'is-active' if is_active }} inline-flex items-center gap-1.5 px-1 py-2 text-base font-medium transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none"
+              class="header__nav-link text-foreground hover:text-primary focus-visible:ring-ring {{ 'is-active' if is_active }} inline-flex items-center gap-1.5 px-1 py-2 text-base font-normal transition-colors duration-150 focus-visible:ring-2 focus-visible:outline-none"
             >
               <span>{{ menu.label }}</span>
             </a>

@@ -6,6 +6,15 @@
 
   .header__container {
     height: 100%;
+    padding-inline: var(--page-margin, 20px);
+
+    @media (min-width: 64rem) {
+      padding-inline: 4rem;
+    }
+
+    @media (min-width: 80rem) {
+      padding-inline: 6rem;
+    }
   }
 
   .header__nav-link {
@@ -36,7 +45,6 @@
 
     &.is-active {
       color: var(--color-primary);
-      font-weight: 700;
     }
   }
 
