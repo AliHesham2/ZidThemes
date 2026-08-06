@@ -36,6 +36,10 @@ msgstr ""
 msgid "Open main menu"
 msgstr "فتح القائمة الرئيسية"
 
+#: components/layout/localization_selector.jinja:35
+msgid "Change currency"
+msgstr "تغيير العملة"
+
 #: header.jinja:44
 msgid "Open search"
 msgstr "فتح البحث"
