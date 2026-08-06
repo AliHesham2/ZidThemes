@@ -3,6 +3,7 @@
 
 /* Base Partials */
 @import "./css/base/tokens.css";
+@import "./css/base/animations.css";
 @import "./css/base/reset.css";
 @import "./css/base/typography.css";
 
@@ -17,6 +18,9 @@
 @import "./css/components/drawer.css";
 @import "./css/components/header.css";
 @import "./css/components/footer.css";
+
+/* Section Partials */
+@import "./css/sections/hero.css";
 
 /* Tailwind Theme Inline Mapping */
 @theme inline {

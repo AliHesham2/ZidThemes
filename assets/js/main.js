@@ -1,3 +1,4 @@
+import "./features/reveal.js";
 import "./features/drawer.js";
 import "./features/search.js";
 import "./features/localization.js";
