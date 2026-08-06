@@ -1,4 +1,9 @@
 {
+  "name": {
+    "ar": "أعلى الصفحة",
+    "en": "Header"
+  },
+  "icon": "layout-top-line",
   "groups": [
     {
       "id": "header",

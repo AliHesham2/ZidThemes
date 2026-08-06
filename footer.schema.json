@@ -1,4 +1,9 @@
 {
+  "name": {
+    "ar": "أسفل الصفحة",
+    "en": "Footer"
+  },
+  "icon": "layout-bottom-line",
   "groups": [
     {
       "id": "footer",

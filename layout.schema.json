@@ -1,4 +1,8 @@
 {
+  "name": {
+    "ar": "إعدادات المتجر",
+    "en": "Theme Settings"
+  },
   "groups": [
     {
       "id": "theme",
