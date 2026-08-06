@@ -1,0 +1,8 @@
+@layer components {
+  .theme-container {
+    width: 100%;
+    max-width: var(--page-width, 1320px);
+    margin-inline: auto;
+    padding-inline: var(--page-margin, 20px);
+  }
+}

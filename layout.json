@@ -1,0 +1,24 @@
+{
+  "ar": {
+    "theme_background": "#F8F0FF",
+    "theme_foreground": "#1f0038",
+    "theme_surface": "#FFFFFF",
+    "theme_accent": "#8d0f69",
+    "theme_on_accent": "#FFFFFF",
+    "theme_secondary": "#EDD9F5",
+    "theme_muted": "#7A5A8A",
+    "theme_border": "#D5C0E8",
+    "theme_radius": "4px"
+  },
+  "en": {
+    "theme_background": "#F8F0FF",
+    "theme_foreground": "#1f0038",
+    "theme_surface": "#FFFFFF",
+    "theme_accent": "#8d0f69",
+    "theme_on_accent": "#FFFFFF",
+    "theme_secondary": "#EDD9F5",
+    "theme_muted": "#7A5A8A",
+    "theme_border": "#D5C0E8",
+    "theme_radius": "4px"
+  }
+}

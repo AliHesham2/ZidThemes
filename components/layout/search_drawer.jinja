@@ -1,0 +1,72 @@
+<div
+  id="search-drawer"
+  class="drawer drawer--search z-drawer invisible fixed inset-0"
+  aria-hidden="true"
+  data-drawer="search"
+>
+  <!-- Backdrop -->
+  <div
+    class="drawer__backdrop bg-scrim/50 fixed inset-0 opacity-0 transition-opacity duration-300"
+    data-drawer-close
+  ></div>
+
+  <!-- Panel -->
+  <div
+    class="search-drawer__inner bg-surface border-border fixed inset-x-0 top-0 z-10 w-full -translate-y-full transform border-b p-4 shadow-lg transition-transform duration-300 ease-out lg:p-6"
+  >
+    <div class="theme-container max-w-3xl">
+      <!-- Header -->
+      <div class="search-drawer__header mb-4 flex items-center justify-between">
+        <h2 class="search-drawer__title font-heading text-foreground m-0 text-lg font-bold">
+          {{ _("Search Products") }}
+        </h2>
+        <button
+          type="button"
+          class="search-drawer__close text-foreground hover:text-primary inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2"
+          data-drawer-close
+          aria-label="{{ _('Close search') }}"
+        >
+          <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Form -->
+      <form action="{{ url_for('list_products') }}" method="GET" class="search-drawer__form">
+        <div class="search-drawer__input-group relative flex items-center">
+          <input
+            type="search"
+            name="q"
+            class="search-drawer__input form-input rounded-md py-3 ps-11 pe-24 text-base"
+            placeholder="{{ _('Search for skincare, makeup, perfumes...') }}"
+            autocomplete="off"
+            required
+            data-search-input
+          />
+          <svg
+            class="text-muted pointer-events-none absolute start-3.5 h-5 w-5"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+            />
+          </svg>
+          <button type="submit" class="btn btn-filled btn-sm absolute end-2 min-h-[36px]">
+            {{ _("Search") }}
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

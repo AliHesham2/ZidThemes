@@ -1,0 +1,55 @@
+:root {
+  /* Typography Scale (Arabic-adjusted base 18px, fluid clamp) */
+  --text-xs: 1.3rem; /* 13px */
+  --text-sm: 1.5rem; /* 15px */
+  --text-base: 1.8rem; /* 18px body (Arabic x-height adjusted) */
+  --text-md: 2rem; /* 20px */
+  --text-lg: 2.3rem; /* 23px */
+  --text-xl: clamp(2.5rem, 1.8rem + 1.2vw, 3.2rem); /* 25 → 32px */
+  --text-2xl: clamp(3.2rem, 2.2rem + 2.4vw, 4.2rem); /* 32 → 42px */
+  --text-3xl: clamp(4rem, 2.5rem + 4vw, 6rem); /* 40 → 60px */
+
+  /* Leading & Tracking */
+  --leading-body: 1.75;
+  --leading-display: 1.3;
+  --tracking-eyebrow: 0.1em;
+
+  /* Fixed Derived & Status Colors (not merchant-editable, no --color- prefix) */
+  --error: #a63a3a;
+  --success: #7a8c6e;
+  --warning: #c98a00;
+  --sale-bg: #f0c8e8;
+  --on-sale: #6b0a50;
+  --scrim: #1f0038;
+
+  /* Spacing Scale */
+  --spacing-xs: 0.4rem;
+  --spacing-sm: 0.8rem;
+  --spacing-md: 1.6rem;
+  --spacing-lg: 3.2rem;
+  --spacing-xl: 6.4rem;
+
+  /* Shadows (purple-tinted) */
+  --shadow-sm: 0 1px 4px rgba(31, 0, 56, 0.08);
+  --shadow-md: 0 4px 20px rgba(31, 0, 56, 0.12);
+  --shadow-lg: 0 16px 48px rgba(31, 0, 56, 0.18);
+
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-base: 250ms ease;
+  --transition-slow: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layering (z-index) */
+  --z-base: 0;
+  --z-dropdown: 10;
+  --z-sticky: 20;
+  --z-drawer: 30;
+  --z-modal: 40;
+  --z-toast: 50;
+  --z-max: 9999;
+
+  /* Layout constants */
+  --page-width: 1320px;
+  --page-margin: 20px;
+  --header-height: 67px;
+}

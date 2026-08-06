@@ -1,0 +1,129 @@
+{# Header Component — Mirvela Theme #}
+{% include 'vitrin:shared/store_messages.jinja' %}
+
+<header
+  class="site-header {{ 'sticky top-0 z-sticky' if safeget(settings, 'header_enable_sticky', true) else 'relative' }} bg-background border-border/60 border-b transition-shadow duration-200"
+  data-header
+>
+  <div class="header__container theme-container flex items-center justify-between gap-4">
+    <!-- Mobile Hamburger Trigger (below lg) -->
+    <button
+      type="button"
+      class="header__hamburger text-foreground hover:text-primary focus-visible:ring-ring inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2 focus-visible:ring-2 focus-visible:outline-none lg:hidden"
+      data-drawer-trigger="mobile"
+      aria-label="{{ _('Open main menu') }}"
+      aria-expanded="false"
+    >
+      <svg class="h-6 w-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16"
+        />
+      </svg>
+    </button>
+
+    <!-- Logo (Left on lg+, Centered on mobile) -->
+    {% include 'components/layout/logo.jinja' %}
+
+    <!-- Main Navigation (Centered, lg+ only) -->
+    {% include 'components/layout/nav.jinja' %}
+
+    <!-- Action Icons (Right) -->
+    <div class="header__icons flex items-center gap-1 sm:gap-2">
+      <!-- Search Icon -->
+      <button
+        type="button"
+        class="header__icon-button text-foreground hover:text-primary focus-visible:ring-ring inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none"
+        data-drawer-trigger="search"
+        aria-label="{{ _('Open search') }}"
+        aria-expanded="false"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+          />
+        </svg>
+      </button>
+
+      <!-- Region & Language Icon (Desktop only) -->
+      <button
+        type="button"
+        onclick="window.zidOpenRegionSettingDialog?.()"
+        class="header__icon-button header__desktop-only text-foreground hover:text-primary focus-visible:ring-ring hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none lg:inline-flex"
+        aria-label="{{ _('Country & Language') }}"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 002 2h1.5a2.5 2.5 0 002.5-2.5V7.414a2.5 2.5 0 00-.732-1.768l-1.074-1.074A2.5 2.5 0 0015.414 3.935H8z"
+          />
+        </svg>
+      </button>
+
+      <!-- Wishlist Icon (Desktop only) -->
+      <a
+        href="{{ url_for('wishlist') }}"
+        class="header__icon-button header__desktop-only text-foreground hover:text-primary focus-visible:ring-ring hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none lg:inline-flex"
+        aria-label="{{ _('Wishlist') }}"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
+          />
+        </svg>
+      </a>
+
+      <!-- Account Icon (Desktop only) -->
+      <a
+        href="{{ url_for('profile') }}"
+        class="header__icon-button header__desktop-only text-foreground hover:text-primary focus-visible:ring-ring hidden min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none lg:inline-flex"
+        aria-label="{{ _('My Account') }}"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
+          />
+        </svg>
+      </a>
+
+      <!-- Cart Icon Trigger -->
+      <button
+        type="button"
+        class="header__cart-trigger header__icon-button text-foreground hover:text-primary focus-visible:ring-ring relative inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md p-2 transition-colors focus-visible:ring-2 focus-visible:outline-none"
+        data-drawer-trigger="cart"
+        aria-label="{{ _('Open cart') }}"
+        aria-expanded="false"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"
+          />
+        </svg>
+        <span
+          class="js-cart-count-badge bg-primary text-primary-foreground absolute end-1.5 top-1.5 hidden inline-flex h-4 min-w-[16px] items-center justify-center rounded-full px-1 font-sans text-[10px] leading-none font-bold"
+        ></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Global Drawers Included -->
+{% include 'components/layout/mobile_drawer.jinja' %}
+{% include 'components/layout/cart_drawer.jinja' %}
+{% include 'components/layout/search_drawer.jinja' %}

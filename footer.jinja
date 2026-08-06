@@ -1,0 +1,173 @@
+{# Footer Component — Mirvela Theme #}
+<footer
+  class="site-footer bg-secondary/30 text-foreground border-border mt-auto border-t pt-12 pb-8"
+>
+  <div class="footer__inner theme-container">
+    <!-- Top Footer Grid -->
+    <div class="grid grid-cols-1 gap-8 pb-10 md:grid-cols-2 lg:grid-cols-4">
+      <!-- Brand & Tagline Column -->
+      <div class="footer__brand space-y-4">
+        <div class="footer__logo-wrap">
+          {% set logo = settings.header_logo %}
+          {% if logo %}
+            <img
+              src="{{ image_url(logo, w=240, f='auto', q=85) }}"
+              alt="{{ store.name }}"
+              width="140"
+              height="38"
+              class="h-auto max-h-10 w-auto object-contain"
+            />
+          {% else %}
+            <span class="footer__brand-name font-heading text-foreground text-2xl font-bold"
+              >{{ store.name }}</span
+            >
+          {% endif %}
+        </div>
+        <p class="footer__tagline text-muted max-w-sm text-sm leading-relaxed">
+          {{ store.settings.branding.description | default(_("Your premier destination for skincare, makeup, perfume, and organic beauty products.")) }}
+        </p>
+        {% if safeget(settings, "footer_show_social_links", true) %}
+          {% include 'components/layout/social_links.jinja' %}
+        {% endif %}
+      </div>
+
+      <!-- Quick Navigation Column -->
+      <div class="footer__nav space-y-4">
+        <h3 class="footer__nav-title font-heading text-foreground m-0 text-base font-bold">
+          {{ _("Quick Links") }}
+        </h3>
+        <ul class="footer__nav-list m-0 list-none space-y-2.5 p-0 text-sm">
+          <li>
+            <a
+              href="{{ url_for('home') }}"
+              class="footer__nav-link text-foreground/80 hover:text-primary transition-colors"
+            >
+              {{ _("Home") }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('list_products') }}"
+              class="footer__nav-link text-foreground/80 hover:text-primary transition-colors"
+            >
+              {{ _("All Products") }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('list_categories') }}"
+              class="footer__nav-link text-foreground/80 hover:text-primary transition-colors"
+            >
+              {{ _("Categories") }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('blogs') }}"
+              class="footer__nav-link text-foreground/80 hover:text-primary transition-colors"
+            >
+              {{ _("Blog") }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Customer Service & Support Column -->
+      <div class="footer__nav space-y-4">
+        <h3 class="footer__nav-title font-heading text-foreground m-0 text-base font-bold">
+          {{ _("Customer Service") }}
+        </h3>
+        <ul class="footer__nav-list m-0 list-none space-y-2.5 p-0 text-sm">
+          <li>
+            <a
+              href="{{ url_for('faqs') }}"
+              class="footer__nav-link text-foreground/80 hover:text-primary transition-colors"
+            >
+              {{ _("FAQs") }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('shipping_payment') }}"
+              class="footer__nav-link text-foreground/80 hover:text-primary transition-colors"
+            >
+              {{ _("Shipping & Payment") }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('profile') }}"
+              class="footer__nav-link text-foreground/80 hover:text-primary transition-colors"
+            >
+              {{ _("My Account") }}
+            </a>
+          </li>
+          <li>
+            <a
+              href="{{ url_for('wishlist') }}"
+              class="footer__nav-link text-foreground/80 hover:text-primary transition-colors"
+            >
+              {{ _("Wishlist") }}
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Newsletter Column -->
+      {% if safeget(settings, "footer_show_newsletter", true) %}
+        <div class="footer__newsletter space-y-3">
+          <h3 class="footer__newsletter-title font-heading text-foreground m-0 text-base font-bold">
+            {{ settings.footer_newsletter_title | default(_("Subscribe to Our Newsletter")) }}
+          </h3>
+          <p class="text-muted text-xs leading-relaxed">
+            {{ _("Get exclusive offers, beauty tips, and new product releases directly to your inbox.") }}
+          </p>
+        </div>
+      {% endif %}
+    </div>
+
+    <!-- Divider -->
+    <hr class="footer__divider border-border my-6" />
+
+    <!-- Bottom Footer Row -->
+    <div
+      class="footer__bottom text-muted flex flex-col items-center justify-between gap-4 text-xs sm:flex-row"
+    >
+      <!-- Copyright -->
+      <p class="footer__copyright m-0 text-center sm:text-start">
+        &copy; {{ store.settings.branding.copyrights | default(store.name) }} —
+        {{ _("All Rights Reserved.") }}
+      </p>
+
+      <!-- Payment Icons -->
+      {% if safeget(settings, "footer_show_payment_methods", true) %}
+        <div class="footer__payment flex items-center gap-2">
+          <span
+            class="bg-surface border-border text-foreground rounded border px-2.5 py-1 text-[11px] font-medium"
+            >Mada</span
+          >
+          <span
+            class="bg-surface border-border text-foreground rounded border px-2.5 py-1 text-[11px] font-medium"
+            >Visa</span
+          >
+          <span
+            class="bg-surface border-border text-foreground rounded border px-2.5 py-1 text-[11px] font-medium"
+            >Mastercard</span
+          >
+          <span
+            class="bg-surface border-border text-foreground rounded border px-2.5 py-1 text-[11px] font-medium"
+            >Apple Pay</span
+          >
+          <span
+            class="bg-surface border-border text-foreground rounded border px-2.5 py-1 text-[11px] font-medium"
+            >Tamara</span
+          >
+          <span
+            class="bg-surface border-border text-foreground rounded border px-2.5 py-1 text-[11px] font-medium"
+            >Tabby</span
+          >
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</footer>

@@ -1,0 +1,20 @@
+# Normalise line endings to LF in the repository.
+# Prettier is configured for LF and `npx prettier --check` is part of every
+# task's acceptance criteria — without this, a Windows clone checks out CRLF
+# and the check fails on files nobody touched.
+* text=auto eol=lf
+
+# Binary assets — never convert.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+*.mo binary
+*.zip binary

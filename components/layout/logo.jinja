@@ -1,0 +1,38 @@
+<div class="header__logo">
+  <a href="{{ url_for('home') }}" class="header__logo-link flex items-center">
+    {% set desktop_logo = settings.header_logo %}
+    {% set mobile_logo = settings.header_mobile_logo | default(settings.header_logo) %}
+
+    {% if desktop_logo or mobile_logo %}
+      {% if desktop_logo and mobile_logo and desktop_logo != mobile_logo %}
+        <img
+          src="{{ image_url(desktop_logo, w=300, f='auto', q=85) }}"
+          alt="{{ store.name }}"
+          width="150"
+          height="40"
+          class="hidden h-auto max-h-12 w-auto object-contain lg:block"
+        />
+        <img
+          src="{{ image_url(mobile_logo, w=200, f='auto', q=85) }}"
+          alt="{{ store.name }}"
+          width="120"
+          height="32"
+          class="block h-auto max-h-10 w-auto object-contain lg:hidden"
+        />
+      {% else %}
+        {% set active_logo = desktop_logo | default(mobile_logo) %}
+        <img
+          src="{{ image_url(active_logo, w=300, f='auto', q=85) }}"
+          alt="{{ store.name }}"
+          width="150"
+          height="40"
+          class="h-auto max-h-10 w-auto object-contain lg:max-h-12"
+        />
+      {% endif %}
+    {% else %}
+      <span class="font-heading text-foreground text-xl font-bold tracking-tight lg:text-2xl">
+        {{ store.name }}
+      </span>
+    {% endif %}
+  </a>
+</div>

@@ -1,0 +1,8 @@
+req/
+node_modules/
+assets/styles.css
+assets/dist/
+dist/
+.vitrin/
+*.po
+*.mo

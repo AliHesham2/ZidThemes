@@ -1,0 +1,39 @@
+{
+  "groups": [
+    {
+      "id": "header",
+      "name": {
+        "ar": "إعدادات الهيدر",
+        "en": "Header Settings"
+      },
+      "icon": "layout-top-line",
+      "settings": [
+        {
+          "id": "logo",
+          "type": "image",
+          "label": {
+            "ar": "شعار المتجر (سطح المكتب)",
+            "en": "Store Logo (Desktop)"
+          }
+        },
+        {
+          "id": "mobile_logo",
+          "type": "image",
+          "label": {
+            "ar": "شعار المتجر (الجوال)",
+            "en": "Store Logo (Mobile)"
+          }
+        },
+        {
+          "id": "enable_sticky",
+          "type": "checkbox",
+          "label": {
+            "ar": "تثبيت الهيدر عند التمرير",
+            "en": "Enable Sticky Header on Scroll"
+          },
+          "default": true
+        }
+      ]
+    }
+  ]
+}

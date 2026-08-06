@@ -1,0 +1,50 @@
+{
+  "groups": [
+    {
+      "id": "footer",
+      "name": {
+        "ar": "إعدادات الفوتر",
+        "en": "Footer Settings"
+      },
+      "icon": "layout-bottom-line",
+      "settings": [
+        {
+          "id": "show_newsletter",
+          "type": "checkbox",
+          "label": {
+            "ar": "إظهار النشرة البريدية",
+            "en": "Show Newsletter Section"
+          },
+          "default": true
+        },
+        {
+          "id": "newsletter_title",
+          "type": "text",
+          "label": {
+            "ar": "عنوان النشرة البريدية",
+            "en": "Newsletter Title"
+          },
+          "default": "اشتركي في نشرتنا البريدية"
+        },
+        {
+          "id": "show_social_links",
+          "type": "checkbox",
+          "label": {
+            "ar": "إظهار روابط التواصل الاجتماعي",
+            "en": "Show Social Links"
+          },
+          "default": true
+        },
+        {
+          "id": "show_payment_methods",
+          "type": "checkbox",
+          "label": {
+            "ar": "إظهار أيقونات طرق الدفع",
+            "en": "Show Payment Icons"
+          },
+          "default": true
+        }
+      ]
+    }
+  ]
+}

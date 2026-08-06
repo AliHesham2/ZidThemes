@@ -1,0 +1,14 @@
+@layer components {
+  [data-grid] {
+    display: grid;
+    gap: var(--spacing-md, 1.6rem);
+    grid-template-columns: repeat(var(--cols-mobile, 1), minmax(0, 1fr));
+  }
+
+  @media (min-width: 768px) {
+    [data-grid] {
+      grid-template-columns: repeat(var(--cols-desktop, 4), minmax(0, 1fr));
+      gap: var(--spacing-lg, 3.2rem);
+    }
+  }
+}

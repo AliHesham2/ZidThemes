@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="{{ session.lang }}" dir="{{ session.locale.language.direction }}">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    {% vitrin_head %}
+
+    <!-- Preconnect to Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      media="print"
+      onload="this.media='all'"
+    />
+    <noscript>
+      <link
+        rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Cormorant:ital,wght@0,400;0,600;0,700;1,400;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,400..700;1,9..40,400..700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap"
+      />
+    </noscript>
+
+    <!-- Logo Preload for LCP Optimization -->
+    {% set desktop_logo = settings.header_logo %}
+    {% set mobile_logo = settings.header_mobile_logo | default(settings.header_logo) %}
+    {% if desktop_logo %}
+      <link
+        rel="preload"
+        as="image"
+        href="{{ image_url(desktop_logo, w=400, f='auto', q=85) }}"
+        media="(min-width: 768px)"
+      />
+    {% endif %}
+    {% if mobile_logo %}
+      <link
+        rel="preload"
+        as="image"
+        href="{{ image_url(mobile_logo, w=200, f='auto', q=85) }}"
+        media="(max-width: 767px)"
+      />
+    {% endif %}
+
+    <!-- Global Merchant Theme Settings CSS Variables -->
+    <!-- prettier-ignore-start -->
+  <style>
+    :root {
+      --background: {{ settings.theme_background | default('#F8F0FF') }};
+      --foreground: {{ settings.theme_foreground | default('#1f0038') }};
+      --surface: {{ settings.theme_surface | default('#FFFFFF') }};
+      --primary: {{ settings.theme_accent | default('#8d0f69') }};
+      --primary-foreground: {{ settings.theme_on_accent | default('#FFFFFF') }};
+      --secondary: {{ settings.theme_secondary | default('#EDD9F5') }};
+      --muted: {{ settings.theme_muted | default('#7A5A8A') }};
+      --border: {{ settings.theme_border | default('#D5C0E8') }};
+      --input: {{ settings.theme_border | default('#D5C0E8') }};
+      --ring: {{ settings.theme_accent | default('#8d0f69') }};
+      --radius: {{ settings.theme_radius | default('4px') }};
+      {% if session.lang == 'ar' %}
+        --font-display: 'Amiri', 'Cormorant', serif;
+        --font-body: 'IBM Plex Sans Arabic', 'DM Sans', sans-serif;
+      {% else %}
+        --font-display: 'Cormorant', 'Amiri', serif;
+        --font-body: 'DM Sans', 'IBM Plex Sans Arabic', sans-serif;
+      {% endif %}
+    }
+  </style>
+  <!-- prettier-ignore-end -->
+
+    <!-- Theme Compiled Stylesheet -->
+    <link rel="stylesheet" href="{{ 'styles.css' | asset_url }}" />
+
+    <!-- Merchant Custom CSS override -->
+    {% if user_custom_css %}
+      <link rel="stylesheet" href="{{ user_custom_css }}" />
+    {% endif %}
+  </head>
+  <body data-template="{{ session.template }}">
+    {% vitrin_body %}
+    {% include 'header.jinja' %}
+
+    <main id="main">
+      {% block main_content %}{% endblock %}
+      {% block content %}
+      {% endblock %}
+    </main>
+
+    {% include 'footer.jinja' %}
+
+    <!-- Platform Mandatory Region & Currency Dialog -->
+    {% include 'vitrin:shared/region_settings_dialog.jinja' %}
+    <script>
+      window.zidOpenRegionSettingDialog = () => {
+        region_settings_dialog?.open();
+      };
+    </script>
+
+    <!-- Theme JavaScript Bundle -->
+    <script defer src="{{ 'dist/theme.js' | asset_url }}"></script>
+
+    {% block footer_scripts %}{% endblock %}
+  </body>
+</html>

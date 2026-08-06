@@ -1,0 +1,17 @@
+node_modules/
+
+# Working/reference material — not part of the shippable theme.
+# Contains the docs mirror, GrowthTheme + Mirvela reference libraries,
+# and the task/memory scaffolding.
+req/
+assets/styles.css
+assets/dist/
+dist/
+.vitrin/dist/
+*.zip
+*.mo
+*.pot
+.env*
+.DS_Store
+.idea/
+.vscode/

@@ -1,0 +1,125 @@
+{
+  "groups": [
+    {
+      "id": "theme",
+      "name": {
+        "ar": "الألوان والهوية البصرية",
+        "en": "Colors & Visual Identity"
+      },
+      "icon": "palette-line",
+      "settings": [
+        {
+          "id": "background",
+          "type": "color",
+          "label": {
+            "ar": "لون الخلفية الرئيسي",
+            "en": "Main Background Color"
+          },
+          "default": "#F8F0FF"
+        },
+        {
+          "id": "foreground",
+          "type": "color",
+          "label": {
+            "ar": "لون النص الرئيسي",
+            "en": "Main Text Color"
+          },
+          "default": "#1f0038"
+        },
+        {
+          "id": "surface",
+          "type": "color",
+          "label": {
+            "ar": "لون الكروت والأسطح",
+            "en": "Card & Surface Color"
+          },
+          "default": "#FFFFFF"
+        },
+        {
+          "id": "accent",
+          "type": "color",
+          "label": {
+            "ar": "اللون الرئيسي (الأزرار والروابط)",
+            "en": "Primary Accent Color"
+          },
+          "default": "#8d0f69"
+        },
+        {
+          "id": "on_accent",
+          "type": "color",
+          "label": {
+            "ar": "لون النص على الأزرار الرئيسية",
+            "en": "Text Color on Primary Accent"
+          },
+          "default": "#FFFFFF"
+        },
+        {
+          "id": "secondary",
+          "type": "color",
+          "label": {
+            "ar": "اللون الثانوي",
+            "en": "Secondary Color"
+          },
+          "default": "#EDD9F5"
+        },
+        {
+          "id": "muted",
+          "type": "color",
+          "label": {
+            "ar": "لون العناصر الباهتة",
+            "en": "Muted Elements Color"
+          },
+          "default": "#7A5A8A"
+        },
+        {
+          "id": "border",
+          "type": "color",
+          "label": {
+            "ar": "لون الحدود",
+            "en": "Border Color"
+          },
+          "default": "#D5C0E8"
+        },
+        {
+          "id": "radius",
+          "type": "select",
+          "label": {
+            "ar": "انحناء الزوايا (Radius)",
+            "en": "Corner Softness (Radius)"
+          },
+          "options": [
+            {
+              "value": "0px",
+              "label": {
+                "ar": "حادة (0px)",
+                "en": "Sharp (0px)"
+              }
+            },
+            {
+              "value": "4px",
+              "label": {
+                "ar": "ناعمة (4px)",
+                "en": "Soft (4px)"
+              }
+            },
+            {
+              "value": "8px",
+              "label": {
+                "ar": "دائرية (8px)",
+                "en": "Rounded (8px)"
+              }
+            },
+            {
+              "value": "16px",
+              "label": {
+                "ar": "دائرية جداً (16px)",
+                "en": "Extra Rounded (16px)"
+              }
+            }
+          ],
+          "default": "4px"
+        }
+      ]
+    }
+  ]
+}

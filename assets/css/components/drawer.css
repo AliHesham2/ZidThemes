@@ -1,0 +1,41 @@
+@layer components {
+  /* Scroll Lock on Body */
+  body.drawer-open {
+    overflow: hidden !important;
+  }
+
+  /* Drawer Base Container */
+  .drawer {
+    transition: visibility 300ms ease;
+  }
+
+  .drawer.is-open {
+    visibility: visible;
+  }
+
+  .drawer.is-open .drawer__backdrop {
+    opacity: 1;
+  }
+
+  /* Mobile Drawer (Left in LTR, Right in RTL via inset-inline-start) */
+  .drawer--mobile.is-open .mobile-drawer__inner {
+    transform: translateX(0);
+  }
+
+  /* Cart Drawer (Right in LTR, Left in RTL via inset-inline-end) */
+  .drawer--cart.is-open .cart-drawer__inner {
+    transform: translateX(0);
+  }
+
+  /* Search Drawer (Top slide down) */
+  .drawer--search.is-open .search-drawer__inner {
+    transform: translateY(0);
+  }
+
+  /* Drawer Item Animation */
+  .cart-drawer__item {
+    transition:
+      opacity var(--transition-fast, 150ms ease),
+      transform var(--transition-fast, 150ms ease);
+  }
+}

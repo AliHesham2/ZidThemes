@@ -1,0 +1,32 @@
+@layer components {
+  .site-footer {
+    background-color: color-mix(in srgb, var(--color-secondary) 30%, transparent);
+    border-block-start: 1px solid var(--color-border);
+  }
+
+  .footer__social-link {
+    min-width: 44px;
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: var(--radius, 4px);
+    background-color: var(--color-surface);
+    border: 1px solid var(--color-border);
+    transition: all var(--transition-fast, 150ms ease);
+
+    &:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+      transform: translateY(-2px);
+    }
+  }
+
+  .footer__nav-link {
+    transition: color var(--transition-fast, 150ms ease);
+
+    &:hover {
+      color: var(--color-primary);
+    }
+  }
+}
