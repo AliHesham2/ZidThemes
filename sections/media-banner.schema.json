@@ -106,10 +106,10 @@
       "type": "select",
       "label": { "ar": "ارتفاع البانر (سطح المكتب)", "en": "Desktop height" },
       "options": [
-        { "value": "50vh", "label": "50vh" },
-        { "value": "60vh", "label": "60vh" },
-        { "value": "80vh", "label": "80vh" },
-        { "value": "100vh", "label": "100vh" }
+        { "value": "50vh", "label": { "ar": "نصف الشاشة", "en": "Half screen" } },
+        { "value": "60vh", "label": { "ar": "متوسط", "en": "Medium" } },
+        { "value": "80vh", "label": { "ar": "كبير", "en": "Large" } },
+        { "value": "100vh", "label": { "ar": "شاشة كاملة", "en": "Full screen" } }
       ],
       "default": "60vh"
     },
@@ -118,9 +118,9 @@
       "type": "select",
       "label": { "ar": "ارتفاع البانر (الجوال)", "en": "Mobile height" },
       "options": [
-        { "value": "40vh", "label": "40vh" },
-        { "value": "60vh", "label": "60vh" },
-        { "value": "80vh", "label": "80vh" }
+        { "value": "40vh", "label": { "ar": "قصير", "en": "Short" } },
+        { "value": "60vh", "label": { "ar": "متوسط", "en": "Medium" } },
+        { "value": "80vh", "label": { "ar": "كبير", "en": "Large" } }
       ],
       "default": "60vh"
     },

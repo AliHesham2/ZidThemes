@@ -210,6 +210,29 @@
           "show_excerpt": true,
           "show_view_all": true,
           "view_all_label": "عرض جميع المقالات",
+          "posts": [
+            {
+              "is_visible": true,
+              "slug": "",
+              "title": "روتين العناية بالبشرة في خمس خطوات",
+              "excerpt": "ترتيب المنتجات يصنع الفرق. دليل عملي لبناء روتين صباحي ومسائي يناسب بشرتك دون تعقيد.",
+              "date": "١٢ مارس"
+            },
+            {
+              "is_visible": true,
+              "slug": "",
+              "title": "كيف تختارين درجة الأساس المناسبة",
+              "excerpt": "درجة واحدة أفتح أو أغمق تغيّر الإطلالة بالكامل. طريقة بسيطة لتحديد درجتك تحت الإضاءة الطبيعية.",
+              "date": "٢٨ فبراير"
+            },
+            {
+              "is_visible": true,
+              "slug": "",
+              "title": "أساسيات العطر الذي يدوم طويلاً",
+              "excerpt": "من نقاط النبض إلى ترطيب البشرة قبل الرش، عادات صغيرة تُطيل عمر عطرك المفضل.",
+              "date": "١٥ فبراير"
+            }
+          ],
           "show_on_desktop": true,
           "show_on_mobile": true
         }
@@ -466,6 +489,29 @@
           "show_excerpt": true,
           "show_view_all": true,
           "view_all_label": "View All Articles",
+          "posts": [
+            {
+              "is_visible": true,
+              "slug": "",
+              "title": "A Five-Step Skincare Routine",
+              "excerpt": "Order matters more than ingredients. A practical guide to building a morning and evening routine that suits your skin.",
+              "date": "12 March"
+            },
+            {
+              "is_visible": true,
+              "slug": "",
+              "title": "How to Find Your Foundation Shade",
+              "excerpt": "One shade lighter or darker changes everything. A simple way to match your tone in natural daylight.",
+              "date": "28 February"
+            },
+            {
+              "is_visible": true,
+              "slug": "",
+              "title": "Making a Fragrance Last All Day",
+              "excerpt": "From pulse points to moisturising before you spray, small habits that stretch the life of a scent you love.",
+              "date": "15 February"
+            }
+          ],
           "show_on_desktop": true,
           "show_on_mobile": true
         }
