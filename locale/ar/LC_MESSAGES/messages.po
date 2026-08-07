@@ -184,6 +184,14 @@ msgstr "جميع الحقوق محفوظة © %(name)s"
 
 # ── Category Worlds ─────────────────────────────────────────────────────────
 
-#: sections/category-worlds.jinja:38
+#: sections/category-worlds.jinja:39
 msgid "Explore"
 msgstr "اكتشفي"
+
+#: sections/category-worlds.jinja:125
+msgid "Previous"
+msgstr "السابق"
+
+#: sections/category-worlds.jinja:145
+msgid "Next"
+msgstr "التالي"

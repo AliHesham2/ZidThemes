@@ -72,21 +72,116 @@
     );
   }
 
+  .category-worlds__slider-wrapper {
+    position: relative;
+    width: 100%;
+  }
+
   .category-worlds__grid {
     display: grid;
     grid-template-columns: 1fr;
     gap: clamp(1.6rem, 2.2vw, 2.8rem);
+    width: 100%;
+  }
+
+  .category-worlds__grid[data-count="1"] {
+    max-width: 320px;
+    margin-inline: auto;
+  }
+
+  .category-worlds__grid:not([data-count="1"]) {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    padding-block-end: 12px;
+    margin-block-end: -12px;
+  }
+
+  .category-worlds__grid:not([data-count="1"])::-webkit-scrollbar {
+    display: none;
+  }
+
+  .category-worlds__grid:not([data-count="1"]) .category-worlds__card-wrapper {
+    flex: 0 0 100%;
+    scroll-snap-align: start;
   }
 
   @media (min-width: 40rem) {
-    .category-worlds__grid {
-      grid-template-columns: repeat(2, 1fr);
+    .category-worlds__grid[data-count="1"],
+    .category-worlds__grid[data-count="2"] {
+      display: grid;
+      overflow-x: visible;
+      scroll-snap-type: none;
+      max-width: none;
+      margin-inline: 0;
+      padding-block-end: 0;
+      margin-block-end: 0;
+      justify-content: center;
+    }
+
+    .category-worlds__grid[data-count="1"] {
+      grid-template-columns: minmax(0, 320px);
+    }
+
+    .category-worlds__grid[data-count="2"] {
+      grid-template-columns: repeat(2, minmax(0, 320px));
+    }
+
+    .category-worlds__grid[data-count="1"] .category-worlds__card-wrapper,
+    .category-worlds__grid[data-count="2"] .category-worlds__card-wrapper {
+      flex: initial;
+    }
+
+    .category-worlds__grid:not([data-count="1"]):not([data-count="2"])
+      .category-worlds__card-wrapper {
+      flex: 0 0 calc((100% - clamp(1.6rem, 2.2vw, 2.8rem)) / 2);
     }
   }
 
   @media (min-width: 64rem) {
-    .category-worlds__grid {
+    .category-worlds__grid[data-count="1"],
+    .category-worlds__grid[data-count="2"],
+    .category-worlds__grid[data-count="3"],
+    .category-worlds__grid[data-count="4"] {
+      display: grid;
+      overflow-x: visible;
+      scroll-snap-type: none;
+      justify-content: center;
+      padding-block-end: 0;
+      margin-block-end: 0;
+    }
+
+    .category-worlds__grid[data-count="1"] {
+      grid-template-columns: calc((100% - 3 * clamp(1.6rem, 2.2vw, 2.8rem)) / 4);
+    }
+
+    .category-worlds__grid[data-count="2"] {
+      grid-template-columns: repeat(2, calc((100% - 3 * clamp(1.6rem, 2.2vw, 2.8rem)) / 4));
+    }
+
+    .category-worlds__grid[data-count="3"] {
+      grid-template-columns: repeat(3, calc((100% - 3 * clamp(1.6rem, 2.2vw, 2.8rem)) / 4));
+    }
+
+    .category-worlds__grid[data-count="4"] {
       grid-template-columns: repeat(4, 1fr);
+    }
+
+    .category-worlds__grid[data-count="1"] .category-worlds__card-wrapper,
+    .category-worlds__grid[data-count="2"] .category-worlds__card-wrapper,
+    .category-worlds__grid[data-count="3"] .category-worlds__card-wrapper,
+    .category-worlds__grid[data-count="4"] .category-worlds__card-wrapper {
+      flex: initial;
+    }
+
+    .category-worlds__grid:not([data-count="1"]):not([data-count="2"]):not([data-count="3"]):not(
+        [data-count="4"]
+      )
+      .category-worlds__card-wrapper {
+      flex: 0 0 calc((100% - 3 * clamp(1.6rem, 2.2vw, 2.8rem)) / 4);
     }
   }
 
@@ -314,13 +409,78 @@
     }
   }
 
+  .category-worlds__controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-block-start: var(--block-gap-sm);
+  }
+
+  .category-worlds__grid[data-count="1"] ~ .category-worlds__controls {
+    display: none;
+  }
+
+  @media (min-width: 40rem) {
+    .category-worlds__grid[data-count="2"] ~ .category-worlds__controls {
+      display: none;
+    }
+  }
+
+  @media (min-width: 64rem) {
+    .category-worlds__grid[data-count="3"] ~ .category-worlds__controls,
+    .category-worlds__grid[data-count="4"] ~ .category-worlds__controls {
+      display: none;
+    }
+  }
+
+  .category-worlds__control-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-surface) 90%, transparent);
+    border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+    color: var(--color-primary);
+    box-shadow: 0 4px 12px color-mix(in srgb, var(--scrim) 4%, transparent);
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      border-color 0.2s ease,
+      color 0.2s ease,
+      opacity 0.2s ease;
+  }
+
+  .category-worlds__control-btn:focus-visible {
+    outline: 2px solid var(--color-ring);
+    outline-offset: 2px;
+  }
+
+  @media (hover: hover) {
+    .category-worlds__control-btn:hover:not(:disabled):not(.is-disabled) {
+      background-color: var(--color-primary);
+      border-color: var(--color-primary);
+      color: var(--color-primary-foreground);
+    }
+  }
+
+  .category-worlds__control-btn:disabled,
+  .category-worlds__control-btn.is-disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     .category-worlds__card,
     .category-worlds__illus,
     .category-worlds__img,
     .category-worlds__glow,
     .category-worlds__cta,
-    .category-worlds__cta svg {
+    .category-worlds__cta svg,
+    .category-worlds__control-btn {
       transition: none;
     }
   }

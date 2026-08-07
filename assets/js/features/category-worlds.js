@@ -1,8 +1,14 @@
 import { listenEvent } from "../utils/events.js";
 
 const initializedGrids = new WeakSet();
+const initializedSliders = new WeakSet();
 
 export function initCategoryWorlds() {
+  initTilt();
+  initSliders();
+}
+
+function initTilt() {
   const isFinePointer =
     window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
   const isReducedMotion =
@@ -91,6 +97,88 @@ function resetCard(card) {
   card.style.removeProperty("--glare-x");
   card.style.removeProperty("--glare-y");
   card.style.removeProperty("--glare-o");
+}
+
+function initSliders() {
+  const wrappers = document.querySelectorAll("[data-category-slider]");
+
+  wrappers.forEach((wrapper) => {
+    if (initializedSliders.has(wrapper)) return;
+    initializedSliders.add(wrapper);
+
+    const track = wrapper.querySelector(".category-worlds__grid");
+    const prevBtn = wrapper.querySelector("[data-slider-prev]");
+    const nextBtn = wrapper.querySelector("[data-slider-next]");
+
+    if (!track || !prevBtn || !nextBtn) return;
+
+    let scrollRaf = null;
+
+    const updateControls = () => {
+      scrollRaf = null;
+      const isRTL = getComputedStyle(track).direction === "rtl";
+      const scrollLeft = track.scrollLeft;
+      const maxScroll = track.scrollWidth - track.clientWidth;
+
+      let isAtStart = false;
+      let isAtEnd = false;
+
+      if (isRTL) {
+        const absScroll = Math.abs(scrollLeft);
+        isAtStart = absScroll <= 5;
+        isAtEnd = absScroll >= maxScroll - 5;
+      } else {
+        isAtStart = scrollLeft <= 5;
+        isAtEnd = scrollLeft >= maxScroll - 5;
+      }
+
+      setButtonState(prevBtn, isAtStart);
+      setButtonState(nextBtn, isAtEnd);
+    };
+
+    const getStepWidth = () => {
+      const firstCard = track.querySelector(".category-worlds__card-wrapper");
+      if (!firstCard) return track.clientWidth * 0.8;
+      const cardWidth = firstCard.getBoundingClientRect().width;
+      const gap = parseFloat(getComputedStyle(track).gap) || 16;
+      return cardWidth + gap;
+    };
+
+    prevBtn.addEventListener("click", () => {
+      const isRTL = getComputedStyle(track).direction === "rtl";
+      const step = getStepWidth();
+      track.scrollBy({ left: isRTL ? step : -step, behavior: "smooth" });
+    });
+
+    nextBtn.addEventListener("click", () => {
+      const isRTL = getComputedStyle(track).direction === "rtl";
+      const step = getStepWidth();
+      track.scrollBy({ left: isRTL ? -step : step, behavior: "smooth" });
+    });
+
+    const onScrollOrResize = () => {
+      if (!scrollRaf) {
+        scrollRaf = requestAnimationFrame(updateControls);
+      }
+    };
+
+    track.addEventListener("scroll", onScrollOrResize, { passive: true });
+    window.addEventListener("resize", onScrollOrResize, { passive: true });
+
+    updateControls();
+  });
+}
+
+function setButtonState(btn, disabled) {
+  if (!btn) return;
+  btn.disabled = disabled;
+  if (disabled) {
+    btn.setAttribute("aria-disabled", "true");
+    btn.classList.add("is-disabled");
+  } else {
+    btn.removeAttribute("aria-disabled");
+    btn.classList.remove("is-disabled");
+  }
 }
 
 if (document.readyState === "loading") {

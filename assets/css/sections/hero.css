@@ -198,6 +198,16 @@
     }
   }
 
+  .hero-leaf-cluster--start {
+    transform-box: view-box;
+    transform: translateX(calc(var(--leaf-shift, 0) * -1px));
+  }
+
+  .hero-leaf-cluster--end {
+    transform-box: view-box;
+    transform: translateX(calc(var(--leaf-shift, 0) * 1px));
+  }
+
   .hero-leaf-bob {
     transform-box: fill-box;
     transform-origin: center;

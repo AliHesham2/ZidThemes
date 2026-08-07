@@ -4,4 +4,5 @@ import "./features/search.js";
 import "./features/localization.js";
 import "./features/auth.js";
 import "./features/category-worlds.js";
+import "./features/hero-wordmark.js";
 import "./cart/badge.js";

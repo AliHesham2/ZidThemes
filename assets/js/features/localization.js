@@ -21,7 +21,8 @@ const initializedTriggers = new WeakSet();
  * 🚨 setRegion requires BOTH `language` and `country_code` on every call —
  * `city_id` is the only optional one. Sending just the field being changed
  * makes the call fail and the click appear to do nothing. So we always merge
- * the change over the current state.
+ * the change over the current state. Both codes must also be lowercase, as
+ * uppercase country codes cause setRegion to resolve silently without applying.
  * @param {{language?: string, country_code?: string}} change
  */
 async function applyRegion(change) {
@@ -37,6 +38,9 @@ async function applyRegion(change) {
     return;
   }
 
+  payload.language = payload.language.toLowerCase();
+  payload.country_code = payload.country_code.toLowerCase();
+
   // The SDK may still be loading when the user clicks.
   const ready = await waitForZid("store.region.setRegion");
   if (!ready) {
@@ -44,6 +48,19 @@ async function applyRegion(change) {
     // platform dialog rather than doing nothing.
     window.zidOpenRegionSettingDialog?.();
     return;
+  }
+
+  try {
+    const langs = await window.zid.store.region.languages?.();
+    if (Array.isArray(langs) && langs.length > 0) {
+      const isSupported = langs.some((l) => l && String(l.code).toLowerCase() === payload.language);
+      if (!isSupported) {
+        window.zidOpenRegionSettingDialog?.();
+        return;
+      }
+    }
+  } catch {
+    // Safety check failure falls through to setRegion attempt
   }
 
   try {
