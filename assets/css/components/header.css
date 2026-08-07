@@ -156,7 +156,6 @@
     }
   }
 
-  /* Nav & Localisation Dropdown Panels (Shared Visual Language) */
   .header__dropdown,
   .hdr-loc-dropdown {
     position: absolute;
@@ -175,6 +174,15 @@
       transform 0.22s ease,
       visibility 0.22s ease;
     z-index: var(--z-dropdown);
+  }
+
+  .header__dropdown::before,
+  .hdr-loc-dropdown::before {
+    content: "";
+    position: absolute;
+    inset-block-end: 100%;
+    inset-inline: 0;
+    height: 4px;
   }
 
   .header__dropdown {

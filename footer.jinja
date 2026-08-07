@@ -27,9 +27,12 @@
         <!-- Small Deco Rule Under Brand -->
         <div class="footer__deco-rule bg-border/60 my-3 h-[1px] w-10"></div>
 
-        <p class="footer__tagline text-muted max-w-[260px] text-sm leading-relaxed">
-          {{ store.settings.branding.description | default(_("Your premier destination for skincare, makeup, perfume, and organic beauty products."), true) }}
-        </p>
+        {% set brand_description = store.settings.branding.description %}
+        {% if brand_description %}
+          <p class="footer__tagline text-muted max-w-[260px] text-sm leading-relaxed">
+            {{ brand_description }}
+          </p>
+        {% endif %}
 
         {% if safeget(settings, "footer_show_social_links", true) %}
           {% include 'components/layout/social_links.jinja' %}

@@ -171,16 +171,22 @@ function initDrawers() {
     });
   });
 
-  // Bind Accessible Nav Menu Dropdown Toggle Buttons (Section E2)
   document.querySelectorAll("[data-menu-toggle]").forEach((toggleBtn) => {
     if (initializedTriggers.has(toggleBtn)) return;
     initializedTriggers.add(toggleBtn);
 
-    toggleBtn.addEventListener("click", (e) => {
-      e.preventDefault();
-      const isExpanded = toggleBtn.getAttribute("aria-expanded") === "true";
-      toggleBtn.setAttribute("aria-expanded", isExpanded ? "false" : "true");
-    });
+    const wrapper = toggleBtn.closest(".header__nav-item");
+    if (!wrapper) return;
+
+    const syncExpanded = () =>
+      queueMicrotask(() => {
+        const open = wrapper.matches(":hover") || wrapper.contains(document.activeElement);
+        toggleBtn.setAttribute("aria-expanded", String(open));
+      });
+
+    ["mouseenter", "mouseleave", "focusin", "focusout"].forEach((evt) =>
+      wrapper.addEventListener(evt, syncExpanded)
+    );
   });
 
   // Attach keydown listener for Focus Trap & Escape key (once)

@@ -175,13 +175,6 @@ msgstr "الشحن والدفع"
 
 # ── Footer · brand + legal ──────────────────────────────────────────────────
 
-#. Brand tagline under the logo — marketing copy, not a literal translation.
-#: footer.jinja:27
-msgid ""
-"Your premier destination for skincare, makeup, perfume, and organic beauty "
-"products."
-msgstr "وجهتك الأولى لمنتجات العناية بالبشرة والمكياج والعطور والجمال العضوي."
-
 #. Copyright line. %(name)s is the store name.
 #. The Arabic leads so the "©" is not stranded at the page edge in RTL.
 #: footer.jinja:139

@@ -63,6 +63,17 @@
     }
   }
 
+  .btn-outlined--on-dark {
+    background-color: transparent;
+    color: var(--color-background);
+    border-color: color-mix(in srgb, var(--color-background) 55%, transparent);
+
+    &:hover:not(:disabled) {
+      background-color: var(--color-background);
+      color: var(--color-foreground);
+    }
+  }
+
   .btn-text {
     background-color: transparent;
     color: var(--color-foreground);
