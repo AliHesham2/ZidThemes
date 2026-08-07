@@ -84,6 +84,15 @@
           "default": true
         },
         {
+          "id": "title",
+          "type": "text",
+          "label": {
+            "ar": "عنوان التصنيف (اختياري)",
+            "en": "Title (optional)"
+          },
+          "default": ""
+        },
+        {
           "id": "category",
           "type": "category",
           "label": {

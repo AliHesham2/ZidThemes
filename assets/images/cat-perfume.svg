@@ -35,7 +35,7 @@
   </defs>
 
   <ellipse cx="110" cy="148" rx="60" ry="84" fill="url(#pf-glow)"/>
-  <ellipse cx="110" cy="242" rx="52" ry="7" fill="rgba(31,0,56,0.2)"/>
+  <ellipse cx="110" cy="266" rx="52" ry="7.5" fill="rgba(31,0,56,0.18)"/>
 
   <g transform="translate(110, 145) scale(0.85) translate(-110, -150)">
     <rect x="60" y="224" width="100" height="36" rx="10" fill="url(#pf-body)"/>

@@ -1,0 +1,274 @@
+{% set card_product = product %}
+{% set ratio = image_ratio | default('4-5', true) %}
+{% set product_url = url_for('product_details', slug=card_product.slug) if (card_product and card_product.slug) else '#' %}
+
+{% set is_sold_out = (not card_product.in_stock) if card_product else false %}
+{% set is_on_sale = (card_product.formatted_sale_price is defined and card_product.formatted_sale_price is not none) if card_product else false %}
+{% set discount_pct = card_product.discount_percentage if (card_product and card_product.discount_percentage) else 0 %}
+
+{% set regular_price = card_product.formatted_price if card_product else '' %}
+{% set sale_price = card_product.formatted_sale_price if (card_product and is_on_sale) else '' %}
+{% set has_options = card_product.has_options if card_product else false %}
+{% set has_fields = card_product.has_fields if card_product else false %}
+
+{% set media_list = card_product.images if (card_product and card_product.images and card_product.images|length > 0) else (card_product.selected_product.media if (card_product and card_product.selected_product and card_product.selected_product.media) else []) %}
+{% set main_img = card_product.main_image if card_product else none %}
+
+<article
+  class="product-card {{ class | default('', true) }}"
+  data-product-card
+  data-reveal-item="card"
+  data-product-url="{{ product_url }}"
+  {% if index is defined %}style="--i: {{ index }}"{% endif %}
+>
+  <div class="product-card__media-wrapper product-card__media-wrapper--{{ ratio }}">
+    <div class="product-card__badge-slot">
+      {% if is_sold_out %}
+        <span class="pc-badge pc-badge--soldout">{{ _("OUT OF STOCK") }}</span>
+      {% elif is_on_sale %}
+        <span class="pc-badge pc-badge--sale">
+          {% if discount_pct > 0 %}-{{ discount_pct }}%{% else %}{{ _("Sale") }}{% endif %}
+        </span>
+      {% endif %}
+    </div>
+
+    <div class="product-card__carousel-track" data-carousel-track>
+      {% if media_list|length > 0 %}
+        {% for media_item in media_list %}
+          {% set img_src = media_item.image.full_size if (media_item and media_item.image and media_item.image.full_size) else none %}
+          <div class="product-card__carousel-slide" data-index="{{ loop.index0 }}">
+            <a
+              href="{{ product_url }}"
+              class="product-card__media-link"
+              aria-label="{{ card_product.name }}"
+            >
+              {% if img_src %}
+                <img
+                  src="{{ image_url(img_src, w=400, q=85, f='auto') }}"
+                  srcset="
+                    {{ image_url(img_src, w=400, q=85, f='auto') }} 400w,
+                    {{ image_url(img_src, w=800, q=85, f='auto') }} 800w
+                  "
+                  sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
+                  alt="{{ card_product.name }}"
+                  loading="lazy"
+                  class="product-card__image"
+                />
+              {% else %}
+                <div class="product-card__image-placeholder"></div>
+              {% endif %}
+            </a>
+          </div>
+        {% endfor %}
+      {% elif main_img %}
+        {% set img_src = main_img.image.full_size if (main_img and main_img.image and main_img.image.full_size) else (main_img.image.medium if (main_img and main_img.image) else none) %}
+        <div class="product-card__carousel-slide" data-index="0">
+          <a
+            href="{{ product_url }}"
+            class="product-card__media-link"
+            aria-label="{{ card_product.name }}"
+          >
+            {% if img_src %}
+              <img
+                src="{{ image_url(img_src, w=400, q=85, f='auto') }}"
+                srcset="
+                  {{ image_url(img_src, w=400, q=85, f='auto') }} 400w,
+                  {{ image_url(img_src, w=800, q=85, f='auto') }} 800w
+                "
+                sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 400px"
+                alt="{{ card_product.name }}"
+                loading="lazy"
+                class="product-card__image"
+              />
+            {% else %}
+              <div class="product-card__image-placeholder"></div>
+            {% endif %}
+          </a>
+        </div>
+      {% else %}
+        <div class="product-card__carousel-slide" data-index="0">
+          <a
+            href="{{ product_url }}"
+            class="product-card__media-link"
+            aria-label="{{ card_product.name if card_product else '' }}"
+          >
+            <div class="product-card__image-placeholder"></div>
+          </a>
+        </div>
+      {% endif %}
+    </div>
+
+    {% if media_list|length > 1 %}
+      <button
+        type="button"
+        class="product-card__carousel-arrow product-card__carousel-arrow--prev"
+        data-carousel-prev
+        aria-label="{{ _('Previous') }}"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          class="rtl:rotate-180"
+          aria-hidden="true"
+        >
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </button>
+      <button
+        type="button"
+        class="product-card__carousel-arrow product-card__carousel-arrow--next"
+        data-carousel-next
+        aria-label="{{ _('Next') }}"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          class="rtl:rotate-180"
+          aria-hidden="true"
+        >
+          <path d="M9 18l6-6-6-6" />
+        </svg>
+      </button>
+
+      <div class="product-card__carousel-dots">
+        {% for media_item in media_list %}
+          <button
+            type="button"
+            class="product-card__carousel-dot"
+            data-carousel-dot="{{ loop.index0 }}"
+            aria-label="{{ _('Image') }} {{ loop.index }}"
+            {% if loop.first %}aria-current="true"{% endif %}
+          >
+            <span class="product-card__dot-inner"></span>
+          </button>
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    <div class="product-card__notch">
+      {% if is_sold_out %}
+        <button
+          type="button"
+          class="product-card__quick-view-btn product-card__quick-view-btn--sold-out"
+          disabled
+          aria-label="{{ _('Sold Out') }}"
+        >
+          <span class="product-card__notch-ico product-card__notch-ico--soldout" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="12" cy="12" r="9" />
+              <line x1="5.6" y1="5.6" x2="18.4" y2="18.4" />
+            </svg>
+          </span>
+        </button>
+      {% else %}
+        <a
+          href="{{ product_url }}"
+          class="product-card__quick-view-btn"
+          aria-label="{% if has_options or has_fields %}{{ _('Select options') }}{% else %}{{ _('View Product') }}{% endif %}"
+        >
+          <span class="product-card__notch-ico product-card__notch-ico--add" aria-hidden="true">
+            <svg
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <path d="M12 5v14M5 12h14" />
+            </svg>
+          </span>
+        </a>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="product-card__info">
+    {% if card_product and card_product.name %}
+      <h3 class="product-card__title">
+        <a href="{{ product_url }}" class="product-card__title-link">{{ card_product.name }}</a>
+      </h3>
+    {% endif %}
+
+    {% if card_product and card_product.options %}
+      {% for option in card_product.options %}
+        {% set choices = option.choices or [] %}
+        {% set meta_map = option.choices_metadata or {} %}
+        {% set swatch_choices = [] %}
+        {% for choice in choices %}
+          {% set meta = meta_map[choice] if meta_map[choice] is defined else none %}
+          {% if meta and meta.type in ['color', 'icon'] and meta.type_value %}
+            {% set _ = swatch_choices.append((choice, meta.type, meta.type_value)) %}
+          {% endif %}
+        {% endfor %}
+        {% if swatch_choices | length > 0 %}
+          <div class="product-card__color-swatches" aria-hidden="true">
+            {% for choice, swatch_type, swatch_value in swatch_choices %}
+              <span
+                class="product-card__swatch-dot{{ ' is-active' if loop.first else '' }}"
+                title="{{ choice }}"
+                style="{% if swatch_type == 'icon' %}
+                  background-image: url('{{ swatch_value }}'); background-size: cover;
+                {% else %}
+                  --swatch-color: {{ swatch_value }};
+                {% endif %}"
+              ></span>
+            {% endfor %}
+          </div>
+        {% endif %}
+      {% endfor %}
+    {% endif %}
+
+    {% set raw_desc = card_product.short_description | striptags if (card_product and card_product.short_description) else (card_product.description | striptags if (card_product and card_product.description) else '') %}
+    {% set card_desc = raw_desc | truncate(80) if raw_desc else '' %}
+    {% if card_desc %}
+      <p class="product-card__description">{{ card_desc }}</p>
+    {% endif %}
+
+    <div class="product-card__price-row">
+      <div class="product-card__price">
+        {% if is_on_sale %}
+          <ins class="product-card__sale-price">
+            {%- if has_options %}{{ _("From") }}{% endif -%}
+            {{ sale_price }}
+          </ins>
+          <del class="product-card__regular-price">{{ regular_price }}</del>
+        {% else %}
+          <span class="product-card__regular-price">
+            {%- if has_options %}{{ _("From") }}{% endif -%}
+            {{ regular_price }}
+          </span>
+        {% endif %}
+      </div>
+      <a
+        href="{{ product_url }}"
+        class="product-card__quickview-icon"
+        aria-label="{{ _('View Product') }}"
+      >
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="1.8"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      </a>
+    </div>
+  </div>
+</article>

@@ -18,6 +18,7 @@
 @import "./css/components/drawer.css";
 @import "./css/components/header.css";
 @import "./css/components/footer.css";
+@import "./css/components/product-card.css";
 
 /* Section Partials */
 @import "./css/sections/hero.css";

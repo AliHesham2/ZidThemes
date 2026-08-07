@@ -29,7 +29,7 @@
     {% set category_items = safeget(settings, "categories", []) %}
     {% set valid_items = [] %}
     {% for item in category_items %}
-      {% if item.category and item.category.id and safeget(item, "is_visible", true) %}
+      {% if safeget(item, "is_visible", true) and (item.title or (item.category and item.category.id)) %}
         {% set _ = valid_items.append(item) %}
       {% endif %}
     {% endfor %}
@@ -43,8 +43,8 @@
         <ul class="category-worlds__grid" data-count="{{ count }}">
           {% for item in valid_items %}
             {% set cat = item.category %}
-            {% set cat_url = url_for('category_details', category_id=cat.id, slug=cat.slug) %}
-            {% set cat_name = cat.name %}
+            {% set cat_url = url_for('category_details', category_id=cat.id, slug=cat.slug) if (cat and cat.id and cat.slug) else url_for('list_categories') %}
+            {% set cat_name = item.title | default(cat.name if (cat and cat.name) else "", true) %}
             {% set tagline_text = item.tagline | default(cat.description | striptags if cat and cat.description else "", true) %}
             {% set cta_text = item.cta_label | default(default_cta_text, true) %}
             {% set illus_type = item.illustration | default("other", true) %}

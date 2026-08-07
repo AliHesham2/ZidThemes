@@ -15,11 +15,36 @@
       {
         "template": "sections/category-worlds.jinja",
         "settings": {
-          "eyebrow": "اكتشف عالمنا",
-          "heading": "تصنيفات الجمال المختارة",
+          "eyebrow": "اكتشف",
+          "heading": "عالمنا",
           "cta_label": "تسوّق",
           "image_fit": "contain",
-          "categories": [],
+          "categories": [
+            {
+              "is_visible": true,
+              "title": "العناية بالبشرة",
+              "tagline": "غذّي إشراقتك الطبيعية",
+              "illustration": "skincare"
+            },
+            {
+              "is_visible": true,
+              "title": "مكياج",
+              "tagline": "اصنعي إطلالتك المميزة",
+              "illustration": "makeup"
+            },
+            {
+              "is_visible": true,
+              "title": "عطور",
+              "tagline": "اتركي أثرًا لا يُنسى",
+              "illustration": "perfume"
+            },
+            {
+              "is_visible": true,
+              "title": "عضوي",
+              "tagline": "نباتات نقية، نتائج نقية",
+              "illustration": "organic"
+            }
+          ],
           "show_on_desktop": true,
           "show_on_mobile": true
         }
@@ -40,11 +65,36 @@
       {
         "template": "sections/category-worlds.jinja",
         "settings": {
-          "eyebrow": "Discover Our World",
-          "heading": "Curated Beauty Categories",
+          "eyebrow": "Discover",
+          "heading": "Our World",
           "cta_label": "Explore",
           "image_fit": "contain",
-          "categories": [],
+          "categories": [
+            {
+              "is_visible": true,
+              "title": "Skincare",
+              "tagline": "Nourish your natural glow",
+              "illustration": "skincare"
+            },
+            {
+              "is_visible": true,
+              "title": "Makeup",
+              "tagline": "Define your signature look",
+              "illustration": "makeup"
+            },
+            {
+              "is_visible": true,
+              "title": "Perfume",
+              "tagline": "Leave a lasting impression",
+              "illustration": "perfume"
+            },
+            {
+              "is_visible": true,
+              "title": "Organic",
+              "tagline": "Pure botanicals, pure results",
+              "illustration": "organic"
+            }
+          ],
           "show_on_desktop": true,
           "show_on_mobile": true
         }
