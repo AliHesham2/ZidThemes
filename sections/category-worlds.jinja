@@ -45,7 +45,7 @@
             {% set cat = item.category %}
             {% set cat_url = url_for('category_details', category_id=cat.id, slug=cat.slug) %}
             {% set cat_name = cat.name %}
-            {% set tagline_text = item.tagline %}
+            {% set tagline_text = item.tagline | default(cat.description | striptags if cat and cat.description else "", true) %}
             {% set cta_text = item.cta_label | default(default_cta_text, true) %}
             {% set illus_type = item.illustration | default("other", true) %}
             {% set custom_image = item.image %}

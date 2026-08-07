@@ -27,11 +27,11 @@
 
   .category-worlds__eyebrow-star {
     color: var(--color-primary);
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
   }
 
   .category-worlds__eyebrow-text {
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     font-weight: 700;
     color: var(--color-primary);
   }
@@ -361,18 +361,23 @@
   }
 
   .category-worlds__tagline {
-    font-size: var(--text-base);
+    font-size: var(--text-sm);
     line-height: var(--leading-body);
     color: color-mix(in srgb, var(--color-foreground) 75%, transparent);
     margin: 0;
     max-width: 220px;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    overflow: hidden;
   }
 
   .category-worlds__cta {
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    font-size: var(--text-sm);
+    font-size: var(--text-xs);
     font-weight: 700;
     color: var(--color-primary);
     padding: 8px 18px;
