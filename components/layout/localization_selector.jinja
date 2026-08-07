@@ -18,7 +18,7 @@
 {# setRegion requires BOTH language and country_code on every call, so the
    current value of whichever one isn't changing has to travel with it. #}
 <div
-  class="hdr-loc-group text-foreground hidden items-center gap-3 text-xs font-medium lg:flex"
+  class="hdr-loc-group hidden lg:flex"
   data-localization-group
   data-current-lang="{{ session.lang | default('ar', true) }}"
   data-current-country="{{ session.country.code | default(session.country.iso_code_2, true) | default('SA', true) }}"
@@ -31,11 +31,11 @@
   {% set cur_symbol = cur.symbol | default('﷼', true) %}
 
   {# ── Currency / Region Selector ────────────────────────────────────── #}
-  <div class="hdr-loc-wrapper relative" data-loc-currency-wrapper>
+  <div class="hdr-loc-wrapper" data-loc-currency-wrapper>
     {% if multiple_countries %}
       <button
         type="button"
-        class="hdr-loc-btn hover:bg-secondary/40 focus-visible:ring-ring flex cursor-pointer items-center gap-1 rounded px-2 py-1 transition-colors focus-visible:ring-1 focus-visible:outline-none"
+        class="hdr-loc-btn focus-visible:ring-ring focus-visible:ring-1 focus-visible:outline-none"
         data-loc-trigger="currency"
         data-current-currency="{{ cur_code }}"
         aria-expanded="false"
@@ -60,22 +60,19 @@
       </button>
     {% else %}
       {# Single currency — plain text, not a control. #}
-      <span class="hdr-loc-static flex items-center gap-1 px-2 py-1">
+      <span class="hdr-loc-static">
         <span class="font-bold">{{ cur_symbol }}</span>
         <span class="sr-only">{{ cur_code }}</span>
       </span>
     {% endif %}
 
     {% if multiple_countries %}
-      <div
-        class="hdr-loc-dropdown bg-surface border-border z-dropdown absolute start-0 top-full mt-1 hidden min-w-[160px] rounded-md border p-1.5 shadow-md"
-        data-loc-dropdown="currency"
-      >
+      <div class="hdr-loc-dropdown" data-loc-dropdown="currency">
         {% for country in countries %}
           {% set c_code = country.currency_code | default(country.code, true) %}
           <button
             type="button"
-            class="hover:bg-secondary/40 {{ 'text-primary font-bold' if c_code == cur_code else 'text-foreground' }} flex w-full items-center justify-between rounded px-2 py-1.5 text-start text-xs transition-colors"
+            class="{{ 'is-active' if c_code == cur_code }}"
             data-country-code="{{ country.code | default(country.iso_code_2, true) }}"
             {% if c_code == cur_code %}aria-current="true"{% endif %}
           >
@@ -88,7 +85,7 @@
   </div>
 
   {# ── Language Selector ─────────────────────────────────────────────── #}
-  <div class="hdr-loc-wrapper relative" data-loc-language-wrapper>
+  <div class="hdr-loc-wrapper" data-loc-language-wrapper>
     {% set globe_svg %}
       <svg
         class="text-muted h-3.5 w-3.5"
@@ -108,7 +105,7 @@
     {% if multiple_languages %}
       <button
         type="button"
-        class="hdr-loc-btn hover:bg-secondary/40 focus-visible:ring-ring flex cursor-pointer items-center gap-1 rounded px-2 py-1 transition-colors focus-visible:ring-1 focus-visible:outline-none"
+        class="hdr-loc-btn focus-visible:ring-ring focus-visible:ring-1 focus-visible:outline-none"
         data-loc-trigger="language"
         data-current-lang="{{ session.lang | default('ar', true) }}"
         aria-expanded="false"
@@ -133,22 +130,19 @@
       </button>
     {% else %}
       {# Single language — plain text, not a control. #}
-      <span class="hdr-loc-static flex items-center gap-1 px-2 py-1">
+      <span class="hdr-loc-static">
         {{ globe_svg }}
         <span class="font-bold uppercase">{{ session.lang | default('ar', true) }}</span>
       </span>
     {% endif %}
 
     {% if multiple_languages %}
-      <div
-        class="hdr-loc-dropdown bg-surface border-border z-dropdown absolute start-0 top-full mt-1 hidden min-w-[140px] rounded-md border p-1.5 shadow-md"
-        data-loc-dropdown="language"
-      >
+      <div class="hdr-loc-dropdown" data-loc-dropdown="language">
         {% for language in languages %}
           {% set l_code = language.code | default(language.iso_code, true) %}
           <button
             type="button"
-            class="hover:bg-secondary/40 {{ 'text-primary font-bold' if l_code == session.lang else 'text-foreground' }} flex w-full items-center justify-between rounded px-2 py-1.5 text-start text-xs transition-colors"
+            class="{{ 'is-active' if l_code == session.lang }}"
             data-lang-code="{{ l_code }}"
             {% if l_code == session.lang %}aria-current="true"{% endif %}
           >

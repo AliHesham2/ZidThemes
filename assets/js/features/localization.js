@@ -19,7 +19,7 @@ const initializedTriggers = new WeakSet();
 let globalListenersAttached = false;
 
 function closeAll() {
-  document.querySelectorAll("[data-loc-dropdown]").forEach((dd) => dd.classList.add("hidden"));
+  document.querySelectorAll("[data-loc-dropdown]").forEach((dd) => dd.classList.remove("is-open"));
   document.querySelectorAll("[data-loc-trigger]").forEach((tr) => {
     tr.setAttribute("aria-expanded", "false");
     tr.querySelector(".js-loc-chevron")?.classList.remove("rotate-180");
@@ -27,11 +27,11 @@ function closeAll() {
 }
 
 function toggle(btn, dropdown) {
-  const willOpen = dropdown.classList.contains("hidden");
+  const willOpen = !dropdown.classList.contains("is-open");
   closeAll();
   if (!willOpen) return;
 
-  dropdown.classList.remove("hidden");
+  dropdown.classList.add("is-open");
   btn.setAttribute("aria-expanded", "true");
   btn.querySelector(".js-loc-chevron")?.classList.add("rotate-180");
 }
@@ -115,7 +115,7 @@ function initLocalization() {
 
   document.addEventListener("keydown", (e) => {
     if (e.key !== "Escape") return;
-    const open = document.querySelector("[data-loc-dropdown]:not(.hidden)");
+    const open = document.querySelector("[data-loc-dropdown].is-open");
     if (!open) return;
     const trigger = open
       .closest("[data-loc-currency-wrapper], [data-loc-language-wrapper]")

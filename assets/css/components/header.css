@@ -67,7 +67,7 @@
     &::before {
       content: "";
       position: absolute;
-      inset: 0;
+      inset: 7px;
       border-radius: 50%;
       background-color: currentColor;
       opacity: 0;
@@ -77,8 +77,10 @@
         opacity 250ms ease;
     }
 
-    /* Keep the glyph above the hover circle. */
-    & > svg {
+    /* Keep the glyph above the hover circle. Matches direct <svg> (search, account)
+       and nested <svg> inside .header__cart-bubble-wrapper (cart). */
+    & > svg,
+    .header__cart-bubble-wrapper > svg {
       position: relative;
       z-index: 1;
     }
@@ -94,12 +96,19 @@
     }
   }
 
-  /* Cart count badge.
+  /* Cart count badge & icon bubble wrapper.
      🚨 Do NOT use Tailwind's `hidden` here. In v4's output `.hidden` is emitted
      BEFORE `.inline-flex`, so `hidden inline-flex` resolves to VISIBLE — the
      badge showed as an empty blob whenever JS hadn't filled it yet. (`hidden
      flex` behaves the opposite way, which is what makes this so easy to miss.)
      Visibility is owned by .is-visible, toggled in cart/badge.js. */
+  .header__cart-bubble-wrapper {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
   .cart-badge {
     min-width: 18px;
     height: 18px;
@@ -129,7 +138,7 @@
     }
   }
 
-  .header__cart-trigger .cart-badge {
+  .header__cart-bubble-wrapper .cart-badge {
     position: absolute;
     inset-block-start: -6px;
     inset-inline-end: -8px;
@@ -149,12 +158,12 @@
     }
   }
 
-  /* Nav Dropdown */
-  .header__dropdown {
+  /* Nav & Localisation Dropdown Panels (Shared Visual Language) */
+  .header__dropdown,
+  .hdr-loc-dropdown {
     position: absolute;
     inset-block-start: calc(100% + 4px);
     inset-inline-start: 0;
-    min-width: 230px;
     padding: 10px 0;
     border-radius: 16px;
     background: var(--color-surface);
@@ -170,16 +179,29 @@
     z-index: var(--z-dropdown);
   }
 
-  .header__dropdown > ul > li:first-child > .header__dropdown-link {
+  .header__dropdown {
+    min-width: 230px;
+  }
+
+  .hdr-loc-dropdown {
+    min-width: 220px;
+  }
+
+  .header__dropdown > ul > li:first-child > .header__dropdown-link,
+  .hdr-loc-dropdown > button:first-child,
+  .hdr-loc-dropdown > a:first-child {
     border-start-start-radius: 6px;
   }
 
-  .header__dropdown > ul > li:last-child > .header__dropdown-link {
+  .header__dropdown > ul > li:last-child > .header__dropdown-link,
+  .hdr-loc-dropdown > button:last-child,
+  .hdr-loc-dropdown > a:last-child {
     border-end-start-radius: 6px;
   }
 
   .header__nav-item:hover .header__dropdown,
-  .header__nav-item:focus-within .header__dropdown {
+  .header__nav-item:focus-within .header__dropdown,
+  .hdr-loc-dropdown.is-open {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -189,7 +211,10 @@
     position: relative;
   }
 
-  .header__dropdown-link {
+  /* Dropdown Option Link Styling (Shared across nav and localization) */
+  .header__dropdown-link,
+  .hdr-loc-dropdown button,
+  .hdr-loc-dropdown a {
     font-size: 13px;
     font-weight: 500;
     line-height: 1.4;
@@ -199,8 +224,12 @@
     align-items: center;
     justify-content: space-between;
     gap: 12px;
+    width: 100%;
     color: var(--color-foreground);
     text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
     border-inline-start: 3.5px solid transparent;
     transition:
       color 0.18s ease,
@@ -208,14 +237,18 @@
       padding-inline-start 0.18s ease;
   }
 
-  .header__dropdown-link:hover {
+  .header__dropdown-link:hover,
+  .hdr-loc-dropdown button:hover,
+  .hdr-loc-dropdown a:hover {
     background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
     color: var(--color-primary);
     border-inline-start-color: var(--color-primary);
     padding-inline-start: 28px;
   }
 
-  .header__dropdown-link.is-active {
+  .header__dropdown-link.is-active,
+  .hdr-loc-dropdown button.is-active,
+  .hdr-loc-dropdown a.is-active {
     color: var(--color-primary);
     background-color: color-mix(in srgb, var(--color-primary) 8%, transparent);
     border-inline-start-color: var(--color-primary);
@@ -262,9 +295,48 @@
     transform: translateX(0);
   }
 
-  /* Localisation Hairline Divider */
+  /* Localisation Controls & Hairline Divider */
   .hdr-loc-group {
     position: relative;
+    display: flex;
+    align-items: stretch;
+    height: 36px;
+  }
+
+  .hdr-loc-wrapper {
+    position: relative;
+    display: flex;
+    align-items: stretch;
+  }
+
+  .hdr-loc-btn,
+  .hdr-loc-static {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    padding-inline: 9px;
+    padding-block: 0;
+    border-radius: 5px;
+    height: 100%;
+    color: var(--color-foreground);
+    font-size: 13px;
+    font-weight: 500;
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition:
+      background-color 0.2s ease,
+      color 0.2s ease;
+  }
+
+  .hdr-loc-btn:hover {
+    background-color: color-mix(in srgb, var(--color-primary) 7%, transparent);
+    color: var(--color-primary);
+  }
+
+  .hdr-loc-btn[aria-expanded="true"] {
+    background-color: color-mix(in srgb, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
   }
 
   @media (min-width: 64rem) {
@@ -359,6 +431,7 @@
     }
 
     .header__dropdown,
+    .hdr-loc-dropdown,
     .header__dropdown-submenu {
       transition: none !important;
     }
