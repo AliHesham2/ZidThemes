@@ -5,6 +5,7 @@ A Zid Vitrin storefront theme built for **Mirvela** (beauty retailer — Skincar
 ## Architecture Overview
 
 ### Folder Structure
+
 ```
 ZidMirvela/
 ├── layout.jinja                  # Base HTML wrapper (CSS vars, <head>, header/footer, bundles)
@@ -43,7 +44,9 @@ ZidMirvela/
 ```
 
 ### CSS Architecture & Token Flow
+
 All styling is strictly **global**:
+
 ```
 layout.schema.json (Merchant Theme Editor)
        │
@@ -61,6 +64,7 @@ Jinja Templates & CSS Recipes (bg-primary, text-foreground, rounded-md)
 - **RTL-First**: Built with CSS logical properties (`margin-inline`, `padding-inline`, `start`/`end`).
 
 ### JavaScript Architecture
+
 - **Two IIFE Bundles** (no ES modules at runtime):
   - `dist/theme.js`: Global site interaction module loaded on every page.
   - `dist/cart-controller.js`: Cart page dedicated logic loaded only on `/cart`.
@@ -71,21 +75,25 @@ Jinja Templates & CSS Recipes (bg-primary, text-foreground, rounded-md)
 ## Development & Build Commands
 
 ### Install Dependencies
+
 ```bash
 npm install
 ```
 
 ### Run Watcher (Development)
+
 ```bash
 npm run dev
 ```
 
 ### Production Build
+
 ```bash
 npm run build
 ```
 
 ### Format Code
+
 ```bash
 npm run format
 ```

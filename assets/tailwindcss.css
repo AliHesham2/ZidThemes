@@ -21,6 +21,7 @@
 
 /* Section Partials */
 @import "./css/sections/hero.css";
+@import "./css/sections/category-worlds.css";
 
 /* Tailwind Theme Inline Mapping */
 @theme inline {

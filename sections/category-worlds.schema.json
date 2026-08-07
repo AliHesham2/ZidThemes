@@ -1,0 +1,173 @@
+{
+  "template": "sections/category-worlds.jinja",
+  "name": {
+    "ar": "تصنيفات عالمنا",
+    "en": "Category Worlds"
+  },
+  "icon": "grid-line",
+  "settings": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": {
+        "ar": "نص الشعار العلوي",
+        "en": "Eyebrow text"
+      },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": {
+        "ar": "العنوان الرئيسي",
+        "en": "Heading"
+      },
+      "default": ""
+    },
+    {
+      "id": "cta_label",
+      "type": "text",
+      "label": {
+        "ar": "نص الزر",
+        "en": "Button label"
+      },
+      "default": ""
+    },
+    {
+      "id": "image_fit",
+      "type": "select",
+      "label": {
+        "ar": "تناسق صورة التصنيف",
+        "en": "Category image fit"
+      },
+      "options": [
+        {
+          "value": "contain",
+          "label": {
+            "ar": "احتواء",
+            "en": "Contain"
+          }
+        },
+        {
+          "value": "cover",
+          "label": {
+            "ar": "تغطية",
+            "en": "Cover"
+          }
+        },
+        {
+          "value": "fill",
+          "label": {
+            "ar": "تعبئة",
+            "en": "Fill"
+          }
+        }
+      ],
+      "default": "contain"
+    },
+    {
+      "id": "categories",
+      "type": "list",
+      "label": {
+        "ar": "التصنيفات",
+        "en": "Categories"
+      },
+      "max_items": 6,
+      "settings": [
+        {
+          "id": "category",
+          "type": "category",
+          "label": {
+            "ar": "اختر التصنيف",
+            "en": "Select category"
+          }
+        },
+        {
+          "id": "illustration",
+          "type": "select",
+          "label": {
+            "ar": "الرسم التوضيحي الافتراضي",
+            "en": "Default SVG illustration"
+          },
+          "options": [
+            {
+              "value": "skincare",
+              "label": {
+                "ar": "عناية بالبشرة",
+                "en": "Skincare"
+              }
+            },
+            {
+              "value": "makeup",
+              "label": {
+                "ar": "مكياج",
+                "en": "Makeup"
+              }
+            },
+            {
+              "value": "perfume",
+              "label": {
+                "ar": "عطور",
+                "en": "Perfume"
+              }
+            },
+            {
+              "value": "organic",
+              "label": {
+                "ar": "عضوي",
+                "en": "Organic"
+              }
+            },
+            {
+              "value": "other",
+              "label": {
+                "ar": "آخر",
+                "en": "Other"
+              }
+            }
+          ],
+          "default": "other"
+        },
+        {
+          "id": "image",
+          "type": "image",
+          "label": {
+            "ar": "صورة مخصصة للتصنيف",
+            "en": "Custom category image"
+          },
+          "info": {
+            "ar": "تتجاوز الرسم التوضيحي الافتراضي أعلاه",
+            "en": "Overrides default SVG illustration above"
+          }
+        },
+        {
+          "id": "tagline",
+          "type": "text",
+          "label": {
+            "ar": "الوصف القصير",
+            "en": "Tagline"
+          },
+          "default": ""
+        }
+      ]
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": {
+        "ar": "عرض على أجهزة الكمبيوتر",
+        "en": "Show on desktop"
+      },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": {
+        "ar": "عرض على الجوال",
+        "en": "Show on mobile"
+      },
+      "default": true
+    }
+  ]
+}

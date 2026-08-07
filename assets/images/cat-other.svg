@@ -1,0 +1,65 @@
+<svg viewBox="0 0 220 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <radialGradient id="ot-glow" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#8d0f69" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#8d0f69" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <ellipse cx="110" cy="158" rx="60" ry="84" fill="url(#ot-glow)"/>
+  <ellipse cx="110" cy="264" rx="54" ry="7.5" fill="rgba(31,0,56,0.18)"/>
+
+  <g transform="translate(110, 132) scale(0.85) translate(-110, -150)">
+    <!-- ══ GIFT BOX BASE ══ -->
+    <rect x="36" y="188" width="148" height="72" rx="14" fill="#1f0038"/>
+    <!-- Base front panel highlight -->
+    <rect x="44" y="196" width="132" height="56" rx="10" fill="rgba(255,255,255,.04)"/>
+
+    <!-- ══ GIFT BOX LID ══ -->
+    <rect x="30" y="156" width="160" height="38" rx="12" fill="#2a0050"/>
+    <!-- Lid top face -->
+    <rect x="30" y="148" width="160" height="18" rx="8" fill="#8d0f69"/>
+
+    <!-- ── Ribbon VERTICAL ── -->
+    <rect x="102" y="148" width="16" height="112" rx="0" fill="#C9A876" opacity=".9"/>
+    <!-- Ribbon HORIZONTAL (on lid) -->
+    <rect x="30" y="157" width="160" height="14" rx="0" fill="#C9A876" opacity=".8"/>
+    <!-- Ribbon cross highlight -->
+    <rect x="105" y="158" width="10" height="12" rx="0" fill="rgba(255,255,255,.25)"/>
+
+    <!-- ── BOW (top centre) ── -->
+    <!-- Left bow loop -->
+    <path d="M110 148 Q72 110 60 124 Q70 138 110 148Z" fill="#8d0f69"/>
+    <path d="M110 148 Q78 116 62 128 Q70 140 110 148Z" fill="#a01278"/>
+    <!-- Right bow loop -->
+    <path d="M110 148 Q148 110 160 124 Q150 138 110 148Z" fill="#8d0f69"/>
+    <path d="M110 148 Q142 116 158 128 Q150 140 110 148Z" fill="#a01278"/>
+    <!-- Bow knot -->
+    <ellipse cx="110" cy="148" rx="12" ry="9" fill="#C9A876"/>
+    <!-- Bow tail LEFT -->
+    <path d="M104 148 Q84 164 76 182" stroke="#8d0f69" stroke-width="9" fill="none" stroke-linecap="round"/>
+    <!-- Bow tail RIGHT -->
+    <path d="M116 148 Q136 164 144 182" stroke="#8d0f69" stroke-width="9" fill="none" stroke-linecap="round"/>
+
+    <!-- ── Box label / sticker ── -->
+    <rect x="58" y="208" width="104" height="40" rx="8" fill="rgba(255,255,255,.07)"/>
+    <rect x="66" y="217" width="88" height="2" rx="1" fill="rgba(237,195,255,.42)"/>
+    <rect x="70" y="223" width="80" height="1.5" rx="1" fill="rgba(237,195,255,.28)"/>
+    <rect x="68" y="229" width="84" height="1.5" rx="1" fill="rgba(237,195,255,.18)"/>
+    <!-- Gold "M" monogram -->
+    <path d="M106 238 L110 231 L114 238" stroke="#C9A876" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <!-- Lid highlight stripe -->
+    <rect x="36" y="150" width="10" height="34" rx="5" fill="rgba(255,255,255,.08)"/>
+    <!-- Base highlight stripe -->
+    <rect x="42" y="192" width="8" height="60" rx="4" fill="rgba(255,255,255,.06)"/>
+  </g>
+
+  <g transform="translate(0, 4)">
+    <path d="M38 128 l2 5.2 5.2 0 -4.2 3.1 2 5.2 -5.2-3.1 -5.2 3.1 2-5.2 -4.2-3.1 5.2 0Z" fill="rgba(201,168,118,.5)"/>
+    <circle cx="32" cy="156" r="4" fill="rgba(141,15,105,.28)"/>
+    <circle cx="188" cy="132" r="5" fill="rgba(237,195,255,.5)"/>
+    <path d="M186 158 l1.5 3.8 3.8 0 -3 2.3 1.5 3.8 -3.8-2.3 -3.8 2.3 1.5-3.8 -3-2.3 3.8 0Z" fill="rgba(201,168,118,.4)"/>
+    <circle cx="194" cy="174" r="2.5" fill="rgba(209,90,173,.35)"/>
+  </g>
+</svg>

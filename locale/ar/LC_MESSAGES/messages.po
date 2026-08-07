@@ -180,3 +180,10 @@ msgstr "الشحن والدفع"
 #: footer.jinja:135
 msgid "© %(name)s — All Rights Reserved."
 msgstr "جميع الحقوق محفوظة © %(name)s"
+
+
+# ── Category Worlds ─────────────────────────────────────────────────────────
+
+#: sections/category-worlds.jinja:38
+msgid "Explore"
+msgstr "اكتشفي"

@@ -1,0 +1,118 @@
+{% set is_show_desktop = safeget(settings, "show_on_desktop", true) %}
+{% set is_show_mobile = safeget(settings, "show_on_mobile", true) %}
+
+<section
+  section-id="{{ sectionId }}"
+  class="category-worlds {{ 'hidden lg:flex' if is_show_desktop and not is_show_mobile }} {{ 'flex lg:hidden' if is_show_mobile and not is_show_desktop }} {{ 'hidden' if not is_show_desktop and not is_show_mobile }} flex flex-col"
+  data-reveal
+>
+  <div class="theme-container flex flex-col gap-[var(--section-py)]">
+    {% set eyebrow_text = settings.eyebrow %}
+    {% set heading_text = settings.heading %}
+    {% if eyebrow_text or heading_text %}
+      <header class="category-worlds__header">
+        {% if eyebrow_text %}
+          <div class="category-worlds__eyebrow" data-reveal-item="eyebrow">
+            <span class="category-worlds__eyebrow-star">✦</span>
+            <span class="category-worlds__eyebrow-text">{{ eyebrow_text }}</span>
+            <span class="category-worlds__eyebrow-star">✦</span>
+          </div>
+        {% endif %}
+
+        {% if heading_text %}
+          <h2 class="category-worlds__heading" data-reveal-item="heading">{{ heading_text }}</h2>
+          <div class="category-worlds__deco" data-reveal-item="deco" aria-hidden="true"></div>
+        {% endif %}
+      </header>
+    {% endif %}
+
+    {% set category_items = safeget(settings, "categories", []) %}
+    {% set valid_items = [] %}
+    {% for item in category_items %}
+      {% if item.category and item.category.id %}
+        {% set _ = valid_items.append(item) %}
+      {% endif %}
+    {% endfor %}
+
+    {% if valid_items|length > 0 %}
+      {% set default_cta_text = settings.cta_label | default(_("Explore"), true) %}
+      {% set image_fit_class = 'category-worlds__img--' ~ (settings.image_fit | default('contain', true)) %}
+
+      <ul class="category-worlds__grid m-0 list-none p-0">
+        {% for item in valid_items %}
+          {% set cat = item.category %}
+          {% set cat_url = url_for('category_details', category_id=cat.id, slug=cat.slug) %}
+          {% set cat_name = cat.name %}
+          {% set tagline_text = item.tagline %}
+          {% set cta_text = default_cta_text %}
+          {% set illus_type = item.illustration | default("other", true) %}
+          {% set custom_image = item.image %}
+
+          <li
+            class="category-worlds__card-wrapper"
+            data-reveal-item="card"
+            style="--i: {{ loop.index0 }}"
+          >
+            <a href="{{ cat_url }}" class="category-worlds__card">
+              <span class="category-worlds__glare" aria-hidden="true"></span>
+
+              <div class="category-worlds__media">
+                <span class="category-worlds__glow" aria-hidden="true"></span>
+                {% if custom_image %}
+                  <img
+                    src="{{ image_url(custom_image, w=600, q=90, f='auto') }}"
+                    srcset="
+                      {{ image_url(custom_image, w=320, f='auto') }} 320w,
+                      {{ image_url(custom_image, w=600, f='auto') }} 600w
+                    "
+                    sizes="(min-width: 1024px) 305px, (min-width: 640px) 50vw, 100vw"
+                    alt=""
+                    width="165"
+                    height="190"
+                    loading="lazy"
+                    class="category-worlds__img {{ image_fit_class }}"
+                  />
+                {% else %}
+                  {% set illus_svg = 'images/cat-' ~ illus_type ~ '.svg' %}
+                  <img
+                    src="{{ illus_svg | asset_url }}"
+                    alt=""
+                    width="165"
+                    height="190"
+                    loading="lazy"
+                    class="category-worlds__illus"
+                  />
+                {% endif %}
+              </div>
+
+              <div class="category-worlds__body">
+                <div class="category-worlds__text">
+                  <h3 class="category-worlds__title">{{ cat_name }}</h3>
+                  {% if tagline_text %}
+                    <p class="category-worlds__tagline">{{ tagline_text }}</p>
+                  {% endif %}
+                </div>
+                <span class="category-worlds__cta">
+                  <span>{{ cta_text }}</span>
+                  <svg
+                    class="h-3.5 w-3.5 rtl:rotate-180"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <line x1="5" y1="12" x2="19" y2="12" />
+                    <polyline points="12 5 19 12 12 19" />
+                  </svg>
+                </span>
+              </div>
+            </a>
+          </li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+  </div>
+</section>

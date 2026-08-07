@@ -11,6 +11,18 @@
           "show_on_desktop": true,
           "show_on_mobile": true
         }
+      },
+      {
+        "template": "sections/category-worlds.jinja",
+        "settings": {
+          "eyebrow": "اكتشف عالمنا",
+          "heading": "تصنيفات الجمال المختارة",
+          "cta_label": "تسوّق",
+          "image_fit": "contain",
+          "categories": [],
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
       }
     ],
     "en": [
@@ -21,6 +33,18 @@
           "height_desktop": "85vh",
           "height_tablet": "70vh",
           "enable_motion": true,
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      },
+      {
+        "template": "sections/category-worlds.jinja",
+        "settings": {
+          "eyebrow": "Discover Our World",
+          "heading": "Curated Beauty Categories",
+          "cta_label": "Explore",
+          "image_fit": "contain",
+          "categories": [],
           "show_on_desktop": true,
           "show_on_mobile": true
         }
