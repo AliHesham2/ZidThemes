@@ -31,7 +31,7 @@
   {% set cur_symbol = cur.symbol | default('﷼', true) %}
 
   {# ── Currency / Region Selector ────────────────────────────────────── #}
-  <div class="hdr-loc-wrapper" data-loc-currency-wrapper>
+  <div class="hdr-loc-wrapper group" data-loc-currency-wrapper>
     {% if multiple_countries %}
       <button
         type="button"
@@ -44,7 +44,7 @@
       >
         <span class="font-bold">{{ cur_symbol }}</span>
         <svg
-          class="js-loc-chevron h-2.5 w-2.5 transition-transform"
+          class="h-2.5 w-2.5 transition-transform duration-200 group-focus-within:rotate-180 group-hover:rotate-180"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 12 12"
@@ -85,7 +85,7 @@
   </div>
 
   {# ── Language Selector ─────────────────────────────────────────────── #}
-  <div class="hdr-loc-wrapper" data-loc-language-wrapper>
+  <div class="hdr-loc-wrapper group" data-loc-language-wrapper>
     {% set globe_svg %}
       <svg
         class="text-muted h-3.5 w-3.5"
@@ -114,7 +114,7 @@
         {{ globe_svg }}
         <span class="font-bold uppercase">{{ session.lang | default('ar', true) }}</span>
         <svg
-          class="js-loc-chevron h-2.5 w-2.5 transition-transform"
+          class="h-2.5 w-2.5 transition-transform duration-200 group-focus-within:rotate-180 group-hover:rotate-180"
           fill="none"
           stroke="currentColor"
           viewBox="0 0 12 12"

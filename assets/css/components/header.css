@@ -201,7 +201,8 @@
 
   .header__nav-item:hover .header__dropdown,
   .header__nav-item:focus-within .header__dropdown,
-  .hdr-loc-dropdown.is-open {
+  .hdr-loc-wrapper:hover .hdr-loc-dropdown,
+  .hdr-loc-wrapper:focus-within .hdr-loc-dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
