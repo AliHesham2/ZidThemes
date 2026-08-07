@@ -195,3 +195,92 @@ msgstr "السابق"
 #: sections/category-worlds.jinja:145
 msgid "Next"
 msgstr "التالي"
+
+
+# ── Task 013 Home Sections ──────────────────────────────────────────────────
+
+msgid "View all"
+msgstr "عرض الكل"
+
+msgid "View all articles"
+msgstr "عرض جميع المقالات"
+
+msgid "Read article"
+msgstr "اقرئي المقال"
+
+msgid "Article Title"
+msgstr "عنوان المقالة"
+
+msgid "Add to Cart"
+msgstr "إضافة للسلة"
+
+msgid "Buy Now"
+msgstr "شراء الآن"
+
+msgid "Out of Stock"
+msgstr "نفدت الكمية"
+
+msgid "Preorder now"
+msgstr "الطلب المسبق الآن"
+
+msgid "View full details"
+msgstr "عرض التفاصيل الكاملة"
+
+msgid "Quantity"
+msgstr "الكمية"
+
+msgid "Decrease quantity"
+msgstr "تقليل الكمية"
+
+msgid "Increase quantity"
+msgstr "زيادة الكمية"
+
+msgid "Product images"
+msgstr "صور المنتج"
+
+msgid "View slide"
+msgstr "عرض الشريحة"
+
+msgid "out of 5 stars"
+msgstr "من 5 نجوم"
+
+msgid "Previous slide"
+msgstr "الشريحة السابقة"
+
+msgid "Next slide"
+msgstr "الشريحة التالية"
+
+msgid "of"
+msgstr "من"
+
+msgid "Testimonials"
+msgstr "آراء العملاء"
+
+msgid "Enter your email"
+msgstr "أدخلي بريدك الإلكتروني"
+
+msgid "Subscribe"
+msgstr "اشتراك"
+
+msgid "Thank you for subscribing!"
+msgstr "شكراً لاشتراكك!"
+
+msgid "You are subscribed to our VIP newsletter."
+msgstr "أنتِ مشتركة بالفعل في النشرة الخاصة المميزة."
+
+msgid "Play video"
+msgstr "تشغيل الفيديو"
+
+msgid "Newsletter service unavailable."
+msgstr "خدمة النشرة البريدية غير متوفرة حالياً."
+
+msgid "Failed to update subscription."
+msgstr "تعذّر تحديث الاشتراك."
+
+msgid "Failed to add item to cart."
+msgstr "تعذّر إضافة المنتج إلى السلة."
+
+msgid "From"
+msgstr "من"
+
+

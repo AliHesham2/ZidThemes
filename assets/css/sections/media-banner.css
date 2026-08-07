@@ -1,0 +1,63 @@
+@layer components {
+  .media-banner {
+    width: 100%;
+  }
+
+  .media-banner__container {
+    min-height: var(--mb-h-mobile, 60vh);
+  }
+
+  @media (min-width: 1024px) {
+    .media-banner__container {
+      min-height: var(--mb-h-desktop, 60vh);
+    }
+  }
+
+  .media-banner__container--start {
+    justify-content: flex-start;
+  }
+
+  .media-banner__container--center {
+    justify-content: center;
+  }
+
+  .media-banner__container--end {
+    justify-content: flex-end;
+  }
+
+  .media-banner__content--start {
+    align-items: flex-start;
+    text-align: start;
+  }
+
+  .media-banner__content--center {
+    align-items: center;
+    text-align: center;
+  }
+
+  .media-banner__content--end {
+    align-items: flex-end;
+    text-align: end;
+  }
+
+  .media-banner__heading {
+    overflow-wrap: anywhere;
+  }
+
+  .media-banner__scrim {
+    background-color: var(--color-scrim);
+    opacity: var(--scrim-opacity, 0.5);
+  }
+
+  .media-banner__scrim--gradient {
+    background: linear-gradient(180deg, transparent 0%, var(--color-scrim) 100%);
+  }
+
+  .media-banner__scrim--vignette {
+    background: radial-gradient(circle, transparent 40%, var(--color-scrim) 100%);
+  }
+
+  .media-banner:hover .media-banner__image {
+    transform: scale(1.03);
+  }
+}

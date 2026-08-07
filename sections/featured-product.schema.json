@@ -1,0 +1,100 @@
+{
+  "template": "featured-product",
+  "name": {
+    "ar": "منتج مميّز",
+    "en": "Featured product"
+  },
+  "icon": "price-tag-3-line",
+  "settings": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": { "ar": "العنوان الفرعي", "en": "Eyebrow" },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": { "ar": "العنوان الرئيسي", "en": "Heading" },
+      "default": ""
+    },
+    {
+      "id": "product",
+      "type": "product",
+      "label": { "ar": "المنتج", "en": "Product" }
+    },
+    {
+      "id": "show_gallery_thumbs",
+      "type": "checkbox",
+      "label": { "ar": "إظهار صور المعرض المصغّرة", "en": "Show gallery thumbnails" },
+      "default": true
+    },
+    {
+      "id": "show_rating",
+      "type": "checkbox",
+      "label": { "ar": "إظهار التقييم", "en": "Show rating" },
+      "default": true
+    },
+    {
+      "id": "show_short_description",
+      "type": "checkbox",
+      "label": { "ar": "إظهار الوصف المختصر", "en": "Show short description" },
+      "default": true
+    },
+    {
+      "id": "show_quantity",
+      "type": "checkbox",
+      "label": { "ar": "إظهار تحديد الكمية", "en": "Show quantity selector" },
+      "default": true
+    },
+    {
+      "id": "show_buy_now",
+      "type": "checkbox",
+      "label": { "ar": "إظهار زر الشراء المباشر", "en": "Show buy now button" },
+      "default": true
+    },
+    {
+      "id": "show_trust_badges",
+      "type": "checkbox",
+      "label": { "ar": "إظهار شارات الثقة", "en": "Show trust badges" },
+      "default": true
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على سطح المكتب", "en": "Show on desktop" },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على الجوال", "en": "Show on mobile" },
+      "default": true
+    },
+    {
+      "id": "trust_badges",
+      "type": "list",
+      "label": { "ar": "شارات الثقة", "en": "Trust badges" },
+      "max_items": 4,
+      "settings": [
+        {
+          "id": "image",
+          "type": "image",
+          "label": { "ar": "الأيقونة", "en": "Icon image" }
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": { "ar": "العنوان", "en": "Title" },
+          "default": ""
+        },
+        {
+          "id": "text",
+          "type": "text",
+          "label": { "ar": "الوصف", "en": "Subtext" },
+          "default": ""
+        }
+      ]
+    }
+  ]
+}

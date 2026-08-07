@@ -1,0 +1,108 @@
+{
+  "template": "newsletter",
+  "name": {
+    "ar": "النشرة البريدية",
+    "en": "Newsletter"
+  },
+  "icon": "mail-line",
+  "settings": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": { "ar": "العنوان الفرعي", "en": "Eyebrow" },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": { "ar": "العنوان الرئيسي", "en": "Heading" },
+      "default": ""
+    },
+    {
+      "id": "subtext",
+      "type": "richtext",
+      "label": { "ar": "النص الفرعي", "en": "Subtext" },
+      "default": ""
+    },
+    {
+      "id": "placeholder",
+      "type": "text",
+      "label": { "ar": "نص حقل البريد", "en": "Placeholder text" },
+      "default": ""
+    },
+    {
+      "id": "button_label",
+      "type": "text",
+      "label": { "ar": "نص زر الاشتراك", "en": "Button label" },
+      "default": ""
+    },
+    {
+      "id": "success_message",
+      "type": "text",
+      "label": { "ar": "رسالة التمامي والنجاح", "en": "Success message" },
+      "default": ""
+    },
+    {
+      "id": "vip_message",
+      "type": "text",
+      "label": { "ar": "رسالة المشترك الحالي", "en": "Already subscribed message" },
+      "default": ""
+    },
+    {
+      "id": "show_perks",
+      "type": "checkbox",
+      "label": { "ar": "إظهار الميزات الترويجية", "en": "Show perks" },
+      "default": true
+    },
+    {
+      "id": "perk_1",
+      "type": "text",
+      "label": { "ar": "الميزة الأولى", "en": "Perk 1" },
+      "default": ""
+    },
+    {
+      "id": "perk_2",
+      "type": "text",
+      "label": { "ar": "الميزة الثانية", "en": "Perk 2" },
+      "default": ""
+    },
+    {
+      "id": "perk_3",
+      "type": "text",
+      "label": { "ar": "الميزة الثالثة", "en": "Perk 3" },
+      "default": ""
+    },
+    {
+      "id": "image",
+      "type": "image",
+      "label": { "ar": "صورة الخلفية (سطح المكتب)", "en": "Background image (desktop)" }
+    },
+    {
+      "id": "image_mobile",
+      "type": "image",
+      "label": { "ar": "صورة الخلفية (الجوال)", "en": "Background image (mobile)" }
+    },
+    {
+      "id": "overlay_opacity",
+      "type": "range",
+      "label": { "ar": "شفافية التظليل (%)", "en": "Overlay opacity (%)" },
+      "min": 0,
+      "max": 90,
+      "step": 5,
+      "unit": "%",
+      "default": 30
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على سطح المكتب", "en": "Show on desktop" },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على الجوال", "en": "Show on mobile" },
+      "default": true
+    }
+  ]
+}

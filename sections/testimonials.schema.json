@@ -1,0 +1,101 @@
+{
+  "template": "testimonials",
+  "name": {
+    "ar": "آراء العملاء",
+    "en": "Testimonials"
+  },
+  "icon": "double-quotes-l",
+  "settings": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": { "ar": "العنوان الفرعي", "en": "Eyebrow" },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": { "ar": "العنوان الرئيسي", "en": "Heading" },
+      "default": ""
+    },
+    {
+      "id": "autoplay",
+      "type": "checkbox",
+      "label": { "ar": "التشغيل التلقائي", "en": "Autoplay" },
+      "default": true
+    },
+    {
+      "id": "autoplay_speed",
+      "type": "range",
+      "label": { "ar": "سرعة التبديل (ثوانٍ)", "en": "Autoplay speed (seconds)" },
+      "min": 3,
+      "max": 10,
+      "step": 1,
+      "unit": "s",
+      "default": 6
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على سطح المكتب", "en": "Show on desktop" },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على الجوال", "en": "Show on mobile" },
+      "default": true
+    },
+    {
+      "id": "testimonials",
+      "type": "list",
+      "label": { "ar": "الآراء", "en": "Testimonials" },
+      "max_items": 12,
+      "settings": [
+        {
+          "id": "is_visible",
+          "type": "checkbox",
+          "label": { "ar": "إظهار الرأي", "en": "Show testimonial" },
+          "default": true
+        },
+        {
+          "id": "rating",
+          "type": "range",
+          "label": { "ar": "التقييم (1-5)", "en": "Rating (1-5)" },
+          "min": 1,
+          "max": 5,
+          "step": 1,
+          "default": 5
+        },
+        {
+          "id": "quote",
+          "type": "textarea",
+          "label": { "ar": "الرأي/الاقتباس", "en": "Quote" },
+          "default": ""
+        },
+        {
+          "id": "author",
+          "type": "text",
+          "label": { "ar": "اسم العميل", "en": "Author name" },
+          "default": ""
+        },
+        {
+          "id": "role",
+          "type": "text",
+          "label": { "ar": "المسمى/الصفة (اختياري)", "en": "Role/Location (optional)" },
+          "default": ""
+        },
+        {
+          "id": "image",
+          "type": "image",
+          "label": { "ar": "الصورة الشخصية (سطح المكتب)", "en": "Avatar (desktop)" }
+        },
+        {
+          "id": "image_mobile",
+          "type": "image",
+          "label": { "ar": "الصورة الشخصية (الجوال)", "en": "Avatar (mobile)" }
+        }
+      ]
+    }
+  ]
+}

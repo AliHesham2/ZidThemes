@@ -1,0 +1,169 @@
+{% set is_show_desktop = safeget(settings, "show_on_desktop", true) %}
+{% set is_show_mobile  = safeget(settings, "show_on_mobile",  true) %}
+
+{% set m_type = safeget(settings, "media_type", "image") %}
+{% set is_bleed = safeget(settings, "full_bleed", true) %}
+{% set opac = safeget(settings, "overlay_opacity", 50) | int %}
+{% set style_overlay = safeget(settings, "overlay_style", "solid") %}
+{% set pos_y = safeget(settings, "content_position", "center") %}
+{% set pos_x = safeget(settings, "content_alignment", "center") %}
+{% set h_dt = safeget(settings, "height_desktop", "60vh") %}
+{% set h_mb = safeget(settings, "height_mobile", "60vh") %}
+
+{% set eye = safeget(settings, "eyebrow", "") %}
+{% set head = safeget(settings, "heading", "") %}
+{% set subtxt = safeget(settings, "text", "") %}
+{% set cta1_lbl = safeget(settings, "cta_1_label", "") %}
+{% set cta1_url = safeget(settings, "cta_1_url", "") %}
+{% set cta2_lbl = safeget(settings, "cta_2_label", "") %}
+{% set cta2_url = safeget(settings, "cta_2_url", "") %}
+
+{% set is_priority = safeget(settings, "order", 99) <= 2 %}
+{% set vid_src = safeget(settings, "video", "") %}
+{% set vid_mob = safeget(settings, "video_mobile", "") or vid_src %}
+{% set vid_ink = safeget(settings, "video_ink", "") %}
+
+<section
+  section-id="{{ sectionId }}"
+  class="media-banner {{ 'hidden lg:flex' if is_show_desktop and not is_show_mobile }} {{ 'flex lg:hidden' if is_show_mobile and not is_show_desktop }} {{ 'hidden' if not is_show_desktop and not is_show_mobile }} relative flex flex-col overflow-hidden"
+  data-reveal
+  data-media-banner
+  data-media-type="{{ m_type }}"
+>
+  {% set poster_img = image_url(settings.poster or settings.poster_mobile, w=1920, q=80, f='auto') if (settings.poster or settings.poster_mobile) else '' %}
+  <div
+    class="media-banner__container media-banner__container--{{ pos_y }} {% if not is_bleed %}
+      theme-container py-[var(--section-py)]
+    {% endif %} relative flex w-full flex-col"
+    style="--mb-h-mobile: {{ h_mb }}; --mb-h-desktop: {{ h_dt }};"
+  >
+    <div class="media-banner__backdrop absolute inset-0 z-0 overflow-hidden">
+      {% if m_type == 'video' and (vid_src or vid_mob) %}
+        <video
+          class="media-banner__video h-full w-full object-cover"
+          {% if poster_img %}poster="{{ poster_img }}"{% endif %}
+          muted
+          playsinline
+          loop
+          preload="{{ 'metadata' if is_priority else 'none' }}"
+          data-media-video
+        >
+          {% if vid_src %}
+            <source media="(min-width: 768px)" src="{{ vid_src }}" />
+          {% endif %}
+          <source src="{{ vid_mob }}" />
+        </video>
+
+        {% if vid_ink %}
+          <video
+            class="media-banner__video-ink pointer-events-none absolute inset-0 h-full w-full object-cover mix-blend-screen brightness-200"
+            src="{{ vid_ink }}"
+            muted
+            playsinline
+            loop
+            preload="none"
+          ></video>
+        {% endif %}
+      {% elif settings.image or settings.image_mobile %}
+        {% with image=settings.image, image_mobile=settings.image_mobile, alt=head, class="media-banner__image w-full h-full object-cover transition-transform duration-1000 ease-out", is_priority=is_priority, sizes="100vw" %}
+          {% include 'components/shared/responsive-image.jinja' %}
+        {% endwith %}
+      {% else %}
+        <div
+          class="media-banner__empty-bg h-full w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] opacity-80"
+        ></div>
+      {% endif %}
+
+      <div
+        class="media-banner__scrim media-banner__scrim--{{ style_overlay }} pointer-events-none absolute inset-0"
+        style="--scrim-opacity: {{ opac / 100 }};"
+      ></div>
+    </div>
+
+    <div
+      class="media-banner__content-wrapper media-banner__content--{{ pos_x }} {% if is_bleed %}
+        theme-container py-[var(--section-py)]
+      {% endif %} relative z-10 flex w-full flex-col"
+    >
+      <div
+        class="media-banner__content media-banner__content--{{ pos_x }} flex max-w-2xl flex-col gap-4"
+      >
+        {% if eye %}
+          <span
+            class="media-banner__eyebrow text-xs font-semibold tracking-[var(--tracking-eyebrow)] text-[var(--gold)] uppercase"
+            data-reveal-item="text"
+            style="--d: 0.1s"
+          >
+            {{ eye }}
+          </span>
+        {% endif %}
+
+        {% if head %}
+          <h2
+            class="media-banner__heading font-heading max-w-[20ch] text-3xl leading-tight font-bold text-[var(--color-background)]"
+            data-reveal-item="text"
+            style="--d: 0.22s"
+          >
+            {{ head }}
+          </h2>
+        {% endif %}
+
+        {% if head %}
+          <div
+            class="media-banner__deco section-header__deco"
+            data-reveal-item="text"
+            style="--d: 0.32s"
+          ></div>
+        {% endif %}
+
+        {% if subtxt %}
+          <div
+            class="media-banner__subtext text-sm leading-relaxed text-[var(--color-background)] opacity-90 lg:text-base"
+            data-reveal-item="text"
+            style="--d: 0.4s"
+          >
+            {{ subtxt }}
+          </div>
+        {% endif %}
+
+        {% if (cta1_lbl and cta1_url) or (cta2_lbl and cta2_url) %}
+          <div
+            class="media-banner__actions media-banner__content--{{ pos_x }} flex flex-wrap gap-3 pt-2"
+            data-reveal-item="text"
+            style="--d: 0.5s"
+          >
+            {% if cta1_lbl and cta1_url %}
+              <a
+                href="{{ cta1_url }}"
+                class="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--color-primary)] px-7 py-3 text-sm font-semibold text-[var(--color-background)] transition-opacity hover:opacity-90"
+              >
+                {{ cta1_lbl }}
+              </a>
+            {% endif %}
+            {% if cta2_lbl and cta2_url %}
+              <a
+                href="{{ cta2_url }}"
+                class="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--color-background)] px-7 py-3 text-sm font-semibold text-[var(--color-foreground)] transition-opacity hover:opacity-90"
+              >
+                {{ cta2_lbl }}
+              </a>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% if m_type == 'video' %}
+          <button
+            type="button"
+            class="media-banner__play-btn mt-4 hidden h-12 w-12 items-center justify-center rounded-full bg-[var(--color-background)] text-[var(--color-foreground)] shadow-lg transition-transform hover:scale-105 focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+            data-media-play-btn
+            aria-label="{{ _('Play video') }}"
+          >
+            <svg viewBox="0 0 24 24" fill="currentColor" class="ms-0.5 h-6 w-6" aria-hidden="true">
+              <polygon points="5 3 19 12 5 21 5 3" />
+            </svg>
+          </button>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

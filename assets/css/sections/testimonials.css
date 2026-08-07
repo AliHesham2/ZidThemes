@@ -1,0 +1,10 @@
+@layer components {
+  .testimonials {
+    padding-block: var(--section-py);
+  }
+
+  .testimonials__quote {
+    font-family: var(--font-heading);
+    line-height: var(--leading-relaxed);
+  }
+}

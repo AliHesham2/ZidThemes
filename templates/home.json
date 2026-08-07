@@ -48,6 +48,212 @@
           "show_on_desktop": true,
           "show_on_mobile": true
         }
+      },
+      {
+        "template": "sections/featured-collection.jinja",
+        "settings": {
+          "eyebrow": "مختاراتنا لكِ",
+          "heading": "المنتجات الأكثر مبيعاً",
+          "columns_desktop": 4,
+          "show_view_all": true,
+          "view_all_label": "عرض جميع المنتجات",
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      },
+      {
+        "template": "sections/editorial.jinja",
+        "settings": {
+          "eyebrow": "فلسفة العناية",
+          "heading": "رحلة الإشراق الطبيعي",
+          "show_on_desktop": true,
+          "show_on_mobile": true,
+          "rows": [
+            {
+              "is_visible": true,
+              "accent": "rose",
+              "layout": "image_first",
+              "eyebrow": "النقاء والصفاء",
+              "heading": "مكونات طبيعية تم اختيارها بعناية",
+              "text": "تعتمد تركيباتنا على خلاصة النباتات النادرة والزيوت المستخلصة بعناية لتعزيز صحة بشرتك وإعادة نضارتها الطبيعية.",
+              "cta_label": "اكتشفي المكونات",
+              "cta_url": "/categories"
+            },
+            {
+              "is_visible": true,
+              "accent": "gold",
+              "layout": "text_first",
+              "eyebrow": "ابتكار مدروس",
+              "heading": "علم العناية المتكاملة بالبشرة",
+              "text": "دمجنا بين الحكمة التقليدية والأبحاث الحديثة لتطوير مستحضرات تمنحك نتائج ملموسة وعناية فائقة تدوم.",
+              "cta_label": "اقرئي المزيد",
+              "cta_url": "/blogs"
+            },
+            {
+              "is_visible": true,
+              "accent": "lavender",
+              "layout": "image_first",
+              "eyebrow": "تجربة فاخرة",
+              "heading": "طقوس يومية تلامس حواسك",
+              "text": "تحوّل مستحضراتنا روتينك اليومي إلى لحظات من الهدوء والاسترخاء مع روائح مستخلصة طبيعياً وقوام حريري ناعم.",
+              "cta_label": "تسوّقي المجموعة",
+              "cta_url": "/products"
+            }
+          ]
+        }
+      },
+      {
+        "template": "sections/featured-product.jinja",
+        "settings": {
+          "eyebrow": "منتج الأسبوع",
+          "heading": "العناية الفائقة المستهدفة",
+          "show_gallery_thumbs": true,
+          "show_rating": true,
+          "show_short_description": true,
+          "show_quantity": true,
+          "show_buy_now": true,
+          "show_trust_badges": true,
+          "show_on_desktop": true,
+          "show_on_mobile": true,
+          "trust_badges": [
+            {
+              "title": "شحن سريع ومجاني",
+              "text": "للطلبات المحددة"
+            },
+            {
+              "title": "تركيبة آمنة 100%",
+              "text": "مكونات معتمدة"
+            },
+            {
+              "title": "ضمان الجودة",
+              "text": "خيارات إرجاع مرنة"
+            }
+          ]
+        }
+      },
+      {
+        "template": "sections/brand-pillars.jinja",
+        "settings": {
+          "eyebrow": "لماذا تختاريننا",
+          "heading": "معايير الجودة والالتزام",
+          "columns_desktop": 3,
+          "alignment": "center",
+          "show_on_desktop": true,
+          "show_on_mobile": true,
+          "pillars": [
+            {
+              "is_visible": true,
+              "heading": "تركيبات خالية من السموم",
+              "text": "نلتزم بتقديم مستحضرات خالية تماماً من البارابين والسلفات والمواد الكيميائية الضارة.",
+              "link_label": "تعرّفي على معاييرنا",
+              "link_url": "/pages/about"
+            },
+            {
+              "is_visible": true,
+              "heading": "استدامة وصداقة للبيئة",
+              "text": "عبوات قابلة للتدوير ومكونات نباتية مستخرجة بطرق أخلاقية تحافظ على البيئة.",
+              "link_label": "مبادرة الاستدامة",
+              "link_url": "/pages/sustainability"
+            },
+            {
+              "is_visible": true,
+              "heading": "نتائج مثبتة ونقية",
+              "text": "منتجات تم اختبارها بعناية لضمان أفضل فاعلية وأمان لكل أنواع البشرة.",
+              "link_label": "اقرئي عن تجارب العملاء",
+              "link_url": "/pages/reviews"
+            }
+          ]
+        }
+      },
+      {
+        "template": "sections/testimonials.jinja",
+        "settings": {
+          "eyebrow": "تجارب حقيقية",
+          "heading": "ماذا تقول خبيرات العناية",
+          "autoplay": true,
+          "autoplay_speed": 6,
+          "show_on_desktop": true,
+          "show_on_mobile": true,
+          "testimonials": [
+            {
+              "is_visible": true,
+              "rating": 5,
+              "quote": "تغيرت مرونة بشرتي ومظهرها تماماً بعد استخدام روتين العناية الزيتي. القوام خفيف والإشراقة فورية.",
+              "author": "سارة أحمد",
+              "role": "مهتمة بالعناية بالبشرة"
+            },
+            {
+              "is_visible": true,
+              "rating": 5,
+              "quote": "المنتجات فائقة النقاء والروائح المستخلصة طبيعياً تمنح شعوراً رائعاً بالاسترخاء والنضارة يومياً.",
+              "author": "نورة خالد",
+              "role": "عميلة دائمة"
+            },
+            {
+              "is_visible": true,
+              "rating": 5,
+              "quote": "أفضل مستحضرات طبيعية استخدمتها، العبوات راقية والتوصيل سريع جداً والعناية بالتفاصيل مذهلة.",
+              "author": "مريم الشمري",
+              "role": "مؤثرة جمال"
+            }
+          ]
+        }
+      },
+      {
+        "template": "sections/blog-posts.jinja",
+        "settings": {
+          "eyebrow": "مقالات ونصائح",
+          "heading": "من مدونة الجمال والعناية",
+          "columns_desktop": 3,
+          "show_image": true,
+          "show_date": true,
+          "show_excerpt": true,
+          "show_view_all": true,
+          "view_all_label": "عرض جميع المقالات",
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      },
+      {
+        "template": "sections/media-banner.jinja",
+        "settings": {
+          "media_type": "image",
+          "overlay_style": "gradient",
+          "overlay_opacity": 50,
+          "content_position": "center",
+          "content_alignment": "center",
+          "height_desktop": "60vh",
+          "height_mobile": "60vh",
+          "full_bleed": true,
+          "eyebrow": "المجموعة الخاصة",
+          "heading": "إشراقة الطبيعة الفاخرة بين يديكِ",
+          "text": "اكتشفي عالم التناغم بين جمال الطبيعة وعلم العناية المتطور في تشكيلتنا الحصرية الجديدة.",
+          "cta_1_label": "تسوّقي المجموعة",
+          "cta_1_url": "/products",
+          "cta_2_label": "استكشفي الفلسفة",
+          "cta_2_url": "/categories",
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      },
+      {
+        "template": "sections/newsletter.jinja",
+        "settings": {
+          "eyebrow": "انضمي لعالمنا",
+          "heading": "اشتركي للحصول على نصائح حصرية وعروض خاصة",
+          "subtext": "احصلي على خصم 15% على طلبك الأول ونصائح أسبوعية مخصصة لنوع بشرتك.",
+          "placeholder": "أدخلي بريدك الإلكتروني",
+          "button_label": "اشتركي الآن",
+          "success_message": "تم اشتراكك بنجاح! أهلاً بكِ في مجتمعنا.",
+          "vip_message": "أنتِ مشتركة بالفعل في النشرة الخاصة المميزة.",
+          "show_perks": true,
+          "perk_1": "خصم حالم عند التسجيل",
+          "perk_2": "نصائح عناية أسبوعية",
+          "perk_3": "أولوية الوصول للمجموعات الجديده",
+          "overlay_opacity": 30,
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
       }
     ],
     "en": [
@@ -95,6 +301,212 @@
               "illustration": "organic"
             }
           ],
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      },
+      {
+        "template": "sections/featured-collection.jinja",
+        "settings": {
+          "eyebrow": "Curated Selection",
+          "heading": "Bestselling Favorites",
+          "columns_desktop": 4,
+          "show_view_all": true,
+          "view_all_label": "View All Products",
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      },
+      {
+        "template": "sections/editorial.jinja",
+        "settings": {
+          "eyebrow": "Care Philosophy",
+          "heading": "The Journey to Natural Radiance",
+          "show_on_desktop": true,
+          "show_on_mobile": true,
+          "rows": [
+            {
+              "is_visible": true,
+              "accent": "rose",
+              "layout": "image_first",
+              "eyebrow": "Purity & Clarity",
+              "heading": "Thoughtfully Selected Botanical Ingredients",
+              "text": "Our formulas rely on rare plant extracts and botanical oils to enhance your skin’s health and restore its natural vitality.",
+              "cta_label": "Discover Ingredients",
+              "cta_url": "/categories"
+            },
+            {
+              "is_visible": true,
+              "accent": "gold",
+              "layout": "text_first",
+              "eyebrow": "Mindful Innovation",
+              "heading": "The Science of Holistic Skincare",
+              "text": "Blending traditional wisdom with clinical research to develop formulations that deliver visible, lasting beauty results.",
+              "cta_label": "Read More",
+              "cta_url": "/blogs"
+            },
+            {
+              "is_visible": true,
+              "accent": "lavender",
+              "layout": "image_first",
+              "eyebrow": "Sensory Luxury",
+              "heading": "Daily Rituals to Elevate Your Routine",
+              "text": "Transform your daily skincare into moments of mindful relaxation with naturally derived aromas and silky smooth textures.",
+              "cta_label": "Shop Collection",
+              "cta_url": "/products"
+            }
+          ]
+        }
+      },
+      {
+        "template": "sections/featured-product.jinja",
+        "settings": {
+          "eyebrow": "Product of the Week",
+          "heading": "Targeted High-Performance Care",
+          "show_gallery_thumbs": true,
+          "show_rating": true,
+          "show_short_description": true,
+          "show_quantity": true,
+          "show_buy_now": true,
+          "show_trust_badges": true,
+          "show_on_desktop": true,
+          "show_on_mobile": true,
+          "trust_badges": [
+            {
+              "title": "Fast Express Delivery",
+              "text": "On eligible orders"
+            },
+            {
+              "title": "100% Clean Formula",
+              "text": "Certified ingredients"
+            },
+            {
+              "title": "Quality Guarantee",
+              "text": "Flexible returns"
+            }
+          ]
+        }
+      },
+      {
+        "template": "sections/brand-pillars.jinja",
+        "settings": {
+          "eyebrow": "Why Choose Us",
+          "heading": "Our Standards & Commitment",
+          "columns_desktop": 3,
+          "alignment": "center",
+          "show_on_desktop": true,
+          "show_on_mobile": true,
+          "pillars": [
+            {
+              "is_visible": true,
+              "heading": "Toxin-Free Formulations",
+              "text": "Committed to clean formulas free from parabens, sulfates, and harsh synthetic additives.",
+              "link_label": "Our Standards",
+              "link_url": "/pages/about"
+            },
+            {
+              "is_visible": true,
+              "heading": "Sustainable & Eco-Conscious",
+              "text": "Recyclable packaging and ethically sourced plant ingredients that respect the planet.",
+              "link_label": "Sustainability Ethos",
+              "link_url": "/pages/sustainability"
+            },
+            {
+              "is_visible": true,
+              "heading": "Proven Clean Results",
+              "text": "Carefully tested for safety, efficacy, and suitability across all skin types.",
+              "link_label": "Read Customer Stories",
+              "link_url": "/pages/reviews"
+            }
+          ]
+        }
+      },
+      {
+        "template": "sections/testimonials.jinja",
+        "settings": {
+          "eyebrow": "Real Experiences",
+          "heading": "What Beauty Enthusiasts Say",
+          "autoplay": true,
+          "autoplay_speed": 6,
+          "show_on_desktop": true,
+          "show_on_mobile": true,
+          "testimonials": [
+            {
+              "is_visible": true,
+              "rating": 5,
+              "quote": "My skin texture and elasticity improved remarkably after incorporating the facial oil. Lightweight texture with an instant natural glow.",
+              "author": "Sarah Ahmed",
+              "role": "Skincare Enthusiast"
+            },
+            {
+              "is_visible": true,
+              "rating": 5,
+              "quote": "Incredibly pure formulas with delicate botanical scents that leave my skin feeling deeply nourished and refreshed every single day.",
+              "author": "Noura Khaled",
+              "role": "Verified Buyer"
+            },
+            {
+              "is_visible": true,
+              "rating": 5,
+              "quote": "Hands down the best natural beauty products I've used. Gorgeous packaging, super fast delivery, and incredible attention to detail.",
+              "author": "Mariam Al-Shammari",
+              "role": "Beauty Creator"
+            }
+          ]
+        }
+      },
+      {
+        "template": "sections/blog-posts.jinja",
+        "settings": {
+          "eyebrow": "Articles & Guides",
+          "heading": "From Our Journal",
+          "columns_desktop": 3,
+          "show_image": true,
+          "show_date": true,
+          "show_excerpt": true,
+          "show_view_all": true,
+          "view_all_label": "View All Articles",
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      },
+      {
+        "template": "sections/media-banner.jinja",
+        "settings": {
+          "media_type": "image",
+          "overlay_style": "gradient",
+          "overlay_opacity": 50,
+          "content_position": "center",
+          "content_alignment": "center",
+          "height_desktop": "60vh",
+          "height_mobile": "60vh",
+          "full_bleed": true,
+          "eyebrow": "Exclusive Edition",
+          "heading": "Natural Radiance Meets Modern Care",
+          "text": "Discover the harmony between botanical purity and advanced skincare in our new seasonal release.",
+          "cta_1_label": "Shop Collection",
+          "cta_1_url": "/products",
+          "cta_2_label": "Explore Rituals",
+          "cta_2_url": "/categories",
+          "show_on_desktop": true,
+          "show_on_mobile": true
+        }
+      },
+      {
+        "template": "sections/newsletter.jinja",
+        "settings": {
+          "eyebrow": "Join Our Circle",
+          "heading": "Subscribe for Exclusive Rituals & Special Offers",
+          "subtext": "Receive 15% off your first order and weekly beauty guides tailored to your skin needs.",
+          "placeholder": "Enter your email address",
+          "button_label": "Subscribe Now",
+          "success_message": "Successfully subscribed! Welcome to our community.",
+          "vip_message": "You are subscribed to our VIP newsletter.",
+          "show_perks": true,
+          "perk_1": "15% off welcome offer",
+          "perk_2": "Weekly expert care tips",
+          "perk_3": "Early access to new launches",
+          "overlay_opacity": 30,
           "show_on_desktop": true,
           "show_on_mobile": true
         }

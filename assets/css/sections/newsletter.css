@@ -1,0 +1,17 @@
+@layer components {
+  .newsletter {
+    padding-block: var(--section-py);
+  }
+
+  .newsletter__card {
+    width: 100%;
+  }
+
+  .newsletter__submit.is-loading span:first-child {
+    display: none;
+  }
+
+  .newsletter__submit.is-loading .newsletter__spinner {
+    display: inline-block;
+  }
+}

@@ -1,0 +1,55 @@
+{% set score = rating | default(0, true) | float %}
+{% set lbl = label | default('', true) %}
+{% set star_id = id | default('rs-' ~ (range(1, 10000) | random), true) %}
+{% set full_stars = score | int %}
+{% set decimal = score - full_stars %}
+{% set has_half = decimal >= 0.25 and decimal < 0.75 %}
+{% if decimal >= 0.75 %}{% set full_stars = full_stars + 1 %}{% endif %}
+
+<div
+  class="rating-stars inline-flex items-center gap-1"
+  {% if lbl %}aria-label="{{ lbl }}" role="img"{% else %}aria-hidden="true"{% endif %}
+>
+  {% for i in range(1, 6) %}
+    {% if i <= full_stars %}
+      <svg
+        viewBox="0 0 24 24"
+        fill="currentColor"
+        class="rating-stars__icon rating-stars__icon--full h-4 w-4 text-[var(--gold)]"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+        />
+      </svg>
+    {% elif i == full_stars + 1 and has_half %}
+      <svg
+        viewBox="0 0 24 24"
+        class="rating-stars__icon rating-stars__icon--half h-4 w-4 text-[var(--gold)]"
+        aria-hidden="true"
+      >
+        <defs>
+          <linearGradient id="star-half-grad-{{ star_id }}-{{ i }}">
+            <stop offset="50%" stop-color="currentColor" />
+            <stop offset="50%" stop-color="var(--color-border)" />
+          </linearGradient>
+        </defs>
+        <path
+          fill="url(#star-half-grad-{{ star_id }}-{{ i }})"
+          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+        />
+      </svg>
+    {% else %}
+      <svg
+        viewBox="0 0 24 24"
+        fill="var(--color-border)"
+        class="rating-stars__icon rating-stars__icon--empty h-4 w-4 text-[var(--color-border)]"
+        aria-hidden="true"
+      >
+        <path
+          d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
+        />
+      </svg>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,112 @@
+{% set is_show_desktop = safeget(settings, "show_on_desktop", true) %}
+{% set is_show_mobile  = safeget(settings, "show_on_mobile",  true) %}
+
+{% set eye = safeget(settings, "eyebrow", "") %}
+{% set head = safeget(settings, "heading", "") %}
+{% set cols_dt = safeget(settings, "columns_desktop", 3) | int %}
+{% set align_mode = safeget(settings, "alignment", "center") %}
+{% set raw_pillars = safeget(settings, "pillars", []) %}
+
+{% set valid_pillars = [] %}
+{% for item in raw_pillars %}
+  {% if safeget(item, "is_visible", true) and (item.heading or item.text or item.image) %}
+    {% set _ = valid_pillars.append(item) %}
+  {% endif %}
+{% endfor %}
+
+{% set pillar_count = valid_pillars | length %}
+
+{% if eye or head or pillar_count > 0 %}
+  <section
+    section-id="{{ sectionId }}"
+    class="brand-pillars {{ 'hidden lg:flex' if is_show_desktop and not is_show_mobile }} {{ 'flex lg:hidden' if is_show_mobile and not is_show_desktop }} {{ 'hidden' if not is_show_desktop and not is_show_mobile }} flex flex-col"
+    data-reveal
+  >
+    <div class="theme-container flex flex-col gap-[var(--section-py)]">
+      {% with eyebrow=eye, heading=head, align="center" %}
+        {% include 'components/shared/section-header.jinja' %}
+      {% endwith %}
+
+      {% if pillar_count > 0 %}
+        <div class="slider" data-slider>
+          <ul
+            class="slider__track brand-pillars__grid bp-grid--cols-{{ cols_dt }}"
+            data-slider-track
+            data-count="{{ pillar_count }}"
+          >
+            {% for item in valid_pillars %}
+              <li class="slider__item brand-pillars__item">
+                <div
+                  class="brand-pillars__card brand-pillars__card--{{ align_mode }} group flex h-full flex-col gap-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-sm"
+                  data-reveal-item="card"
+                  style="--i: {{ loop.index0 }}"
+                >
+                  <div
+                    class="brand-pillars__icon-ring flex h-24 w-24 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-background)] transition-all duration-300 group-hover:scale-105 group-hover:border-[var(--color-primary)]"
+                  >
+                    {% if item.image or item.image_mobile %}
+                      {% with image=item.image, image_mobile=item.image_mobile, alt=item.heading, class="w-12 h-12 object-contain", w_mobile=96, w_desktop=96, sizes="96px" %}
+                        {% include 'components/shared/responsive-image.jinja' %}
+                      {% endwith %}
+                    {% else %}
+                      <svg
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="1.5"
+                        class="h-10 w-10 text-[var(--color-primary)]"
+                        aria-hidden="true"
+                      >
+                        <polygon
+                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        />
+                      </svg>
+                    {% endif %}
+                  </div>
+
+                  {% if item.heading %}
+                    <h3
+                      class="brand-pillars__title font-heading text-xl font-bold text-[var(--color-foreground)]"
+                    >
+                      {{ item.heading }}
+                    </h3>
+                  {% endif %}
+
+                  {% if item.text %}
+                    <div
+                      class="brand-pillars__text text-sm leading-relaxed text-[var(--color-muted)]"
+                    >
+                      {{ item.text }}
+                    </div>
+                  {% endif %}
+
+                  {% if item.link_label and item.link_url %}
+                    <div class="brand-pillars__footer mt-auto pt-2">
+                      <a
+                        href="{{ item.link_url }}"
+                        class="inline-flex items-center gap-1 text-xs font-semibold text-[var(--color-primary)] hover:underline"
+                      >
+                        <span>{{ item.link_label }}</span>
+                        <svg
+                          viewBox="0 0 24 24"
+                          fill="none"
+                          stroke="currentColor"
+                          stroke-width="2"
+                          class="h-4 w-4 rtl:rotate-180"
+                          aria-hidden="true"
+                        >
+                          <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                      </a>
+                    </div>
+                  {% endif %}
+                </div>
+              </li>
+            {% endfor %}
+          </ul>
+          {% include 'components/ui/slider-controls.jinja' %}
+        </div>
+      {% endif %}
+    </div>
+  </section>
+{% endif %}

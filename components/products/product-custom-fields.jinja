@@ -1,0 +1,5 @@
+{% if product and product.custom_input_fields %}
+  <div class="product-custom-fields-wrapper my-4">
+    {% include 'vitrin:v2/products/fields/custom_input_fields.jinja' with product=product %}
+  </div>
+{% endif %}

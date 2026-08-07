@@ -1,0 +1,128 @@
+{% set p = post %}
+{% set show_img = show_image if show_image is defined else true %}
+{% set show_dt = show_date if show_date is defined else true %}
+{% set show_exc = show_excerpt if show_excerpt is defined else true %}
+{% set idx = index | default(0, true) %}
+
+{% set post_url = url_for('blogs', slug=p.slug) if (p and p.slug) else '#' %}
+{% set post_title = p.title | default('', true) if p else '' %}
+{% set post_exc = p.excerpt | striptags | default('', true) if p else '' %}
+{% set post_date = p.date | default('', true) if p else '' %}
+{% set needs_title = not post_title %}
+{% set needs_exc = show_exc and not post_exc %}
+
+<article
+  class="article-card group flex h-full flex-col overflow-hidden rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] shadow-sm transition-shadow hover:shadow-md"
+  data-reveal-item="card"
+  style="--i: {{ idx }}"
+  {% if needs_title or needs_exc %}
+    data-blog-needs="{% if needs_title %}title{% endif %}{% if needs_title and needs_exc %},{% endif %}{% if needs_exc %}excerpt{% endif %}"
+    {% if p and p.slug %}data-blog-slug="{{ p.slug }}"{% endif %}
+  {% endif %}
+>
+  {% if show_img %}
+    <div
+      class="article-card__media-wrapper relative aspect-[16/10] overflow-hidden bg-[var(--color-muted)]"
+    >
+      {% if p and p.slug %}
+        <a href="{{ post_url }}" class="block h-full w-full" aria-label="{{ post_title }}">
+          {% if p.image or p.image_mobile %}
+            {% with image=p.image, image_mobile=p.image_mobile, alt=post_title, class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500", sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw" %}
+              {% include 'components/shared/responsive-image.jinja' %}
+            {% endwith %}
+          {% else %}
+            <div
+              class="article-card__placeholder flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--color-muted)] to-[var(--color-surface)]"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.5"
+                class="h-12 w-12 text-[var(--color-muted)] opacity-60"
+                aria-hidden="true"
+              >
+                <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l5 5v11a2 2 0 0 1-2 2z" />
+                <path d="M14 4v5h5" />
+                <line x1="7" y1="13" x2="17" y2="13" />
+                <line x1="7" y1="17" x2="13" y2="17" />
+              </svg>
+            </div>
+          {% endif %}
+        </a>
+      {% else %}
+        <div
+          class="article-card__placeholder flex h-full w-full items-center justify-center bg-gradient-to-br from-[var(--color-muted)] to-[var(--color-surface)]"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            class="h-12 w-12 text-[var(--color-muted)] opacity-60"
+            aria-hidden="true"
+          >
+            <path d="M19 20H5a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h10l5 5v11a2 2 0 0 1-2 2z" />
+            <path d="M14 4v5h5" />
+            <line x1="7" y1="13" x2="17" y2="13" />
+            <line x1="7" y1="17" x2="13" y2="17" />
+          </svg>
+        </div>
+      {% endif %}
+    </div>
+  {% endif %}
+
+  <div class="article-card__content flex flex-1 flex-col gap-2.5 p-5">
+    {% if show_dt and post_date %}
+      <time class="article-card__date text-xs text-[var(--color-muted)]" data-blog-field="date">
+        {{ post_date }}
+      </time>
+    {% endif %}
+
+    <h3
+      class="article-card__title font-heading line-clamp-2 text-lg font-bold text-[var(--color-foreground)]"
+    >
+      {% if p and p.slug %}
+        <a
+          href="{{ post_url }}"
+          class="transition-colors hover:text-[var(--color-primary)]"
+          data-blog-field="title"
+        >
+          {{ post_title if post_title else _("Article Title") }}
+        </a>
+      {% else %}
+        <span data-blog-field="title">{{ post_title if post_title else _("Article Title") }}</span>
+      {% endif %}
+    </h3>
+
+    {% if show_exc %}
+      <p
+        class="article-card__excerpt line-clamp-3 text-sm text-[var(--color-muted)]"
+        data-blog-field="excerpt"
+      >
+        {{ post_exc }}
+      </p>
+    {% endif %}
+
+    {% if p and p.slug %}
+      <div class="article-card__footer mt-auto pt-3">
+        <a
+          href="{{ post_url }}"
+          class="inline-flex items-center gap-1 text-xs font-semibold text-[var(--color-primary)] hover:underline"
+        >
+          <span>{{ _("Read article") }}</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="h-4 w-4 rtl:rotate-180"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    {% endif %}
+  </div>
+</article>

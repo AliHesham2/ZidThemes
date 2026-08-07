@@ -1,0 +1,163 @@
+{% set is_show_desktop = safeget(settings, "show_on_desktop", true) %}
+{% set is_show_mobile  = safeget(settings, "show_on_mobile",  true) %}
+
+{% set eye = safeget(settings, "eyebrow", "") %}
+{% set head = safeget(settings, "heading", "") %}
+{% set subtxt = safeget(settings, "subtext", "") %}
+{% set ph = safeget(settings, "placeholder", "") %}
+{% set btn_lbl = safeget(settings, "button_label", "") %}
+{% set succ_msg = safeget(settings, "success_message", "") %}
+{% set vip_msg = safeget(settings, "vip_message", "") %}
+{% set show_pk = safeget(settings, "show_perks", true) %}
+{% set pk1 = safeget(settings, "perk_1", "") %}
+{% set pk2 = safeget(settings, "perk_2", "") %}
+{% set pk3 = safeget(settings, "perk_3", "") %}
+{% set opac = safeget(settings, "overlay_opacity", 30) | int %}
+{% set is_priority = safeget(settings, "order", 99) <= 2 %}
+
+<section
+  section-id="{{ sectionId }}"
+  class="newsletter {{ 'hidden lg:flex' if is_show_desktop and not is_show_mobile }} {{ 'flex lg:hidden' if is_show_mobile and not is_show_desktop }} {{ 'hidden' if not is_show_desktop and not is_show_mobile }} flex flex-col"
+  data-reveal
+  data-newsletter
+>
+  <div class="theme-container">
+    <div
+      class="newsletter__card relative flex flex-col items-center gap-6 overflow-hidden rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 text-center shadow-md lg:p-16"
+      data-reveal-item="stage"
+    >
+      {% if settings.image or settings.image_mobile %}
+        <div class="newsletter__backdrop absolute inset-0 z-0 overflow-hidden">
+          {% with image=settings.image, image_mobile=settings.image_mobile, alt=head, class="w-full h-full object-cover", is_priority=is_priority, sizes="(min-width: 1360px) 1320px, 100vw" %}
+            {% include 'components/shared/responsive-image.jinja' %}
+          {% endwith %}
+          <div
+            class="newsletter__scrim absolute inset-0 bg-[var(--color-scrim)]"
+            style="opacity: {{ opac / 100 }};"
+          ></div>
+        </div>
+      {% endif %}
+
+      <div
+        class="newsletter__content relative z-10 flex w-full max-w-2xl flex-col items-center gap-4"
+      >
+        {% if eye %}
+          <span
+            class="newsletter__eyebrow text-xs font-semibold tracking-[var(--tracking-eyebrow)] text-[var(--gold)] uppercase"
+            data-reveal-item="text"
+            style="--d: 0.25s"
+          >
+            {{ eye }}
+          </span>
+        {% endif %}
+
+        {% if head %}
+          <h2
+            class="newsletter__heading font-heading text-2xl leading-tight font-bold text-[var(--color-foreground)] lg:text-4xl"
+            data-reveal-item="text"
+            style="--d: 0.35s"
+          >
+            {{ head }}
+          </h2>
+        {% endif %}
+
+        {% if head %}
+          <div
+            class="newsletter__deco section-header__deco"
+            data-reveal-item="text"
+            style="--d: 0.42s"
+          ></div>
+        {% endif %}
+
+        {% if subtxt %}
+          <div
+            class="newsletter__subtext text-sm leading-relaxed text-[var(--color-muted)] lg:text-base"
+            data-reveal-item="text"
+            style="--d: 0.5s"
+          >
+            {{ subtxt }}
+          </div>
+        {% endif %}
+
+        <div
+          class="newsletter__form-wrapper mt-2 w-full max-w-md"
+          data-reveal-item="text"
+          style="--d: 0.6s"
+        >
+          <form
+            class="newsletter__form flex w-full flex-col gap-3 sm:flex-row"
+            data-newsletter-form
+            data-msg-unavailable="{{ _('Newsletter service unavailable.') }}"
+            data-msg-failed="{{ _('Failed to update subscription.') }}"
+            action="{{ url_for('profile') }}"
+          >
+            <input
+              type="email"
+              name="email"
+              required
+              autocomplete="email"
+              placeholder="{{ ph if ph else _('Enter your email') }}"
+              class="form-input min-h-[44px] flex-1 rounded-[var(--radius-md)] border border-[var(--color-input)] bg-[var(--color-background)] px-4 py-3 text-sm text-[var(--color-foreground)] focus:ring-2 focus:ring-[var(--color-ring)] focus:outline-none"
+              data-newsletter-input
+            />
+            <button
+              type="submit"
+              class="newsletter__submit inline-flex min-h-[44px] flex-shrink-0 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-[var(--color-background)] transition-opacity hover:opacity-90 focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+              data-newsletter-submit
+            >
+              <span>{{ btn_lbl if btn_lbl else _("Subscribe") }}</span>
+              <span
+                class="newsletter__spinner ms-2 hidden h-4 w-4 animate-spin rounded-full border-2 border-current border-t-transparent"
+              ></span>
+            </button>
+          </form>
+
+          <div
+            class="newsletter__vip mt-2 hidden rounded-[var(--radius-md)] bg-[var(--color-sale-bg)] p-4 text-center text-sm font-semibold text-[var(--color-on-sale)]"
+            data-newsletter-vip
+          >
+            {{ vip_msg if vip_msg else _("You are subscribed to our VIP newsletter.") }}
+          </div>
+
+          <div
+            class="newsletter__success mt-2 hidden rounded-[var(--radius-md)] bg-[var(--color-success)] p-4 text-center text-sm font-semibold text-[var(--color-background)]"
+            data-newsletter-success
+          >
+            {{ succ_msg if succ_msg else _("Thank you for subscribing!") }}
+          </div>
+
+          <div
+            class="form-error mt-2 hidden text-start text-xs text-[var(--color-error)]"
+            data-newsletter-error
+          ></div>
+        </div>
+
+        {% if show_pk and (pk1 or pk2 or pk3) %}
+          <div
+            class="newsletter__perks mt-4 flex flex-wrap justify-center gap-6 border-t border-[var(--color-border)] pt-4 text-xs text-[var(--color-muted)]"
+            data-reveal-item="text"
+            style="--d: 0.7s"
+          >
+            {% for pk in [pk1, pk2, pk3] %}
+              {% if pk %}
+                <div class="flex items-center gap-2">
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    class="h-4 w-4 text-[var(--color-primary)]"
+                    aria-hidden="true"
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>{{ pk }}</span>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

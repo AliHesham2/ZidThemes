@@ -1,0 +1,117 @@
+{% set p = product %}
+{% set f_id = form_id | default('product-form-' ~ (p.id if p else 'default'), true) %}
+{% set tag = heading_tag | default('h2', true) %}
+{% set show_rating_flag = show_rating if show_rating is defined else true %}
+{% set show_desc = show_short_description if show_short_description is defined else true %}
+{% set show_qty = show_quantity if show_quantity is defined else true %}
+{% set show_buy = show_buy_now if show_buy_now is defined else true %}
+
+{% set product_url = url_for('product_details', slug=p.slug) if (p and p.slug) else '#' %}
+{% set can_buy = p and p.in_stock if p else false %}
+
+<div class="product-buying-box flex flex-col gap-4" data-product-buying-box>
+  {% if p %}
+    <form id="{{ f_id }}" method="post" action="/cart/add" class="flex flex-col gap-4">
+      <input type="hidden" name="product_id" value="{{ p.id }}" />
+
+      <div class="product-buying-box__header flex flex-col gap-2">
+        {% if tag == 'h1' %}
+          <h1
+            class="product-buying-box__title font-heading text-2xl font-bold text-[var(--color-foreground)]"
+          >
+            <a href="{{ product_url }}" class="transition-colors hover:text-[var(--color-primary)]"
+              >{{ p.name }}</a
+            >
+          </h1>
+        {% elif tag == 'h3' %}
+          <h3
+            class="product-buying-box__title font-heading text-2xl font-bold text-[var(--color-foreground)]"
+          >
+            <a href="{{ product_url }}" class="transition-colors hover:text-[var(--color-primary)]"
+              >{{ p.name }}</a
+            >
+          </h3>
+        {% else %}
+          <h2
+            class="product-buying-box__title font-heading text-2xl font-bold text-[var(--color-foreground)]"
+          >
+            <a href="{{ product_url }}" class="transition-colors hover:text-[var(--color-primary)]"
+              >{{ p.name }}</a
+            >
+          </h2>
+        {% endif %}
+
+        {% if show_rating_flag and store.settings.products.reviews_enabled and p.rating %}
+          <div class="flex items-center gap-2">
+            {% with rating=p.rating.average, label=p.rating.average ~ ' ' ~ _('out of 5 stars') %}
+              {% include 'components/ui/rating-stars.jinja' %}
+            {% endwith %}
+            {% if p.rating.total_count %}
+              <span class="text-xs text-[var(--color-muted)]">({{ p.rating.total_count }})</span>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        {% with product=p, size='lg' %}
+          {% include 'components/products/product-price.jinja' %}
+        {% endwith %}
+      </div>
+
+      {% if show_desc %}
+        {% set raw_desc = p.short_description | striptags if p.short_description else (p.description | striptags if p.description else '') %}
+        {% if raw_desc %}
+          <p class="product-buying-box__desc line-clamp-3 text-sm text-[var(--color-muted)]">
+            {{ raw_desc | truncate(150) }}
+          </p>
+        {% endif %}
+      {% endif %}
+
+      {% with product=p, options=p.options %}
+        {% include 'components/products/product-options.jinja' %}
+      {% endwith %}
+
+      {% with product=p %}
+        {% include 'components/products/product-custom-fields.jinja' %}
+      {% endwith %}
+
+      {% if show_qty and can_buy %}
+        <div class="my-2 flex items-center gap-3">
+          <label
+            for="quantity-{{ f_id }}"
+            class="text-sm font-semibold text-[var(--color-foreground)]"
+          >
+            {{ _("Quantity") }}
+          </label>
+          {% with id='quantity-' ~ f_id, quantity=1, min=1 %}
+            {% include 'components/ui/quantity-input.jinja' %}
+          {% endwith %}
+        </div>
+      {% endif %}
+
+      {% with product=p, form_id=f_id, can_buy=can_buy, show_buy_now=show_buy %}
+        {% include 'components/products/product-buy-buttons.jinja' %}
+      {% endwith %}
+
+      <div
+        class="product-buying-box__footer flex items-center justify-between border-t border-[var(--color-border)] pt-2 text-xs"
+      >
+        <a
+          href="{{ product_url }}"
+          class="inline-flex items-center gap-1 font-semibold text-[var(--color-primary)] hover:underline"
+        >
+          <span>{{ _("View full details") }}</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            class="h-4 w-4 rtl:rotate-180"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      </div>
+    </form>
+  {% endif %}
+</div>

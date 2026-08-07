@@ -1,0 +1,59 @@
+{% set desktop_img = image or image_mobile %}
+{% set mobile_img = image_mobile or image %}
+{% set image_alt = alt | default('', true) %}
+{% set img_class = class | default('', true) %}
+{% set img_sizes = sizes | default('100vw', true) %}
+{% set img_pos = position | default('center', true) %}
+{% set priority = is_priority | default(false, true) %}
+
+{% if desktop_img %}
+  <picture class="contents">
+    {% if w_desktop is defined and w_desktop %}
+      {% set w_d = w_desktop | int %}
+      {% set w_d2 = w_d * 2 %}
+      {% set d_srcset = image_url(desktop_img, w=w_d, q=85, f='auto') ~ ' ' ~ w_d ~ 'w, ' ~ image_url(desktop_img, w=w_d2, q=85, f='auto') ~ ' ' ~ w_d2 ~ 'w' %}
+      <source media="(min-width: 768px)" srcset="{{ d_srcset }}" sizes="{{ img_sizes }}" />
+    {% else %}
+      {% set d_srcset = image_url(desktop_img, w=960, q=85, f='auto') ~ ' 960w, ' ~ image_url(desktop_img, w=1440, q=85, f='auto') ~ ' 1440w, ' ~ image_url(desktop_img, w=1920, q=85, f='auto') ~ ' 1920w' %}
+      <source media="(min-width: 768px)" srcset="{{ d_srcset }}" sizes="{{ img_sizes }}" />
+    {% endif %}
+
+    {% if w_mobile is defined and w_mobile %}
+      {% set w_m = w_mobile | int %}
+      {% set w_m2 = w_m * 2 %}
+      {% set m_srcset = image_url(mobile_img, w=w_m, q=80, f='auto') ~ ' ' ~ w_m ~ 'w, ' ~ image_url(mobile_img, w=w_m2, q=80, f='auto') ~ ' ' ~ w_m2 ~ 'w' %}
+      <img
+        srcset="{{ m_srcset }}"
+        sizes="{{ img_sizes }}"
+        src="{{ image_url(mobile_img, w=w_m, q=80, f='auto') }}"
+        alt="{{ image_alt }}"
+        {% if width is defined and width %}width="{{ width }}"{% endif %}
+        {% if height is defined and height %}height="{{ height }}"{% endif %}
+        {% if priority %}
+          fetchpriority="high"
+        {% else %}
+          loading="lazy" decoding="async"
+        {% endif %}
+        class="{{ img_class }}"
+        style="object-position: {{ img_pos }};"
+      />
+    {% else %}
+      {% set m_srcset = image_url(mobile_img, w=414, q=80, f='auto') ~ ' 414w, ' ~ image_url(mobile_img, w=828, q=80, f='auto') ~ ' 828w, ' ~ image_url(mobile_img, w=1104, q=80, f='auto') ~ ' 1104w' %}
+      <img
+        srcset="{{ m_srcset }}"
+        sizes="{{ img_sizes }}"
+        src="{{ image_url(mobile_img, w=828, q=80, f='auto') }}"
+        alt="{{ image_alt }}"
+        {% if width is defined and width %}width="{{ width }}"{% endif %}
+        {% if height is defined and height %}height="{{ height }}"{% endif %}
+        {% if priority %}
+          fetchpriority="high"
+        {% else %}
+          loading="lazy" decoding="async"
+        {% endif %}
+        class="{{ img_class }}"
+        style="object-position: {{ img_pos }};"
+      />
+    {% endif %}
+  </picture>
+{% endif %}

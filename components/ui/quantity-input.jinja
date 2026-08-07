@@ -1,0 +1,60 @@
+{% set input_id = id | default('quantity-input', true) %}
+{% set input_val = quantity | default(1, true) %}
+{% set input_min = min | default(1, true) %}
+{% set input_max = max if max is defined else none %}
+{% set input_name = name | default('quantity', true) %}
+
+<div
+  class="quantity-input flex items-center overflow-hidden rounded-[var(--radius-md)] border border-[var(--color-border)]"
+  data-quantity-wrapper
+>
+  <button
+    type="button"
+    class="quantity-input__btn quantity-input__btn--minus flex h-11 w-11 items-center justify-center text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-muted)] focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+    data-quantity-minus
+    aria-label="{{ _('Decrease quantity') }}"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="h-4 w-4"
+      aria-hidden="true"
+    >
+      <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+  </button>
+  <input
+    type="number"
+    id="{{ input_id }}"
+    name="{{ input_name }}"
+    value="{{ input_val }}"
+    min="{{ input_min }}"
+    {% if input_max is not none %}max="{{ input_max }}"{% endif %}
+    class="quantity-input__field w-12 border-0 bg-transparent text-center text-sm font-semibold text-[var(--color-foreground)] focus:ring-0 focus:outline-none"
+    data-quantity-input
+  />
+  <button
+    type="button"
+    class="quantity-input__btn quantity-input__btn--plus flex h-11 w-11 items-center justify-center text-[var(--color-foreground)] transition-colors hover:bg-[var(--color-muted)] focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+    data-quantity-plus
+    aria-label="{{ _('Increase quantity') }}"
+  >
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="h-4 w-4"
+      aria-hidden="true"
+    >
+      <line x1="12" y1="5" x2="12" y2="19" />
+      <line x1="5" y1="12" x2="19" y2="12" />
+    </svg>
+  </button>
+</div>

@@ -19,10 +19,23 @@
 @import "./css/components/header.css";
 @import "./css/components/footer.css";
 @import "./css/components/product-card.css";
+@import "./css/components/section-header.css";
+@import "./css/components/slider.css";
+@import "./css/components/product-options.css";
+@import "./css/components/buying-box.css";
+@import "./css/components/article-card.css";
 
 /* Section Partials */
 @import "./css/sections/hero.css";
 @import "./css/sections/category-worlds.css";
+@import "./css/sections/featured-collection.css";
+@import "./css/sections/editorial.css";
+@import "./css/sections/featured-product.css";
+@import "./css/sections/brand-pillars.css";
+@import "./css/sections/testimonials.css";
+@import "./css/sections/blog-posts.css";
+@import "./css/sections/media-banner.css";
+@import "./css/sections/newsletter.css";
 
 /* Tailwind Theme Inline Mapping */
 @theme inline {

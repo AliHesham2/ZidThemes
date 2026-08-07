@@ -1,0 +1,98 @@
+{% set is_show_desktop = safeget(settings, "show_on_desktop", true) %}
+{% set is_show_mobile  = safeget(settings, "show_on_mobile",  true) %}
+
+{% set eye = safeget(settings, "eyebrow", "") %}
+{% set head = safeget(settings, "heading", "") %}
+{% set fp_raw = safeget(settings, "product", none) %}
+
+{% set fp = fp_raw %}
+{% if fp and fp.results is defined and fp.results %}{% set fp = fp.results[0] if (fp.results | length > 0) else none %}{% endif %}
+{% if fp and not fp.id %}{% set fp = none %}{% endif %}
+
+{% set show_thumbs = safeget(settings, "show_gallery_thumbs", true) %}
+{% set show_rat = safeget(settings, "show_rating", true) %}
+{% set show_desc = safeget(settings, "show_short_description", true) %}
+{% set show_qty = safeget(settings, "show_quantity", true) %}
+{% set show_buy = safeget(settings, "show_buy_now", true) %}
+{% set show_tb = safeget(settings, "show_trust_badges", true) %}
+{% set raw_badges = safeget(settings, "trust_badges", []) %}
+
+<section
+  section-id="{{ sectionId }}"
+  class="featured-product {{ 'hidden lg:flex' if is_show_desktop and not is_show_mobile }} {{ 'flex lg:hidden' if is_show_mobile and not is_show_desktop }} {{ 'hidden' if not is_show_desktop and not is_show_mobile }} flex flex-col"
+  data-reveal
+>
+  <div class="theme-container flex flex-col gap-[var(--section-py)]">
+    {% with eyebrow=eye, heading=head, align="center" %}
+      {% include 'components/shared/section-header.jinja' %}
+    {% endwith %}
+
+    <div
+      class="featured-product__grid grid grid-cols-1 items-start gap-8 lg:grid-cols-12 lg:gap-12"
+    >
+      <div class="lg:col-span-6" data-reveal-item="stage">
+        {% with product=fp %}
+          {% include 'components/products/product-gallery.jinja' %}
+        {% endwith %}
+      </div>
+
+      <div class="flex flex-col gap-6 lg:col-span-6" data-reveal-item="text" style="--d: 0.2s">
+        {% if fp %}
+          {% with product=fp, heading_tag="h2", show_rating=show_rat, show_short_description=show_desc, show_quantity=show_qty, show_buy_now=show_buy %}
+            {% include 'components/products/product-buying-box.jinja' %}
+          {% endwith %}
+        {% else %}
+          <div
+            class="featured-product__placeholder-box flex animate-pulse flex-col gap-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6"
+          >
+            <div class="h-8 w-3/4 rounded bg-[var(--color-muted)]"></div>
+            <div class="h-6 w-1/4 rounded bg-[var(--color-muted)]"></div>
+            <div class="h-20 w-full rounded bg-[var(--color-muted)]"></div>
+            <div class="h-12 w-full rounded bg-[var(--color-muted)]"></div>
+          </div>
+        {% endif %}
+
+        {% if show_tb and raw_badges|length > 0 %}
+          <div
+            class="featured-product__trust-badges grid grid-cols-1 gap-4 border-t border-[var(--color-border)] pt-4 sm:grid-cols-3"
+          >
+            {% for item in raw_badges %}
+              <div class="flex items-center gap-3">
+                <div
+                  class="flex h-10 w-10 flex-shrink-0 items-center justify-center rounded-full bg-[var(--color-muted)] text-[var(--color-primary)]"
+                >
+                  {% if item.image %}
+                    {% with image=item.image, alt=item.title, class="h-5 w-5 object-contain", w_mobile=60, w_desktop=60, sizes="20px" %}
+                      {% include 'components/shared/responsive-image.jinja' %}
+                    {% endwith %}
+                  {% else %}
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2"
+                      class="h-5 w-5"
+                      aria-hidden="true"
+                    >
+                      <polyline points="20 6 9 17 4 12" />
+                    </svg>
+                  {% endif %}
+                </div>
+                <div class="flex flex-col">
+                  {% if item.title %}
+                    <span class="text-xs font-bold text-[var(--color-foreground)]"
+                      >{{ item.title }}</span
+                    >
+                  {% endif %}
+                  {% if item.text %}
+                    <span class="text-xs text-[var(--color-muted)]">{{ item.text }}</span>
+                  {% endif %}
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>

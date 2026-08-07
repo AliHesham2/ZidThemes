@@ -1,0 +1,49 @@
+{% set p = product %}
+{% set f_id = form_id | default('', true) %}
+{% set buyable = can_buy if can_buy is defined else (p and p.in_stock) %}
+{% set show_bn = show_buy_now if show_buy_now is defined else true %}
+{% set is_preorder = p and p.can_be_preordered if p else false %}
+
+<div class="product-buy-buttons my-4 flex flex-col gap-3" data-buy-buttons>
+  {% if buyable or is_preorder %}
+    <div class="flex gap-3">
+      <button
+        type="submit"
+        class="product-buy-buttons__add-to-cart inline-flex min-h-[44px] flex-1 items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-primary)] px-6 py-3 text-sm font-semibold text-[var(--color-background)] transition-all hover:opacity-90 focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+        data-add-to-cart
+        data-form-id="{{ f_id }}"
+        data-error-msg="{{ _('Failed to add item to cart.') }}"
+      >
+        <span class="product-buy-buttons__label">
+          {% if is_preorder %}
+            {{ _("Preorder now") }}
+          {% else %}
+            {{ _("Add to Cart") }}
+          {% endif %}
+        </span>
+        <span
+          class="product-buy-buttons__spinner ms-2 hidden h-5 w-5 animate-spin rounded-full border-2 border-current border-t-transparent"
+        ></span>
+      </button>
+    </div>
+
+    {% if show_bn and not is_preorder %}
+      <button
+        type="button"
+        class="product-buy-buttons__buy-now inline-flex min-h-[44px] w-full items-center justify-center rounded-[var(--radius-md)] border border-[var(--color-border)] bg-[var(--color-secondary)] px-6 py-3 text-sm font-semibold text-[var(--color-foreground)] transition-all hover:bg-[var(--color-muted)] focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+        data-buy-now
+        data-form-id="{{ f_id }}"
+      >
+        <span>{{ _("Buy Now") }}</span>
+      </button>
+    {% endif %}
+  {% else %}
+    <button
+      type="button"
+      class="product-buy-buttons__out-of-stock inline-flex min-h-[44px] w-full cursor-not-allowed items-center justify-center rounded-[var(--radius-md)] bg-[var(--color-muted)] px-6 py-3 text-sm font-semibold text-[var(--color-muted)] opacity-75"
+      disabled
+    >
+      <span>{{ _("Out of Stock") }}</span>
+    </button>
+  {% endif %}
+</div>

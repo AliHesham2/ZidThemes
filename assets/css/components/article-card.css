@@ -1,0 +1,17 @@
+@layer components {
+  .article-card {
+    position: relative;
+    width: 100%;
+  }
+
+  .article-card__title {
+    font-family: var(--font-heading);
+    font-size: var(--text-lg);
+    line-height: var(--leading-snug);
+  }
+
+  .article-card__excerpt {
+    font-size: var(--text-sm);
+    line-height: var(--leading-normal);
+  }
+}

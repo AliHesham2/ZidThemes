@@ -1,0 +1,60 @@
+{
+  "template": "featured-collection",
+  "name": {
+    "ar": "منتجات مختارة",
+    "en": "Featured collection"
+  },
+  "icon": "shopping-bag-line",
+  "settings": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": { "ar": "العنوان الفرعي", "en": "Eyebrow" },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": { "ar": "العنوان الرئيسي", "en": "Heading" },
+      "default": ""
+    },
+    {
+      "id": "products",
+      "type": "products",
+      "label": { "ar": "المنتجات", "en": "Products" }
+    },
+    {
+      "id": "columns_desktop",
+      "type": "range",
+      "label": { "ar": "عدد الأعمدة (سطح المكتب)", "en": "Desktop columns" },
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "id": "show_view_all",
+      "type": "checkbox",
+      "label": { "ar": "إظهار زر عرض الكل", "en": "Show view all link" },
+      "default": true
+    },
+    {
+      "id": "view_all_label",
+      "type": "text",
+      "label": { "ar": "نص زر عرض الكل", "en": "View all label" },
+      "default": ""
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على سطح المكتب", "en": "Show on desktop" },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على الجوال", "en": "Show on mobile" },
+      "default": true
+    }
+  ]
+}

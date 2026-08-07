@@ -69,6 +69,25 @@
       calc(var(--i, 0) * 0.12s + 0.35s) both;
   }
 
+  [data-reveal].is-revealing [data-reveal-item="text"] {
+    animation: reveal-fade-up 0.65s cubic-bezier(0.22, 1, 0.36, 1) var(--d, 0s) both;
+  }
+
+  [data-reveal].is-revealing [data-reveal-item="stage"] {
+    animation: reveal-stage-rise 0.8s cubic-bezier(0.22, 1, 0.36, 1) 0.38s both;
+  }
+
+  @keyframes reveal-stage-rise {
+    from {
+      opacity: 0;
+      transform: translateY(48px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
   /* State 3: Released State (Clears animation clamping to unblock CSS :hover) */
   [data-reveal].is-revealed [data-reveal-item] {
     opacity: 1;

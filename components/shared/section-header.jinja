@@ -1,0 +1,95 @@
+{% set eye = eyebrow | default('', true) %}
+{% set head = heading | default('', true) %}
+{% set orn = ornament | default('star', true) %}
+{% set alignment = align | default('center', true) %}
+{% set show_deco = deco if deco is defined else true %}
+{% set link_lbl = link_label | default('', true) %}
+{% set link_href = link_url | default('', true) %}
+{% set placement = link_placement | default('below', true) %}
+{% set tag = heading_tag | default('h2', true) %}
+
+{% if eye or head %}
+  <header
+    class="section-header {{ 'section-header--start' if alignment == 'start' }} {{ 'section-header--inline' if (placement == 'inline' and link_lbl and link_href) }}"
+  >
+    <div
+      class="section-header__main {{ 'items-start text-start' if alignment == 'start' else 'items-center text-center' }} flex flex-col gap-2.5"
+    >
+      {% if eye %}
+        <span class="section-header__eyebrow" data-reveal-item="eyebrow">
+          {% if orn == 'star' %}
+            <span class="section-header__eyebrow-ornament" aria-hidden="true">✦</span>
+          {% elif orn == 'bar' %}
+            <span class="section-header__eyebrow-bar" aria-hidden="true"></span>
+          {% endif %}
+          <span>{{ eye }}</span>
+          {% if orn == 'star' %}
+            <span class="section-header__eyebrow-ornament" aria-hidden="true">✦</span>
+          {% elif orn == 'bar' %}
+            <span class="section-header__eyebrow-bar" aria-hidden="true"></span>
+          {% endif %}
+        </span>
+      {% endif %}
+
+      {% if head %}
+        {% if tag == 'h1' %}
+          <h1 class="section-header__heading" data-reveal-item="heading">{{ head }}</h1>
+        {% elif tag == 'h3' %}
+          <h3 class="section-header__heading" data-reveal-item="heading">{{ head }}</h3>
+        {% else %}
+          <h2 class="section-header__heading" data-reveal-item="heading">{{ head }}</h2>
+        {% endif %}
+      {% endif %}
+
+      {% if head and show_deco %}
+        <div class="section-header__deco" data-reveal-item="deco"></div>
+      {% endif %}
+
+      {% if placement == 'below' and link_lbl and link_href %}
+        <a
+          href="{{ link_href }}"
+          class="section-header__link"
+          data-reveal-item="text"
+          style="--d: 0.32s"
+        >
+          <span>{{ link_lbl }}</span>
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="section-header__link-icon rtl:rotate-180"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+        </a>
+      {% endif %}
+    </div>
+
+    {% if placement == 'inline' and link_lbl and link_href %}
+      <a
+        href="{{ link_href }}"
+        class="section-header__link section-header__link--inline"
+        data-reveal-item="text"
+        style="--d: 0.32s"
+      >
+        <span>{{ link_lbl }}</span>
+        <svg
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="section-header__link-icon rtl:rotate-180"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14M12 5l7 7-7 7" />
+        </svg>
+      </a>
+    {% endif %}
+  </header>
+{% endif %}

@@ -1,0 +1,5 @@
+@layer components {
+  .featured-product {
+    padding-block: var(--section-py);
+  }
+}

@@ -1,0 +1,66 @@
+{% set is_show_desktop = safeget(settings, "show_on_desktop", true) %}
+{% set is_show_mobile  = safeget(settings, "show_on_mobile",  true) %}
+
+{% set eye = safeget(settings, "eyebrow", "") %}
+{% set head = safeget(settings, "heading", "") %}
+{% set cols_dt = safeget(settings, "columns_desktop", 3) | int %}
+{% set show_img = safeget(settings, "show_image", true) %}
+{% set show_dt = safeget(settings, "show_date", true) %}
+{% set show_exc = safeget(settings, "show_excerpt", true) %}
+{% set show_va = safeget(settings, "show_view_all", true) %}
+{% set va_label = safeget(settings, "view_all_label", "") %}
+{% set va_text = va_label if va_label else _("View all articles") %}
+{% set view_all_url = url_for('list_blogs') %}
+
+{% set raw_posts = safeget(settings, "posts", []) %}
+{% set valid_posts = [] %}
+{% for item in raw_posts %}
+  {% if safeget(item, "is_visible", true) and (item.slug or item.title or item.excerpt or item.image) %}
+    {% set _ = valid_posts.append(item) %}
+  {% endif %}
+{% endfor %}
+
+{% set post_count = valid_posts | length %}
+
+<section
+  section-id="{{ sectionId }}"
+  class="blog-posts {{ 'hidden lg:flex' if is_show_desktop and not is_show_mobile }} {{ 'flex lg:hidden' if is_show_mobile and not is_show_desktop }} {{ 'hidden' if not is_show_desktop and not is_show_mobile }} flex flex-col"
+  data-reveal
+>
+  <div class="theme-container flex flex-col gap-[var(--section-py)]">
+    {% with eyebrow=eye, heading=head, align="start", link_label=(va_text if show_va else ""), link_url=(view_all_url if show_va else ""), link_placement="inline" %}
+      {% include 'components/shared/section-header.jinja' %}
+    {% endwith %}
+
+    {% if post_count > 0 %}
+      <div class="slider" data-slider>
+        <ul
+          class="slider__track blog-posts__grid blp-grid--cols-{{ cols_dt }}"
+          data-slider-track
+          data-count="{{ post_count }}"
+        >
+          {% for item in valid_posts %}
+            <li class="slider__item blog-posts__item">
+              {% with post=item, show_image=show_img, show_date=show_dt, show_excerpt=show_exc, index=loop.index0 %}
+                {% include 'components/blogs/article-card.jinja' %}
+              {% endwith %}
+            </li>
+          {% endfor %}
+        </ul>
+        {% include 'components/ui/slider-controls.jinja' %}
+      </div>
+    {% else %}
+      <div class="blog-posts__placeholders pointer-events-none" aria-hidden="true">
+        <ul class="blog-posts__grid blp-grid--cols-{{ cols_dt }}">
+          {% for i in range(cols_dt) %}
+            <li class="blog-posts__item">
+              {% with post=none, show_image=show_img, show_date=show_dt, show_excerpt=show_exc, index=loop.index0 %}
+                {% include 'components/blogs/article-card.jinja' %}
+              {% endwith %}
+            </li>
+          {% endfor %}
+        </ul>
+      </div>
+    {% endif %}
+  </div>
+</section>

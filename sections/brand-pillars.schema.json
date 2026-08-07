@@ -1,0 +1,101 @@
+{
+  "template": "brand-pillars",
+  "name": {
+    "ar": "ركائز العلامة",
+    "en": "Brand pillars"
+  },
+  "icon": "layout-column-line",
+  "settings": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": { "ar": "العنوان الفرعي", "en": "Eyebrow" },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": { "ar": "العنوان الرئيسي", "en": "Heading" },
+      "default": ""
+    },
+    {
+      "id": "columns_desktop",
+      "type": "range",
+      "label": { "ar": "عدد الأعمدة (سطح المكتب)", "en": "Desktop columns" },
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "id": "alignment",
+      "type": "select",
+      "label": { "ar": "محاذاة المحتوى", "en": "Content alignment" },
+      "options": [
+        { "value": "start", "label": { "ar": "بداية", "en": "Start" } },
+        { "value": "center", "label": { "ar": "وسط", "en": "Center" } },
+        { "value": "end", "label": { "ar": "نهاية", "en": "End" } }
+      ],
+      "default": "center"
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على سطح المكتب", "en": "Show on desktop" },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على الجوال", "en": "Show on mobile" },
+      "default": true
+    },
+    {
+      "id": "pillars",
+      "type": "list",
+      "label": { "ar": "الركائز", "en": "Pillars" },
+      "max_items": 8,
+      "settings": [
+        {
+          "id": "is_visible",
+          "type": "checkbox",
+          "label": { "ar": "إظهار الركيزة", "en": "Show pillar" },
+          "default": true
+        },
+        {
+          "id": "image",
+          "type": "image",
+          "label": { "ar": "الأيقونة/الصورة (سطح المكتب)", "en": "Icon/Image (desktop)" }
+        },
+        {
+          "id": "image_mobile",
+          "type": "image",
+          "label": { "ar": "الأيقونة/الصورة (الجوال)", "en": "Icon/Image (mobile)" }
+        },
+        {
+          "id": "heading",
+          "type": "text",
+          "label": { "ar": "العنوان", "en": "Title" },
+          "default": ""
+        },
+        {
+          "id": "text",
+          "type": "richtext",
+          "label": { "ar": "الوصف", "en": "Description" },
+          "default": ""
+        },
+        {
+          "id": "link_label",
+          "type": "text",
+          "label": { "ar": "نص الرابط", "en": "Link label" },
+          "default": ""
+        },
+        {
+          "id": "link_url",
+          "type": "url",
+          "label": { "ar": "رابط الصفحات", "en": "Link URL" }
+        }
+      ]
+    }
+  ]
+}

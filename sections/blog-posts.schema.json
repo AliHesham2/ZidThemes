@@ -1,0 +1,121 @@
+{
+  "template": "blog-posts",
+  "name": {
+    "ar": "المدوّنة",
+    "en": "Blog posts"
+  },
+  "icon": "newspaper-line",
+  "settings": [
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": { "ar": "العنوان الفرعي", "en": "Eyebrow" },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": { "ar": "العنوان الرئيسي", "en": "Heading" },
+      "default": ""
+    },
+    {
+      "id": "columns_desktop",
+      "type": "range",
+      "label": { "ar": "عدد الأعمدة (سطح المكتب)", "en": "Desktop columns" },
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "id": "show_image",
+      "type": "checkbox",
+      "label": { "ar": "إظهار الصورة", "en": "Show image" },
+      "default": true
+    },
+    {
+      "id": "show_date",
+      "type": "checkbox",
+      "label": { "ar": "إظهار التاريخ", "en": "Show date" },
+      "default": true
+    },
+    {
+      "id": "show_excerpt",
+      "type": "checkbox",
+      "label": { "ar": "إظهار المقتطف", "en": "Show excerpt" },
+      "default": true
+    },
+    {
+      "id": "show_view_all",
+      "type": "checkbox",
+      "label": { "ar": "إظهار زر عرض الكل", "en": "Show view all link" },
+      "default": true
+    },
+    {
+      "id": "view_all_label",
+      "type": "text",
+      "label": { "ar": "نص زر عرض الكل", "en": "View all label" },
+      "default": ""
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على سطح المكتب", "en": "Show on desktop" },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على الجوال", "en": "Show on mobile" },
+      "default": true
+    },
+    {
+      "id": "posts",
+      "type": "list",
+      "label": { "ar": "المقالات", "en": "Articles" },
+      "max_items": 8,
+      "settings": [
+        {
+          "id": "is_visible",
+          "type": "checkbox",
+          "label": { "ar": "إظهار المقالة", "en": "Show article" },
+          "default": true
+        },
+        {
+          "id": "slug",
+          "type": "text",
+          "label": { "ar": "معرّف المقالة (Slug)", "en": "Post slug" },
+          "default": ""
+        },
+        {
+          "id": "title",
+          "type": "text",
+          "label": { "ar": "العنوان (اختياري)", "en": "Title (optional)" },
+          "default": ""
+        },
+        {
+          "id": "excerpt",
+          "type": "textarea",
+          "label": { "ar": "المقتطف (اختياري)", "en": "Excerpt (optional)" },
+          "default": ""
+        },
+        {
+          "id": "date",
+          "type": "text",
+          "label": { "ar": "التاريخ (اختياري)", "en": "Date (optional)" },
+          "default": ""
+        },
+        {
+          "id": "image",
+          "type": "image",
+          "label": { "ar": "الصورة (سطح المكتب)", "en": "Image (desktop)" }
+        },
+        {
+          "id": "image_mobile",
+          "type": "image",
+          "label": { "ar": "الصورة (الجوال)", "en": "Image (mobile)" }
+        }
+      ]
+    }
+  ]
+}

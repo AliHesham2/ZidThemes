@@ -1,0 +1,8 @@
+{% set opts = options | default((product.options if product else none), true) %}
+{% if opts %}
+  <div class="product-options-wrapper">
+    {% with options=opts, product=product, style='list' %}
+      {% include 'vitrin:v2/products/options/variant_options.jinja' %}
+    {% endwith %}
+  </div>
+{% endif %}

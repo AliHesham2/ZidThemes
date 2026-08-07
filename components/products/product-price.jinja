@@ -1,0 +1,37 @@
+{% set p = product %}
+{% set sz = size | default('lg', true) %}
+{% set is_on_sale = (p and p.formatted_sale_price is defined and p.formatted_sale_price is not none) %}
+{% set has_options = p.has_options if p else false %}
+{% set reg_price = p.formatted_price if p else '' %}
+{% set sale_price = p.formatted_sale_price if (p and is_on_sale) else '' %}
+{% set discount_pct = p.discount_percentage if (p and p.discount_percentage) else 0 %}
+
+<div class="product-price product-price--{{ sz }} flex flex-wrap items-center gap-3">
+  {% if is_on_sale %}
+    <ins
+      class="product-price__sale text-{{ '2xl' if sz == 'lg' else 'lg' }} font-bold text-[var(--color-primary)] no-underline"
+    >
+      {%- if has_options %}{{ _("From") }}{% endif -%}
+      {{ sale_price }}
+    </ins>
+    <del
+      class="product-price__regular text-{{ 'lg' if sz == 'lg' else 'sm' }} text-[var(--color-muted)] line-through"
+    >
+      {{ reg_price }}
+    </del>
+    {% if discount_pct > 0 %}
+      <span
+        class="product-price__badge rounded-[var(--radius-sm)] bg-[var(--color-sale-bg)] px-2 py-0.5 text-xs font-bold text-[var(--color-on-sale)]"
+      >
+        -{{ discount_pct }}%
+      </span>
+    {% endif %}
+  {% else %}
+    <span
+      class="product-price__regular text-{{ '2xl' if sz == 'lg' else 'lg' }} font-bold text-[var(--color-foreground)]"
+    >
+      {%- if has_options %}{{ _("From") }}{% endif -%}
+      {{ reg_price }}
+    </span>
+  {% endif %}
+</div>

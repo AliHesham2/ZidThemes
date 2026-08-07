@@ -1,0 +1,186 @@
+{
+  "template": "media-banner",
+  "name": {
+    "ar": "بانر صورة أو فيديو",
+    "en": "Media banner"
+  },
+  "icon": "image-line",
+  "settings": [
+    {
+      "id": "media_type",
+      "type": "select",
+      "label": { "ar": "نوع الوسائط", "en": "Media type" },
+      "options": [
+        { "value": "image", "label": { "ar": "صورة", "en": "Image" } },
+        { "value": "video", "label": { "ar": "فيديو", "en": "Video" } }
+      ],
+      "default": "image"
+    },
+    {
+      "id": "image",
+      "type": "image",
+      "label": { "ar": "الصورة (سطح المكتب)", "en": "Image (desktop)" },
+      "visible_if": { "media_type": "image" }
+    },
+    {
+      "id": "image_mobile",
+      "type": "image",
+      "label": { "ar": "الصورة (الجوال)", "en": "Image (mobile)" },
+      "visible_if": { "media_type": "image" }
+    },
+    {
+      "id": "video",
+      "type": "video",
+      "label": { "ar": "رابط الفيديو (سطح المكتب)", "en": "Video URL (desktop)" },
+      "visible_if": { "media_type": "video" }
+    },
+    {
+      "id": "video_mobile",
+      "type": "video",
+      "label": { "ar": "رابط الفيديو (الجوال)", "en": "Video URL (mobile)" },
+      "visible_if": { "media_type": "video" }
+    },
+    {
+      "id": "poster",
+      "type": "image",
+      "label": { "ar": "صورة المعاينة (سطح المكتب)", "en": "Poster image (desktop)" },
+      "visible_if": { "media_type": "video" }
+    },
+    {
+      "id": "poster_mobile",
+      "type": "image",
+      "label": { "ar": "صورة المعاينة (الجوال)", "en": "Poster image (mobile)" },
+      "visible_if": { "media_type": "video" }
+    },
+    {
+      "id": "video_ink",
+      "type": "video",
+      "label": { "ar": "فيديو تأثير الحبر (اختياري)", "en": "Ink overlay video (optional)" },
+      "visible_if": { "media_type": "video" }
+    },
+    {
+      "id": "overlay_style",
+      "type": "select",
+      "label": { "ar": "نمط التظليل", "en": "Overlay style" },
+      "options": [
+        { "value": "solid", "label": { "ar": "كامل", "en": "Solid" } },
+        { "value": "gradient", "label": { "ar": "تدرّج", "en": "Gradient" } },
+        { "value": "vignette", "label": { "ar": "إطار مظلّم", "en": "Vignette" } }
+      ],
+      "default": "solid"
+    },
+    {
+      "id": "overlay_opacity",
+      "type": "range",
+      "label": { "ar": "شفافية التظليل (%)", "en": "Overlay opacity (%)" },
+      "min": 0,
+      "max": 95,
+      "step": 5,
+      "unit": "%",
+      "default": 50
+    },
+    {
+      "id": "content_position",
+      "type": "select",
+      "label": { "ar": "موضع المحتوى العمودي", "en": "Vertical content position" },
+      "options": [
+        { "value": "start", "label": { "ar": "أعلى", "en": "Top" } },
+        { "value": "center", "label": { "ar": "وسط", "en": "Center" } },
+        { "value": "end", "label": { "ar": "أسفل", "en": "Bottom" } }
+      ],
+      "default": "center"
+    },
+    {
+      "id": "content_alignment",
+      "type": "select",
+      "label": { "ar": "محاذاة النص الأفقية", "en": "Horizontal text alignment" },
+      "options": [
+        { "value": "start", "label": { "ar": "بداية", "en": "Start" } },
+        { "value": "center", "label": { "ar": "وسط", "en": "Center" } },
+        { "value": "end", "label": { "ar": "نهاية", "en": "End" } }
+      ],
+      "default": "center"
+    },
+    {
+      "id": "height_desktop",
+      "type": "select",
+      "label": { "ar": "ارتفاع البانر (سطح المكتب)", "en": "Desktop height" },
+      "options": [
+        { "value": "50vh", "label": "50vh" },
+        { "value": "60vh", "label": "60vh" },
+        { "value": "80vh", "label": "80vh" },
+        { "value": "100vh", "label": "100vh" }
+      ],
+      "default": "60vh"
+    },
+    {
+      "id": "height_mobile",
+      "type": "select",
+      "label": { "ar": "ارتفاع البانر (الجوال)", "en": "Mobile height" },
+      "options": [
+        { "value": "40vh", "label": "40vh" },
+        { "value": "60vh", "label": "60vh" },
+        { "value": "80vh", "label": "80vh" }
+      ],
+      "default": "60vh"
+    },
+    {
+      "id": "full_bleed",
+      "type": "checkbox",
+      "label": { "ar": "عرض كامل الشاشة", "en": "Full bleed" },
+      "default": true
+    },
+    {
+      "id": "eyebrow",
+      "type": "text",
+      "label": { "ar": "العنوان الفرعي", "en": "Eyebrow" },
+      "default": ""
+    },
+    {
+      "id": "heading",
+      "type": "text",
+      "label": { "ar": "العنوان الرئيسي", "en": "Heading" },
+      "default": ""
+    },
+    {
+      "id": "text",
+      "type": "richtext",
+      "label": { "ar": "النص الوصفي", "en": "Subtext" },
+      "default": ""
+    },
+    {
+      "id": "cta_1_label",
+      "type": "text",
+      "label": { "ar": "نص الزر الأول", "en": "CTA 1 label" },
+      "default": ""
+    },
+    {
+      "id": "cta_1_url",
+      "type": "url",
+      "label": { "ar": "رابط الزر الأول", "en": "CTA 1 URL" }
+    },
+    {
+      "id": "cta_2_label",
+      "type": "text",
+      "label": { "ar": "نص الزر الثاني", "en": "CTA 2 label" },
+      "default": ""
+    },
+    {
+      "id": "cta_2_url",
+      "type": "url",
+      "label": { "ar": "رابط الزر الثاني", "en": "CTA 2 URL" }
+    },
+    {
+      "id": "show_on_desktop",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على سطح المكتب", "en": "Show on desktop" },
+      "default": true
+    },
+    {
+      "id": "show_on_mobile",
+      "type": "checkbox",
+      "label": { "ar": "إظهار على الجوال", "en": "Show on mobile" },
+      "default": true
+    }
+  ]
+}

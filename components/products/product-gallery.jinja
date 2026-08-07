@@ -1,0 +1,116 @@
+{% set p = product %}
+{% set g_id = gallery_id | default('pdp-gallery-' ~ (p.id if p else 'default'), true) %}
+{% set media_list = p.images if (p and p.images and p.images|length > 0) else (p.selected_product.media if (p and p.selected_product and p.selected_product.media) else []) %}
+{% set main_img = p.main_image if p else none %}
+
+<div class="product-gallery flex flex-col gap-4 lg:flex-row" id="{{ g_id }}" data-product-gallery>
+  {% if media_list|length > 1 %}
+    <div
+      class="product-gallery__thumbs order-2 flex max-h-[480px] gap-2.5 overflow-x-auto lg:order-1 lg:flex-col lg:overflow-y-auto"
+      role="tablist"
+      aria-label="{{ _('Product images') }}"
+    >
+      {% for m in media_list %}
+        {% set thumb_img = m.image.thumbnail if (m and m.image and m.image.thumbnail) else (m.image.small if (m and m.image and m.image.small) else none) %}
+        <button
+          type="button"
+          role="tab"
+          class="product-gallery__thumb {{ 'is-active border-[var(--color-primary)]' if loop.first else 'border-transparent' }} h-16 w-16 flex-shrink-0 overflow-hidden rounded-[var(--radius-md)] border-2 transition-colors focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+          data-gallery-thumb="{{ loop.index0 }}"
+          aria-selected="{% if loop.first %}true{% else %}false{% endif %}"
+          aria-label="{{ _('View slide') }} {{ loop.index }}"
+        >
+          {% if thumb_img %}
+            <img
+              src="{{ image_url(thumb_img, w=120, q=80, f='auto') }}"
+              alt="{{ p.name if p else '' }}"
+              class="h-full w-full object-cover"
+            />
+          {% else %}
+            <div class="h-full w-full bg-[var(--color-muted)]"></div>
+          {% endif %}
+        </button>
+      {% endfor %}
+    </div>
+  {% endif %}
+
+  <div
+    class="product-gallery__stage relative order-1 aspect-[4/5] flex-1 overflow-hidden rounded-[var(--radius-lg)] bg-[var(--color-muted)] lg:order-2"
+    data-gallery-stage
+  >
+    {% if media_list|length > 0 %}
+      {% for m in media_list %}
+        {% set stage_src = m.image.full_size if (m and m.image and m.image.full_size) else none %}
+        <div
+          class="product-gallery__slide {% if loop.first %}
+            opacity-100 z-10
+          {% else %}
+            opacity-0 pointer-events-none
+          {% endif %} absolute inset-0 transition-opacity duration-300"
+          data-gallery-slide="{{ loop.index0 }}"
+        >
+          {% if m.media_type == 'video' and m.video_url %}
+            <video src="{{ m.video_url }}" controls class="h-full w-full object-cover"></video>
+          {% elif m.media_type == 'external_video' and m.video_url %}
+            <iframe
+              src="{{ m.video_url }}"
+              class="h-full w-full"
+              frameborder="0"
+              allowfullscreen
+            ></iframe>
+          {% elif stage_src %}
+            <img
+              src="{{ image_url(stage_src, w=800, q=85, f='auto') }}"
+              srcset="
+                {{ image_url(stage_src, w=600, q=85, f='auto') }}  600w,
+                {{ image_url(stage_src, w=1200, q=85, f='auto') }} 1200w
+              "
+              sizes="(min-width: 1024px) 50vw, 100vw"
+              alt="{{ p.name if p else '' }}"
+              class="h-full w-full object-cover"
+              {% if loop.first %}loading="eager"{% else %}loading="lazy"{% endif %}
+            />
+          {% else %}
+            <div class="h-full w-full bg-[var(--color-muted)]"></div>
+          {% endif %}
+        </div>
+      {% endfor %}
+    {% elif main_img %}
+      {% set stage_src = main_img.image.full_size if (main_img and main_img.image and main_img.image.full_size) else none %}
+      <div class="product-gallery__slide absolute inset-0 z-10 opacity-100" data-gallery-slide="0">
+        {% if stage_src %}
+          <img
+            src="{{ image_url(stage_src, w=800, q=85, f='auto') }}"
+            srcset="
+              {{ image_url(stage_src, w=600, q=85, f='auto') }}  600w,
+              {{ image_url(stage_src, w=1200, q=85, f='auto') }} 1200w
+            "
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            alt="{{ p.name if p else '' }}"
+            class="h-full w-full object-cover"
+            loading="eager"
+          />
+        {% else %}
+          <div class="h-full w-full bg-[var(--color-muted)]"></div>
+        {% endif %}
+      </div>
+    {% else %}
+      <div class="product-gallery__slide absolute inset-0 z-10 opacity-100" data-gallery-slide="0">
+        <div class="flex h-full w-full items-center justify-center bg-[var(--color-muted)]">
+          <svg
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            class="h-16 w-16 text-[var(--color-muted)]"
+            aria-hidden="true"
+          >
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h7" />
+            <circle cx="9" cy="9" r="2" />
+            <path d="M21 15l-3.086-3.086a2 2 0 0 0-2.828 0L6 21" />
+          </svg>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</div>
