@@ -1,7 +1,4 @@
 @layer components {
-  /* ═══════════════════════════════════════════════════════════════════════════
-   HERO MORPH — Section Shell (Mobile-First Base Layout)
-   ═══════════════════════════════════════════════════════════════════════════ */
   .hero-morph {
     position: relative;
     display: flex;
@@ -11,22 +8,18 @@
     width: 100%;
     height: auto;
     overflow: hidden;
-
-    /* Mobile 70/30 hard-stop split */
     background: linear-gradient(to bottom, var(--color-secondary) 70%, var(--color-foreground) 70%);
     color: var(--color-background);
     padding-top: clamp(2rem, 4vw, 4.5rem);
   }
 
-  /* ═══════════════════════════════════════════════════════════════════════════
-   LAYER 1 — SVG illustration (Mobile-First)
-   ═══════════════════════════════════════════════════════════════════════════ */
   .hero-morph__illus-layer {
     position: relative;
     inset: unset;
     z-index: 3;
     width: 100%;
-    height: clamp(175px, 46vw, 240px);
+    height: auto;
+    min-height: 175px;
     overflow: hidden;
     flex-shrink: 0;
     pointer-events: none;
@@ -38,7 +31,6 @@
     display: block;
   }
 
-  /* ─── SVG artwork & tokenized elements ──────────────────────────────────── */
   .hi-hair {
     fill: var(--color-foreground);
   }
@@ -71,12 +63,9 @@
     fill: #499e00;
   }
 
-  /* ═══════════════════════════════════════════════════════════════════════════
-   LAYER 2 — Brand wordmark (SVG <text> Base — Visible on Phones)
-   ═══════════════════════════════════════════════════════════════════════════ */
   .hi-brand-name {
     font-family: var(--font-display);
-    font-size: 42px; /* SVG units */
+    font-size: 42px;
     font-weight: 400;
     font-style: normal;
     fill: var(--color-surface);
@@ -86,9 +75,6 @@
     stroke-linejoin: round;
   }
 
-  /* ═══════════════════════════════════════════════════════════════════════════
-   LAYER 3 — Accessibility Content Container
-   ═══════════════════════════════════════════════════════════════════════════ */
   .hero-morph__content {
     position: relative;
     z-index: 4;
@@ -100,16 +86,12 @@
     text-align: center;
   }
 
-  /* ═══════════════════════════════════════════════════════════════════════════
-   DESKTOP & TABLET OVERLAY LAYOUT (min-width: 48rem / 768px+ — Tailwind md)
-   ═══════════════════════════════════════════════════════════════════════════ */
   @media (min-width: 48rem) {
     .hero-morph {
       flex-direction: row;
       align-items: flex-end;
       justify-content: center;
-      min-height: var(--hero-h-tablet, 70vh);
-      /* 85/15 desktop split */
+      min-height: max(var(--hero-h-tablet, 70vh), 48vw);
       background: linear-gradient(
         to bottom,
         var(--color-secondary) 85%,
@@ -117,7 +99,6 @@
       );
     }
 
-    /* Bottom gradient vignette */
     .hero-morph::after {
       content: "";
       position: absolute;
@@ -155,18 +136,12 @@
     }
   }
 
-  /* Desktop Viewport Band (min-width: 80rem / 1280px+ — Tailwind xl) */
   @media (min-width: 80rem) {
     .hero-morph {
-      min-height: var(--hero-h-desktop, 85vh);
+      min-height: max(var(--hero-h-desktop, 85vh), 48vw);
     }
   }
 
-  /* ═══════════════════════════════════════════════════════════════════════════
-   ANIMATIONS — transform/opacity/d: only
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-  /* 1. Path morphing */
   @supports (d: path("")) {
     .hero-morph--animate .hi-hair-main {
       animation: hi-hair-flow 0.75s ease-in-out infinite alternate;
@@ -185,7 +160,6 @@
     }
   }
 
-  /* 2. Heart float */
   .hero-morph--animate .hi-heart {
     transform-box: view-box;
     transform-origin: center;
@@ -204,7 +178,6 @@
     }
   }
 
-  /* 3. Leaf sway */
   .hero-leaf-sway {
     transform-box: fill-box;
     transform-origin: center 100%;
@@ -225,7 +198,6 @@
     }
   }
 
-  /* 3b. Static leaf bob */
   .hero-leaf-bob {
     transform-box: fill-box;
     transform-origin: center;
@@ -246,7 +218,6 @@
     }
   }
 
-  /* 4. Entrance animation for SVG Wordmark */
   @media (min-width: 48rem) {
     .hero-morph--animate .hi-brand-name {
       animation: hi-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.3s both;
@@ -260,13 +231,11 @@
     }
   }
 
-  /* Non-animated: ensure wordmark is visible if motion is disabled */
   .hero-morph:not(.hero-morph--animate) .hi-brand-name {
     opacity: 1 !important;
     transform: none !important;
   }
 
-  /* 5. Prefers-reduced-motion */
   @media (prefers-reduced-motion: reduce) {
     .hi-hair-main,
     .hi-heart,
