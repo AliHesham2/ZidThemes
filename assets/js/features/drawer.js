@@ -173,10 +173,11 @@ function initDrawers() {
 
   document.querySelectorAll("[data-menu-toggle]").forEach((toggleBtn) => {
     if (initializedTriggers.has(toggleBtn)) return;
-    initializedTriggers.add(toggleBtn);
 
     const wrapper = toggleBtn.closest(".header__nav-item");
     if (!wrapper) return;
+
+    initializedTriggers.add(toggleBtn);
 
     const syncExpanded = () =>
       queueMicrotask(() => {

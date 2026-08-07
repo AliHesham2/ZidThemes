@@ -36,7 +36,7 @@ msgstr ""
 msgid "Open main menu"
 msgstr "فتح القائمة الرئيسية"
 
-#: components/layout/localization_selector.jinja:35
+#: components/layout/localization_selector.jinja:43
 msgid "Change currency"
 msgstr "تغيير العملة"
 
@@ -48,11 +48,11 @@ msgstr "فتح البحث"
 msgid "Open cart"
 msgstr "فتح سلة التسوق"
 
-#: header.jinja:63 footer.jinja:102 components/layout/mobile_drawer.jinja:137
+#: header.jinja:63 footer.jinja:110 components/layout/mobile_drawer.jinja:137
 msgid "My Account"
 msgstr "حسابي"
 
-#: footer.jinja:110 components/layout/mobile_drawer.jinja:155
+#: footer.jinja:118 components/layout/mobile_drawer.jinja:155
 msgid "Wishlist"
 msgstr "المفضلة"
 
@@ -85,7 +85,7 @@ msgid "Search Products"
 msgstr "ابحثي عن المنتجات"
 
 #. Submit BUTTON label — keep it to one word.
-#: components/layout/search_drawer.jinja:66
+#: components/layout/search_drawer.jinja:63
 msgid "Search"
 msgstr "بحث"
 
@@ -108,67 +108,67 @@ msgstr "إغلاق البحث"
 msgid "Shopping Cart"
 msgstr "سلة التسوق"
 
-#: components/layout/cart_drawer.jinja:31
+#: components/layout/cart_drawer.jinja:29
 msgid "Close cart"
 msgstr "إغلاق السلة"
 
-#: components/layout/cart_drawer.jinja:65
+#: components/layout/cart_drawer.jinja:69
 msgid "Your cart is empty"
 msgstr "سلتك فارغة"
 
-#: components/layout/cart_drawer.jinja:66
+#: components/layout/cart_drawer.jinja:70
 msgid "Explore our products and start shopping"
 msgstr "اكتشفي منتجاتنا وابدئي التسوق"
 
 #. Button in the empty-cart state.
-#: components/layout/cart_drawer.jinja:72
+#: components/layout/cart_drawer.jinja:76
 msgid "Continue Shopping"
 msgstr "مواصلة التسوق"
 
 #. Primary checkout CTA — the most important string in the cart.
-#: components/layout/cart_drawer.jinja:93
+#: components/layout/cart_drawer.jinja:97
 msgid "View Cart & Checkout"
 msgstr "عرض السلة وإتمام الطلب"
 
-#: components/layout/cart_drawer.jinja:83
+#: components/layout/cart_drawer.jinja:87
 msgid "Taxes and shipping calculated at checkout."
 msgstr "تُحتسب الضريبة والشحن عند إتمام الطلب."
 
 
 # ── Footer · column headings ────────────────────────────────────────────────
 
-#: footer.jinja:37
+#: footer.jinja:45
 msgid "Quick Links"
 msgstr "روابط سريعة"
 
-#: footer.jinja:78
+#: footer.jinja:86
 msgid "Customer Service"
 msgstr "خدمة العملاء"
 
 
 # ── Footer · links ──────────────────────────────────────────────────────────
 
-#: footer.jinja:45
+#: footer.jinja:53
 msgid "Home"
 msgstr "الرئيسية"
 
-#: footer.jinja:53
+#: footer.jinja:61
 msgid "All Products"
 msgstr "جميع المنتجات"
 
-#: footer.jinja:61
+#: footer.jinja:69
 msgid "Categories"
 msgstr "التصنيفات"
 
-#: footer.jinja:69
+#: footer.jinja:77
 msgid "Blog"
 msgstr "المدونة"
 
-#: footer.jinja:86
+#: footer.jinja:94
 msgid "FAQs"
 msgstr "الأسئلة الشائعة"
 
-#: footer.jinja:94
+#: footer.jinja:102
 msgid "Shipping & Payment"
 msgstr "الشحن والدفع"
 
@@ -177,6 +177,6 @@ msgstr "الشحن والدفع"
 
 #. Copyright line. %(name)s is the store name.
 #. The Arabic leads so the "©" is not stranded at the page edge in RTL.
-#: footer.jinja:139
+#: footer.jinja:135
 msgid "© %(name)s — All Rights Reserved."
 msgstr "جميع الحقوق محفوظة © %(name)s"
