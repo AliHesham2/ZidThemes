@@ -77,8 +77,6 @@
         opacity 250ms ease;
     }
 
-    /* Keep the glyph above the hover circle. Matches direct <svg> (search, account)
-       and nested <svg> inside .header__cart-bubble-wrapper (cart). */
     & > svg,
     .header__cart-bubble-wrapper > svg {
       position: relative;
@@ -321,6 +319,9 @@
     color: var(--color-foreground);
     font-size: 13px;
     font-weight: 500;
+  }
+
+  .hdr-loc-btn {
     background: none;
     border: none;
     cursor: pointer;
