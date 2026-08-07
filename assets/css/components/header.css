@@ -183,6 +183,8 @@
 
   .hdr-loc-dropdown {
     min-width: 220px;
+    inset-inline-start: auto;
+    inset-inline-end: 0;
   }
 
   .header__dropdown > ul > li:first-child > .header__dropdown-link,
