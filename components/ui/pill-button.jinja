@@ -7,22 +7,24 @@
 
 {% set base_cls = "pill-button pill-button--" ~ btn_variant ~ " pill-button--" ~ btn_size ~ (" " ~ extra_cls if extra_cls else "") %}
 
+{% macro pill_inner() %}
+  <span class="pill-button__text">{{ btn_label }}</span>
+  {% if btn_icon == 'arrow' %}
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      class="pill-button__icon rtl:rotate-180"
+      aria-hidden="true"
+    >
+      <path d="M5 12h14M12 5l7 7-7 7" />
+    </svg>
+  {% endif %}
+{% endmacro %}
+
 {% if btn_url %}
-  <a href="{{ btn_url }}" class="{{ base_cls }}">
-    <span class="pill-button__text">{{ btn_label }}</span>
-    {% if btn_icon == 'arrow' %}
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-button__icon rtl:rotate-180" aria-hidden="true">
-        <path d="M5 12h14M12 5l7 7-7 7" />
-      </svg>
-    {% endif %}
-  </a>
+  <a href="{{ btn_url }}" class="{{ base_cls }}"> {{ pill_inner() }} </a>
 {% else %}
-  <button type="button" class="{{ base_cls }}">
-    <span class="pill-button__text">{{ btn_label }}</span>
-    {% if btn_icon == 'arrow' %}
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="pill-button__icon rtl:rotate-180" aria-hidden="true">
-        <path d="M5 12h14M12 5l7 7-7 7" />
-      </svg>
-    {% endif %}
-  </button>
+  <button type="button" class="{{ base_cls }}">{{ pill_inner() }}</button>
 {% endif %}

@@ -83,15 +83,14 @@ function initLocalization() {
     if (!dropdown) return;
 
     initializedTriggers.add(btn);
+    dropdown.setAttribute("inert", "");
 
-    // Visibility is owned by CSS (:hover / :focus-within on .hdr-loc-wrapper,
-    // the same mechanism the nav dropdown uses). These listeners only mirror
-    // that state into aria-expanded, which CSS cannot set.
-    // Deferred so `focusout` doesn't read activeElement before it has moved.
     const syncExpanded = () =>
       queueMicrotask(() => {
         const open = wrapper.matches(":hover") || wrapper.contains(document.activeElement);
         btn.setAttribute("aria-expanded", String(open));
+        if (open) dropdown.removeAttribute("inert");
+        else dropdown.setAttribute("inert", "");
       });
     ["mouseenter", "mouseleave", "focusin", "focusout"].forEach((evt) =>
       wrapper.addEventListener(evt, syncExpanded)

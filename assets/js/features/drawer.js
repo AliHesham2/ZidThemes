@@ -179,10 +179,33 @@ function initDrawers() {
 
     initializedTriggers.add(toggleBtn);
 
+    wrapper.querySelectorAll(".header__dropdown-item").forEach((item) => {
+      const sub = item.querySelector(".header__dropdown-submenu");
+      if (!sub) return;
+      sub.setAttribute("inert", "");
+      const syncSub = () =>
+        queueMicrotask(() => {
+          const open = item.matches(":hover") || item.contains(document.activeElement);
+          if (open) sub.removeAttribute("inert");
+          else sub.setAttribute("inert", "");
+        });
+      ["mouseenter", "mouseleave", "focusin", "focusout"].forEach((evt) =>
+        item.addEventListener(evt, syncSub)
+      );
+    });
+
+    const dropdown = wrapper.querySelector(".header__dropdown");
+
+    if (dropdown) dropdown.setAttribute("inert", "");
+
     const syncExpanded = () =>
       queueMicrotask(() => {
         const open = wrapper.matches(":hover") || wrapper.contains(document.activeElement);
         toggleBtn.setAttribute("aria-expanded", String(open));
+        if (dropdown) {
+          if (open) dropdown.removeAttribute("inert");
+          else dropdown.setAttribute("inert", "");
+        }
       });
 
     ["mouseenter", "mouseleave", "focusin", "focusout"].forEach((evt) =>
