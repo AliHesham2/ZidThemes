@@ -19,14 +19,16 @@ class DialogManager {
   ensureDialogInDOM(id, closeLabel = "") {
     let dialogEl = document.querySelector(`dialog[data-dialog="${id}"], dialog#${id}`);
     if (dialogEl) {
-      if (closeLabel) {
-        const btn = dialogEl.querySelector("[data-dialog-close]");
-        if (btn) btn.setAttribute("aria-label", closeLabel);
+      const btn = dialogEl.querySelector("[data-dialog-close]");
+      if (btn) {
+        if (closeLabel) {
+          btn.setAttribute("aria-label", closeLabel);
+        } else {
+          btn.removeAttribute("aria-label");
+        }
       }
       return dialogEl;
     }
-
-    const ariaAttr = closeLabel ? `aria-label="${closeLabel}"` : "";
 
     const wrapper = document.createElement("div");
     wrapper.innerHTML = `
@@ -34,7 +36,7 @@ class DialogManager {
         <div class="dialog-shell__panel" role="document">
           <header class="dialog-shell__header">
             <h2 id="${id}-title" class="dialog-shell__title" data-dialog-title></h2>
-            <button type="button" class="dialog-shell__close-btn" data-dialog-close ${ariaAttr}>
+            <button type="button" class="dialog-shell__close-btn" data-dialog-close>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
@@ -43,7 +45,7 @@ class DialogManager {
           </header>
           <div class="dialog-shell__body" data-dialog-body>
             <div class="dialog-shell__state dialog-shell__state--loading" data-dialog-state="loading">
-              <svg class="spinner-ring" viewBox="0 0 50 50"><circle class="spinner-ring__path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
+              <svg class="spinner-ring spinner-ring--lg" viewBox="0 0 50 50"><circle class="spinner-ring__path" cx="25" cy="25" r="20" fill="none" stroke-width="5"></circle></svg>
             </div>
             <div class="dialog-shell__state dialog-shell__state--error hidden" data-dialog-state="error">
               <p class="dialog-shell__error-text" data-dialog-error-text></p>
@@ -54,6 +56,12 @@ class DialogManager {
       </dialog>
     `;
     dialogEl = wrapper.firstElementChild;
+
+    const closeBtn = dialogEl.querySelector("[data-dialog-close]");
+    if (closeBtn && closeLabel) {
+      closeBtn.setAttribute("aria-label", closeLabel);
+    }
+
     document.body.appendChild(dialogEl);
 
     // Idempotent native close event handling (C4)

@@ -145,15 +145,9 @@ class WishlistManager {
   }
 
   setButtonState(button, state) {
-    const labelAdd =
-      button.getAttribute("data-label-add") ||
-      (document.documentElement.lang === "ar" ? "إضافة إلى المفضلة" : "Add to wishlist");
-    const labelRemove =
-      button.getAttribute("data-label-remove") ||
-      (document.documentElement.lang === "ar" ? "إزالة من المفضلة" : "Remove from wishlist");
-    const labelLoading =
-      button.getAttribute("data-label-loading") ||
-      (document.documentElement.lang === "ar" ? "جاري التحميل" : "Loading");
+    const labelAdd = button.getAttribute("data-label-add") || "";
+    const labelRemove = button.getAttribute("data-label-remove") || "";
+    const labelLoading = button.getAttribute("data-label-loading") || "";
 
     switch (state) {
       case "empty":

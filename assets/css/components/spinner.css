@@ -1,9 +1,13 @@
 @layer components {
-  /* Namespaced Loading Spinner Partial (E3) */
   .spinner-ring {
     animation: spinner-rotate 2s linear infinite;
     width: 18px;
     height: 18px;
+  }
+
+  .spinner-ring--lg {
+    width: 32px;
+    height: 32px;
   }
 
   .spinner-ring .spinner-ring__path {
