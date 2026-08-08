@@ -35,13 +35,6 @@ function initTestimonials() {
       slides.forEach((s, idx) => {
         const isCurrent = idx === index;
         s.classList.toggle("is-active", isCurrent);
-        s.classList.toggle("opacity-100", isCurrent);
-        s.classList.toggle("translate-y-0", isCurrent);
-        s.classList.toggle("z-10", isCurrent);
-        s.classList.toggle("opacity-0", !isCurrent);
-        s.classList.toggle("translate-y-6", !isCurrent);
-        s.classList.toggle("pointer-events-none", !isCurrent);
-        s.classList.toggle("z-0", !isCurrent);
 
         if (isCurrent) {
           s.removeAttribute("aria-hidden");

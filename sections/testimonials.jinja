@@ -32,88 +32,67 @@
 
       {% if total_count > 0 %}
         <div
-          class="testimonials__wrapper relative mx-auto flex w-full max-w-4xl flex-col items-center rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-8 shadow-sm lg:p-12"
+          class="testimonials__wrapper relative w-full"
           role="region"
           aria-roledescription="carousel"
           aria-label="{{ head if head else _('Testimonials') }}"
           data-reveal-item="stage"
         >
-          <div
-            class="testimonials__watermark font-heading pointer-events-none absolute top-6 left-1/2 -translate-x-1/2 text-9xl text-[var(--color-primary)] opacity-5 select-none"
-            aria-hidden="true"
-          >
-            “
-          </div>
-
-          <div class="testimonials__stage z-10 grid w-full" data-testimonials-stage>
+          <div class="testimonials__stage" data-testimonials-stage>
+            <div class="testimonials__glow" aria-hidden="true"></div>
             {% for item in valid_testimonials %}
               {% set author_name = item.author | default('', true) %}
               {% set name_parts = author_name.split(' ') %}
               {% set initials = (name_parts[0][0] if name_parts[0] else '') ~ (name_parts[1][0] if (name_parts|length > 1 and name_parts[1]) else '') %}
 
               <div
-                class="testimonials__slide {% if loop.first %}
-                  is-active opacity-100 translate-y-0 z-10
-                {% else %}
-                  opacity-0 translate-y-6 pointer-events-none z-0
-                {% endif %} col-start-1 row-start-1 flex flex-col items-center gap-6 text-center transition-all duration-500 ease-out"
+                class="testimonials__slide {{ 'is-active' if loop.first }}"
                 role="group"
                 aria-roledescription="slide"
                 aria-label="{{ loop.index }} {{ _('of') }} {{ total_count }}"
                 {% if not loop.first %}aria-hidden="true" tabindex="-1"{% endif %}
                 data-testimonial-slide="{{ loop.index0 }}"
               >
-                {% with rating=item.rating %}
-                  {% include 'components/ui/rating-stars.jinja' %}
-                {% endwith %}
+                <div class="testimonials__stars">
+                  {% with rating=item.rating %}
+                    {% include 'components/ui/rating-stars.jinja' %}
+                  {% endwith %}
+                </div>
 
-                <blockquote
-                  class="testimonials__quote m-0 max-w-2xl text-lg leading-relaxed font-medium text-[var(--color-foreground)] italic lg:text-xl"
-                >
-                  “{{ item.quote }}”
-                </blockquote>
+                <div class="testimonials__quote-area">
+                  <span class="testimonials__watermark" aria-hidden="true">“</span>
+                  <blockquote class="testimonials__quote">{{ item.quote }}</blockquote>
+                </div>
 
-                <div class="testimonials__author mt-2 flex items-center gap-3">
+                <div class="testimonials__author">
+                  <span class="testimonials__author-line" aria-hidden="true"></span>
+
                   <div
-                    class="testimonials__avatar flex h-12 w-12 flex-shrink-0 items-center justify-center overflow-hidden rounded-full border border-[var(--color-border)] bg-[var(--color-muted)]"
+                    class="testimonials__avatar {{ 'testimonials__avatar--initials' if not (item.image or item.image_mobile) }}"
                   >
                     {% if item.image or item.image_mobile %}
-                      {% with image=item.image, image_mobile=item.image_mobile, alt=author_name, class="w-full h-full object-cover", w_mobile=96, w_desktop=96, sizes="96px" %}
+                      {% with image=item.image, image_mobile=item.image_mobile, alt=author_name, class="w-full h-full object-cover", w_mobile=112, w_desktop=112, sizes="56px" %}
                         {% include 'components/shared/responsive-image.jinja' %}
                       {% endwith %}
                     {% else %}
-                      <span
-                        class="testimonials__initials text-sm font-bold text-[var(--color-primary)] uppercase"
-                      >
-                        {{ initials if initials else '✦' }}
-                      </span>
+                      {{ initials if initials else '✦' }}
                     {% endif %}
                   </div>
 
-                  <div class="testimonials__author-info flex flex-col text-start">
-                    <span
-                      class="testimonials__name text-sm font-bold text-[var(--color-foreground)]"
-                    >
-                      {{ author_name }}
-                    </span>
+                  <div class="testimonials__author-info">
+                    <span class="testimonials__name">{{ author_name }}</span>
                     {% if item.role %}
-                      <span class="testimonials__role text-xs text-[var(--color-muted)]">
-                        {{ item.role }}
-                      </span>
+                      <span class="testimonials__role">{{ item.role }}</span>
                     {% endif %}
                   </div>
                 </div>
               </div>
             {% endfor %}
-          </div>
 
-          {% if total_count > 1 %}
-            <div
-              class="testimonials__controls z-10 mt-8 flex w-full items-center justify-between border-t border-[var(--color-border)] pt-6"
-            >
+            {% if total_count > 1 %}
               <button
                 type="button"
-                class="testimonials__arrow testimonials__arrow--prev flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-foreground)] transition-colors hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-background)] focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+                class="testimonials__arrow testimonials__arrow--prev focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
                 data-testimonials-prev
                 aria-label="{{ _('Previous slide') }}"
               >
@@ -121,7 +100,7 @@
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
+                  stroke-width="1.6"
                   class="h-5 w-5 rtl:rotate-180"
                   aria-hidden="true"
                 >
@@ -129,19 +108,9 @@
                 </svg>
               </button>
 
-              <div
-                class="testimonials__counter font-heading flex items-center gap-3 text-xs font-semibold text-[var(--color-muted)]"
-                aria-live="polite"
-                aria-atomic="true"
-              >
-                <span data-testimonials-current>01</span>
-                <span>/</span>
-                <span>{{ '%02d' % total_count }}</span>
-              </div>
-
               <button
                 type="button"
-                class="testimonials__arrow testimonials__arrow--next flex h-11 w-11 items-center justify-center rounded-full border border-[var(--color-border)] text-[var(--color-foreground)] transition-colors hover:border-[var(--color-primary)] hover:bg-[var(--color-primary)] hover:text-[var(--color-background)] focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
+                class="testimonials__arrow testimonials__arrow--next focus-visible:outline-2 focus-visible:outline-[var(--color-ring)]"
                 data-testimonials-next
                 aria-label="{{ _('Next slide') }}"
               >
@@ -149,23 +118,31 @@
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
+                  stroke-width="1.6"
                   class="h-5 w-5 rtl:rotate-180"
                   aria-hidden="true"
                 >
                   <path d="M9 18l6-6-6-6" />
                 </svg>
               </button>
-            </div>
+            {% endif %}
+          </div>
 
-            <div
-              class="testimonials__progress-bar absolute right-0 bottom-0 left-0 h-1 overflow-hidden rounded-b-[var(--radius-xl)] bg-[var(--color-muted)]"
-            >
-              <div
-                class="testimonials__progress-fill h-full origin-left bg-[var(--color-primary)] transition-transform duration-300 rtl:origin-right"
-                data-testimonials-progress
-                style="transform: scaleX({{ 1 / total_count if total_count > 0 else 1 }});"
-              ></div>
+          {% if total_count > 1 %}
+            <div class="testimonials__footer">
+              <div class="testimonials__progress-bar">
+                <div
+                  class="testimonials__progress-fill"
+                  data-testimonials-progress
+                  style="transform: scaleX({{ 1 / total_count if total_count > 0 else 1 }});"
+                ></div>
+              </div>
+
+              <div class="testimonials__counter" aria-live="polite" aria-atomic="true">
+                <span data-testimonials-current>01</span>
+                <span>/</span>
+                <span>{{ '%02d' % total_count }}</span>
+              </div>
             </div>
           {% endif %}
         </div>
