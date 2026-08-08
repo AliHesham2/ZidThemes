@@ -112,7 +112,6 @@
     justify-content: center;
     white-space: nowrap;
     overflow: hidden;
-    text-overflow: ellipsis;
     max-width: 100%;
     transition:
       transform var(--transition-fast),
@@ -449,13 +448,13 @@
   }
 
   @media (hover: hover) {
-    .product-card__actions .wishlist-btn {
+    .product-card__actions .product-card__wishlist-btn {
       opacity: 0;
       pointer-events: none;
     }
 
-    .product-card:hover .product-card__actions .wishlist-btn,
-    .product-card:focus-within .product-card__actions .wishlist-btn {
+    .product-card:hover .product-card__actions .product-card__wishlist-btn,
+    .product-card:focus-within .product-card__actions .product-card__wishlist-btn {
       opacity: 1;
       pointer-events: auto;
     }
@@ -469,40 +468,6 @@
 
     &:empty {
       display: none;
-    }
-  }
-
-  /* Spinner Keyframes */
-  .spinner-ring {
-    animation: pc-rotate 2s linear infinite;
-    width: 18px;
-    height: 18px;
-  }
-
-  .spinner-ring .spinner-ring__path {
-    stroke: currentColor;
-    stroke-linecap: round;
-    animation: pc-dash 1.5s ease-in-out infinite;
-  }
-
-  @keyframes pc-rotate {
-    100% {
-      transform: rotate(360deg);
-    }
-  }
-
-  @keyframes pc-dash {
-    0% {
-      stroke-dasharray: 1, 150;
-      stroke-dashoffset: 0;
-    }
-    50% {
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: -35;
-    }
-    100% {
-      stroke-dasharray: 90, 150;
-      stroke-dashoffset: -124;
     }
   }
 

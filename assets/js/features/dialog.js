@@ -16,11 +16,17 @@ class DialogManager {
     document.addEventListener("keydown", this.handleKeyDown);
   }
 
-  ensureDialogInDOM(id) {
+  ensureDialogInDOM(id, closeLabel = "") {
     let dialogEl = document.querySelector(`dialog[data-dialog="${id}"], dialog#${id}`);
-    if (dialogEl) return dialogEl;
+    if (dialogEl) {
+      if (closeLabel) {
+        const btn = dialogEl.querySelector("[data-dialog-close]");
+        if (btn) btn.setAttribute("aria-label", closeLabel);
+      }
+      return dialogEl;
+    }
 
-    const closeLabel = document.documentElement.lang === "ar" ? "إغلاق النافذة" : "Close dialog";
+    const ariaAttr = closeLabel ? `aria-label="${closeLabel}"` : "";
 
     const wrapper = document.createElement("div");
     wrapper.innerHTML = `
@@ -28,7 +34,7 @@ class DialogManager {
         <div class="dialog-shell__panel" role="document">
           <header class="dialog-shell__header">
             <h2 id="${id}-title" class="dialog-shell__title" data-dialog-title></h2>
-            <button type="button" class="dialog-shell__close-btn" data-dialog-close aria-label="${closeLabel}">
+            <button type="button" class="dialog-shell__close-btn" data-dialog-close ${ariaAttr}>
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <line x1="18" y1="6" x2="6" y2="18" />
                 <line x1="6" y1="6" x2="18" y2="18" />
@@ -59,7 +65,8 @@ class DialogManager {
   }
 
   open(id, opts = {}) {
-    const dialogEl = this.ensureDialogInDOM(id);
+    const dialogEl = this.ensureDialogInDOM(id, opts.closeLabel || "");
+
     if (!dialogEl) return;
 
     if (document.activeElement && typeof document.activeElement.focus === "function") {

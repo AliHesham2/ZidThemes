@@ -1,0 +1,35 @@
+@layer components {
+  /* Namespaced Loading Spinner Partial (E3) */
+  .spinner-ring {
+    animation: spinner-rotate 2s linear infinite;
+    width: 18px;
+    height: 18px;
+  }
+
+  .spinner-ring .spinner-ring__path {
+    stroke: currentColor;
+    stroke-linecap: round;
+    animation: spinner-dash 1.5s ease-in-out infinite;
+  }
+
+  @keyframes spinner-rotate {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes spinner-dash {
+    0% {
+      stroke-dasharray: 1, 150;
+      stroke-dashoffset: 0;
+    }
+    50% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -35;
+    }
+    100% {
+      stroke-dasharray: 90, 150;
+      stroke-dashoffset: -124;
+    }
+  }
+}

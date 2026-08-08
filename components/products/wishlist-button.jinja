@@ -1,4 +1,4 @@
-{% if store.settings.products.wishlist_enabled == true %}
+{% if safeget(store, "settings.products.wishlist_enabled", false) == true %}
   <button
     type="button"
     class="wishlist-btn {{ class | default('', true) }}"

@@ -16,20 +16,15 @@ function initCardAddToCart() {
     const productId = addBtn.getAttribute("data-product-id");
     if (!mode || mode === "none") return;
 
-    const selectOptionsTitle =
-      addBtn.getAttribute("data-label-select-options") ||
-      (document.documentElement.lang === "ar" ? "اختر الخيارات" : "Select options");
-    const defaultErrorMsg =
-      addBtn.getAttribute("data-label-error") ||
-      (document.documentElement.lang === "ar"
-        ? "تعذر إضافة المنتج إلى السلة."
-        : "Failed to add item to cart.");
+    const selectOptionsTitle = addBtn.getAttribute("data-label-select-options") || "";
+    const closeLabel = addBtn.getAttribute("data-label-close") || "";
+    const defaultErrorMsg = addBtn.getAttribute("data-label-error") || "";
 
     if (mode === "dialog") {
       e.preventDefault();
       const dm = window.dialogManager || dialogManager;
       if (dm) {
-        dm.open("quick-options", { productId, title: selectOptionsTitle });
+        dm.open("quick-options", { productId, title: selectOptionsTitle, closeLabel });
       }
       return;
     }
@@ -78,7 +73,7 @@ function initCardAddToCart() {
               addBtn.disabled = false;
               const dm = window.dialogManager || dialogManager;
               if (dm) {
-                dm.open("quick-options", { productId, title: selectOptionsTitle });
+                dm.open("quick-options", { productId, title: selectOptionsTitle, closeLabel });
               }
               return;
             }
@@ -88,7 +83,7 @@ function initCardAddToCart() {
             addBtn.disabled = false;
             const dm = window.dialogManager || dialogManager;
             if (dm) {
-              dm.open("quick-options", { productId, title: selectOptionsTitle });
+              dm.open("quick-options", { productId, title: selectOptionsTitle, closeLabel });
             }
             return;
           }
