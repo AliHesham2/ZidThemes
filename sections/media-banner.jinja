@@ -69,9 +69,7 @@
           {% include 'components/shared/responsive-image.jinja' %}
         {% endwith %}
       {% else %}
-        <div
-          class="media-banner__empty-bg h-full w-full bg-gradient-to-r from-[var(--color-primary)] to-[var(--color-secondary)] opacity-80"
-        ></div>
+        <div class="media-banner__empty-bg"></div>
       {% endif %}
 
       <div
@@ -89,64 +87,44 @@
         class="media-banner__content media-banner__content--{{ pos_x }} flex max-w-2xl flex-col gap-4"
       >
         {% if eye %}
-          <span
-            class="media-banner__eyebrow text-xs font-semibold tracking-[var(--tracking-eyebrow)] text-[var(--gold)] uppercase"
-            data-reveal-item="text"
-            style="--d: 0.1s"
-          >
-            {{ eye }}
+          <span class="media-banner__eyebrow" data-reveal-item="text" style="--d: 0.1s">
+            <span class="media-banner__sparkle" aria-hidden="true">✦</span>
+            <span>{{ eye }}</span>
+            <span class="media-banner__sparkle" aria-hidden="true">✦</span>
           </span>
         {% endif %}
 
         {% if head %}
-          <h2
-            class="media-banner__heading font-heading max-w-[20ch] text-3xl leading-tight font-bold text-[var(--color-background)]"
-            data-reveal-item="text"
-            style="--d: 0.22s"
-          >
+          <h2 class="media-banner__heading" data-reveal-item="text" style="--d: 0.22s">
             {{ head }}
           </h2>
         {% endif %}
 
         {% if head %}
-          <div
-            class="media-banner__deco section-header__deco"
-            data-reveal-item="text"
-            style="--d: 0.32s"
-          ></div>
+          <div class="media-banner__deco" data-reveal-item="text" style="--d: 0.32s"></div>
         {% endif %}
 
         {% if subtxt %}
-          <div
-            class="media-banner__subtext text-sm leading-relaxed text-[var(--color-background)] opacity-90 lg:text-base"
-            data-reveal-item="text"
-            style="--d: 0.4s"
-          >
+          <div class="media-banner__subtext" data-reveal-item="text" style="--d: 0.4s">
             {{ subtxt }}
           </div>
         {% endif %}
 
-        {% if (cta1_lbl and cta1_url) or (cta2_lbl and cta2_url) %}
+        {% if cta1_lbl or cta2_lbl %}
           <div
-            class="media-banner__actions media-banner__content--{{ pos_x }} flex flex-wrap gap-3 pt-2"
+            class="media-banner__actions media-banner__content--{{ pos_x }}"
             data-reveal-item="text"
             style="--d: 0.5s"
           >
-            {% if cta1_lbl and cta1_url %}
-              <a
-                href="{{ cta1_url }}"
-                class="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--color-primary)] px-7 py-3 text-sm font-semibold text-[var(--color-background)] transition-opacity hover:opacity-90"
-              >
-                {{ cta1_lbl }}
-              </a>
+            {% if cta1_lbl %}
+              {% with label=cta1_lbl, url=cta1_url, variant="solid", size="md", icon="arrow" %}
+                {% include 'components/ui/pill-button.jinja' %}
+              {% endwith %}
             {% endif %}
-            {% if cta2_lbl and cta2_url %}
-              <a
-                href="{{ cta2_url }}"
-                class="inline-flex min-h-[44px] items-center justify-center rounded-full bg-[var(--color-background)] px-7 py-3 text-sm font-semibold text-[var(--color-foreground)] transition-opacity hover:opacity-90"
-              >
-                {{ cta2_lbl }}
-              </a>
+            {% if cta2_lbl %}
+              {% with label=cta2_lbl, url=cta2_url, variant="outline", size="md" %}
+                {% include 'components/ui/pill-button.jinja' %}
+              {% endwith %}
             {% endif %}
           </div>
         {% endif %}
