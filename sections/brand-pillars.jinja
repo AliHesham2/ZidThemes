@@ -37,12 +37,12 @@
             {% for item in valid_pillars %}
               <li class="slider__item brand-pillars__item">
                 <div
-                  class="brand-pillars__card brand-pillars__card--{{ align_mode }} group flex h-full flex-col gap-4 rounded-[var(--radius-lg)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-sm"
+                  class="brand-pillars__card brand-pillars__card--{{ align_mode }} group flex h-full flex-col"
                   data-reveal-item="card"
                   style="--i: {{ loop.index0 }}"
                 >
                   <div
-                    class="brand-pillars__icon-ring flex h-24 w-24 items-center justify-center rounded-full border border-[var(--color-border)] bg-[var(--color-background)] transition-all duration-300 group-hover:scale-105 group-hover:border-[var(--color-primary)]"
+                    class="brand-pillars__icon-ring flex h-16 w-16 items-center justify-center overflow-hidden rounded-full border border-[var(--color-border)] transition-all duration-300 group-hover:scale-[1.08] group-hover:border-[var(--color-primary)]"
                   >
                     {% if item.image or item.image_mobile %}
                       {% with image=item.image, image_mobile=item.image_mobile, alt=item.heading, class="w-12 h-12 object-contain", w_mobile=96, w_desktop=96, sizes="96px" %}
@@ -53,31 +53,27 @@
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
-                        stroke-width="1.5"
-                        class="h-10 w-10 text-[var(--color-primary)]"
+                        stroke-width="1.4"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        class="h-[26px] w-[26px] text-[var(--color-primary)]"
                         aria-hidden="true"
                       >
-                        <polygon
-                          points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"
+                        <path
+                          d="M12 2l2.6 6.3L21 9l-5 4.5L17.5 21 12 17.3 6.5 21 8 13.5 3 9l6.4-.7z"
                         />
                       </svg>
                     {% endif %}
                   </div>
 
                   {% if item.heading %}
-                    <h3
-                      class="brand-pillars__title font-heading text-xl font-bold text-[var(--color-foreground)]"
-                    >
+                    <h3 class="brand-pillars__title text-[var(--color-foreground)]">
                       {{ item.heading }}
                     </h3>
                   {% endif %}
 
                   {% if item.text %}
-                    <div
-                      class="brand-pillars__text text-sm leading-relaxed text-[var(--color-muted)]"
-                    >
-                      {{ item.text }}
-                    </div>
+                    <div class="brand-pillars__text text-[var(--color-muted)]">{{ item.text }}</div>
                   {% endif %}
 
                   {% if item.link_label and item.link_url %}

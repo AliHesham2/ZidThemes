@@ -3,6 +3,30 @@
     padding-block: var(--section-py);
   }
 
+  .brand-pillars__card {
+    gap: var(--spacing-sm);
+    transition: translate var(--transition-slow);
+  }
+
+  .brand-pillars__card:hover {
+    translate: 0 -6px;
+  }
+
+  .brand-pillars__title {
+    font-family: var(--font-heading);
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.8rem, 2vw, 2.2rem);
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  .brand-pillars__text {
+    font-size: var(--text-sm);
+    line-height: 1.65;
+    max-width: 34ch;
+  }
+
   .brand-pillars__card--center {
     align-items: center;
     text-align: center;
