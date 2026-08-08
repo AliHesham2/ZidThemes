@@ -13,9 +13,9 @@
       <div class="product-card__carousel-track">
         <div class="product-card__carousel-slide" data-index="0">
           <span
-            class="ph-mark product-card__ph-mark"
+            class="product-card__ph-mark"
             aria-hidden="true"
-            style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+            style="--ph-src: url('{{ 'images/place-holder.webp' | asset_url }}')"
           ></span>
         </div>
       </div>
@@ -154,9 +154,9 @@
                   />
                 {% else %}
                   <span
-                    class="ph-mark product-card__ph-mark"
+                    class="product-card__ph-mark"
                     aria-hidden="true"
-                    style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+                    style="--ph-src: url('{{ 'images/place-holder.webp' | asset_url }}')"
                   ></span>
                 {% endif %}
               </a>
@@ -186,9 +186,9 @@
                 />
               {% else %}
                 <span
-                  class="ph-mark product-card__ph-mark"
+                  class="product-card__ph-mark"
                   aria-hidden="true"
-                  style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+                  style="--ph-src: url('{{ 'images/place-holder.webp' | asset_url }}')"
                 ></span>
               {% endif %}
             </a>
@@ -201,9 +201,9 @@
               aria-label="{{ card_product.name }}"
             >
               <span
-                class="ph-mark product-card__ph-mark"
+                class="product-card__ph-mark"
                 aria-hidden="true"
-                style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+                style="--ph-src: url('{{ 'images/place-holder.webp' | asset_url }}')"
               ></span>
             </a>
           </div>

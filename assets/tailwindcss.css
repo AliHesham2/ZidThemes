@@ -74,10 +74,10 @@
   --font-heading: var(--font-display);
 
   /* Derived Radius Scale */
-  --radius-sm: calc(var(--radius, 4px) * 0.5);
-  --radius-md: var(--radius, 4px);
-  --radius-lg: calc(var(--radius, 4px) * 2);
-  --radius-xl: calc(var(--radius, 4px) * 3);
+  --radius-sm: calc(var(--radius, 8px) * 0.5);
+  --radius-md: var(--radius, 8px);
+  --radius-lg: calc(var(--radius, 8px) * 1.5);
+  --radius-xl: calc(var(--radius, 8px) * 2);
 }
 
 /* Z-Index Scale Utilities */

@@ -26,7 +26,7 @@
     position: relative;
     width: 100%;
     overflow: hidden;
-    background-color: var(--color-surface);
+    background-color: var(--color-background);
     border-radius: var(--radius-md);
     border-end-end-radius: 0;
   }
@@ -192,11 +192,28 @@
 
   .product-card__ph-mark {
     position: absolute;
+    inset: 0;
+    display: block;
+    background: var(--color-surface);
+  }
+
+  .product-card__ph-mark::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 50%;
     top: 50%;
-    left: 50%;
     translate: -50% -50%;
-    width: 38%;
+    width: 52%;
     aspect-ratio: 1;
+    background-color: #b79bcb;
+    -webkit-mask-image: var(--ph-src);
+    mask-image: var(--ph-src);
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
   }
 
   .product-card--placeholder {
