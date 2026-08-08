@@ -49,6 +49,14 @@
     animation-play-state: paused;
   }
 
+  .editorial__placeholder {
+    display: block;
+    width: auto;
+    height: 62%;
+    max-width: min(62%, 300px);
+    object-fit: contain;
+  }
+
   .ed-card-frame {
     position: absolute;
     inset: 0;
