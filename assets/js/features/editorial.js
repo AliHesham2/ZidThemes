@@ -8,7 +8,6 @@ function initEditorialScrub() {
     section.setAttribute("data-editorial-listened", "true");
 
     let journeyObserver = null;
-    let resizeObserver = null;
     let animFrameId = null;
     let lastTimestamp = null;
     let isVisible = false;
@@ -24,6 +23,7 @@ function initEditorialScrub() {
       const inner = section.querySelector("[data-editorial-inner]");
       const stage = section.querySelector("[data-editorial-stage]");
       const textWrap = section.querySelector("[data-editorial-texts]");
+      const sweep = section.querySelector("[data-editorial-sweep]");
 
       if (!journey || !panel || !inner || !stage || !textWrap) return;
 
@@ -41,90 +41,35 @@ function initEditorialScrub() {
       const n = Math.min(cards.length, texts.length);
       if (n < 1) return;
 
-      const layouts = texts.map((t) => t.getAttribute("data-layout") || "image_first");
-
-      let innerW = 0;
-      let stageW = 0;
-      let stageX = [];
-      let textX = [];
-      let textW = 0;
-
-      function measureLayout() {
-        const innerRect = inner.getBoundingClientRect();
-        const stageRect = stage.getBoundingClientRect();
-
-        innerW = innerRect.width || 1200;
-        stageW = stageRect.width || 600;
-
-        const isRTL = document.documentElement.dir === "rtl";
-        const circleGap = 140;
-        const cL = 0.06;
-        const cR = 0.94;
-        const circleW = Math.round(stageW * (cR - cL));
-
-        textW = Math.max(Math.round(innerW * 0.3), 260);
-
-        const pairW = circleW + circleGap + textW;
-        const pairLeft = Math.max(Math.round((innerW - pairW) / 2), 0);
-
-        stageX = layouts.map((l) => {
-          const ltrX =
-            l === "image_first"
-              ? Math.round(pairLeft - stageW * cL)
-              : Math.round(pairLeft + textW + circleGap - stageW * cL);
-          return isRTL ? innerW - stageW - ltrX : ltrX;
-        });
-
-        textX = layouts.map((l) => {
-          const ltrX = l === "image_first" ? pairLeft + circleW + circleGap : pairLeft;
-          return isRTL ? innerW - textW - ltrX : ltrX;
-        });
-
-        texts.forEach((t, i) => {
-          t.style.left = `${textX[i]}px`;
-          t.style.width = `${textW}px`;
-        });
-      }
-
-      measureLayout();
-
-      let resizeTimer = null;
-      resizeObserver = new ResizeObserver(() => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(() => {
-          measureLayout();
-        }, 100);
-      });
-      resizeObserver.observe(inner);
-
-      stage.style.transform = `translate3d(${stageX[0]}px, -50%, 0) scale(0.88)`;
-      stage.style.opacity = "0";
-
       cards.forEach((c, i) => {
         if (i === 0) {
-          c.style.transform = "translate3d(0%, 0, 0) scale(1)";
+          c.style.translate = "0 0";
           c.style.opacity = "1";
-          c.classList.add("is-active");
-          c.classList.remove("is-dormant");
         } else {
-          c.style.transform = "translate3d(85%, 0, 0) scale(0.95)";
+          c.style.translate = "0 44px";
           c.style.opacity = "0";
-          c.classList.remove("is-active");
-          c.classList.add("is-dormant");
         }
       });
 
       texts.forEach((t, i) => {
         if (i === 0) {
-          t.style.opacity = "0";
-          t.style.transform = "translate3d(0, -50%, 0) translateY(28px)";
+          t.style.opacity = "1";
+          t.style.translate = "0 0";
           t.removeAttribute("inert");
         } else {
           t.style.opacity = "0";
-          t.style.transform = "translate3d(0, -50%, 0)";
+          t.style.translate = "0 28px";
           t.setAttribute("inert", "");
         }
       });
+
+      if (journey) {
+        journey.style.setProperty("--vit-level", "1");
+        journey.style.setProperty("--vit-i", "1");
+      }
+      if (sweep) {
+        sweep.style.translate = "-150% 0";
+      }
 
       let targetProgress = 0;
       let easedProgress = 0;
@@ -163,14 +108,12 @@ function initEditorialScrub() {
           ? Math.min(1, Math.max(0, (viewportH * 0.85 - rect.top) / (viewportH * 0.3)))
           : 0;
         const entryFactor = 1 - Math.pow(1 - rawEntryFactor, 3);
-        const entryScale = 0.88 + 0.12 * entryFactor;
         const entryOpacity = entryFactor;
 
         if (n === 1) {
-          stage.style.transform = `translate3d(${stageX[0]}px, -50%, 0) scale(${entryScale})`;
-          stage.style.opacity = `${entryOpacity}`;
-          texts[0].style.opacity = `${entryOpacity}`;
-          texts[0].style.transform = `translate3d(0, -50%, 0) translateY(${28 * (1 - entryFactor)}px)`;
+          stage.style.opacity = `${entryOpacity.toFixed(3)}`;
+          texts[0].style.opacity = `${entryOpacity.toFixed(3)}`;
+          texts[0].style.translate = `0 ${(28 * (1 - entryFactor)).toFixed(2)}px`;
         } else {
           const totalUnits = 0.8 + (n - 1) * 3.2 + 0.2;
           const currentUnit = p * totalUnits;
@@ -189,53 +132,70 @@ function initEditorialScrub() {
 
           const local = (start, dur) => Math.min(Math.max((blockProgress - start) / dur, 0), 1);
 
-          const uStage = local(0.2, 1.8);
-          const tStage = uStage < 0.5 ? 2 * uStage * uStage : 1 - Math.pow(-2 * uStage + 2, 2) / 2;
-
           const uTextOut = local(0.0, 0.5);
           const tTextOut = uTextOut;
+
+          const uObjOut = local(0.0, 0.6);
+          const tObjOut = uObjOut * uObjOut;
+
+          let vitLevel = 1.0;
+          if (blockProgress >= 0.3 && blockProgress < 0.9) {
+            const uDim = (blockProgress - 0.3) / 0.6;
+            vitLevel = 1.0 - 0.65 * uDim;
+          } else if (blockProgress >= 0.9 && blockProgress < 1.2) {
+            vitLevel = 0.35;
+          } else if (blockProgress >= 1.2 && blockProgress <= 2.1) {
+            const uRec = (blockProgress - 1.2) / 0.9;
+            vitLevel = 0.35 + 0.65 * uRec;
+          } else if (blockProgress > 2.1) {
+            vitLevel = 1.0;
+          }
+
+          const uObjIn = local(0.9, 1.1);
+          const tObjIn = 1 - Math.pow(1 - uObjIn, 3);
+
+          const uSweep = local(1.2, 0.9);
+          const tSweep = uSweep * uSweep;
+          const sweepX = -150 + 300 * tSweep;
 
           const uTextIn = local(1.5, 0.7);
           const tTextIn = 1 - Math.pow(1 - uTextIn, 3);
 
-          const currentStageX =
-            stageX[activeIdx] + (stageX[activeIdx + 1] - stageX[activeIdx]) * tStage;
+          journey.style.setProperty("--vit-level", vitLevel.toFixed(3));
 
-          stage.style.transform = `translate3d(${currentStageX}px, -50%, 0) scale(${entryScale})`;
-          stage.style.opacity = `${entryOpacity}`;
+          const displayedChapter = blockProgress >= 1.2 ? activeIdx + 2 : activeIdx + 1;
+          journey.style.setProperty("--vit-i", displayedChapter.toString());
+
+          if (sweep) {
+            sweep.style.translate = `${sweepX.toFixed(2)}% 0`;
+          }
+
+          stage.style.opacity = `${entryOpacity.toFixed(3)}`;
 
           cards.forEach((c, idx) => {
+            const refl = c.querySelector(".editorial__reflection");
+
             if (idx === activeIdx) {
-              const cardX = -85 * tStage;
-              const cardOpacity = 1 - tStage;
-              const cardScale = 1 - 0.06 * tStage;
-              c.style.transform = `translate3d(${cardX}%, 0, 0) scale(${cardScale})`;
-              c.style.opacity = `${cardOpacity}`;
-              c.classList.toggle("is-active", tStage < 0.5);
-              c.classList.remove("is-dormant");
+              const objY = 28 * tObjOut;
+              const objOpacity = 1 - tObjOut;
+              c.style.translate = `0 ${objY.toFixed(2)}px`;
+              c.style.opacity = `${(objOpacity * entryOpacity).toFixed(3)}`;
+              if (refl) refl.style.opacity = `${(0.16 * objOpacity * entryOpacity).toFixed(3)}`;
             } else if (idx === activeIdx + 1) {
-              const cardX = 85 * (1 - tStage);
-              const cardOpacity = tStage;
-              const cardScale = 0.95 + 0.05 * tStage;
-              c.style.transform = `translate3d(${cardX}%, 0, 0) scale(${cardScale})`;
-              c.style.opacity = `${cardOpacity}`;
-              c.classList.toggle("is-active", tStage >= 0.5);
-              c.classList.remove("is-dormant");
-            } else if (idx < activeIdx) {
-              c.style.transform = "translate3d(-85%, 0, 0) scale(0.94)";
-              c.style.opacity = "0";
-              c.classList.remove("is-active");
-              c.classList.add("is-dormant");
+              const objY = 44 * (1 - tObjIn);
+              const objOpacity = tObjIn;
+              c.style.translate = `0 ${objY.toFixed(2)}px`;
+              c.style.opacity = `${(objOpacity * entryOpacity).toFixed(3)}`;
+              if (refl) refl.style.opacity = `${(0.16 * objOpacity * entryOpacity).toFixed(3)}`;
             } else {
-              c.style.transform = "translate3d(85%, 0, 0) scale(0.95)";
+              c.style.translate = "0 44px";
               c.style.opacity = "0";
-              c.classList.remove("is-active");
-              c.classList.add("is-dormant");
+              if (refl) refl.style.opacity = "0";
             }
           });
 
           texts.forEach((t, idx) => {
-            const isCurrent = idx === (tStage > 0.5 ? activeIdx + 1 : activeIdx);
+            const isCurrent = idx === (blockProgress >= 1.2 ? activeIdx + 1 : activeIdx);
             if (isCurrent) {
               t.removeAttribute("inert");
             } else {
@@ -245,16 +205,16 @@ function initEditorialScrub() {
             if (idx === activeIdx) {
               const textOpacity = 1 - tTextOut;
               const textY = -24 * tTextOut;
-              t.style.opacity = `${textOpacity * entryOpacity}`;
-              t.style.transform = `translate3d(0, -50%, 0) translateY(${textY}px)`;
+              t.style.opacity = `${(textOpacity * entryOpacity).toFixed(3)}`;
+              t.style.translate = `0 ${textY.toFixed(2)}px`;
             } else if (idx === activeIdx + 1) {
               const textOpacity = tTextIn;
               const textY = 28 * (1 - tTextIn);
-              t.style.opacity = `${textOpacity * entryOpacity}`;
-              t.style.transform = `translate3d(0, -50%, 0) translateY(${textY}px)`;
+              t.style.opacity = `${(textOpacity * entryOpacity).toFixed(3)}`;
+              t.style.translate = `0 ${textY.toFixed(2)}px`;
             } else {
               t.style.opacity = "0";
-              t.style.transform = "translate3d(0, -50%, 0)";
+              t.style.translate = "0 28px";
             }
           });
         }
@@ -267,13 +227,11 @@ function initEditorialScrub() {
           entries.forEach((entry) => {
             isVisible = entry.isIntersecting;
             if (isVisible) {
-              stage.style.willChange = "transform, opacity";
               if (!animFrameId) {
                 lastTimestamp = null;
                 animFrameId = requestAnimationFrame(renderFrame);
               }
             } else {
-              stage.style.willChange = "auto";
               if (animFrameId) {
                 cancelAnimationFrame(animFrameId);
                 animFrameId = null;

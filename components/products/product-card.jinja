@@ -12,15 +12,11 @@
     <div class="product-card__media-wrapper product-card__media-wrapper--{{ ratio }}">
       <div class="product-card__carousel-track">
         <div class="product-card__carousel-slide" data-index="0">
-          <img
-            src="{{ 'images/product-placeholder.svg' | asset_url }}"
-            alt=""
+          <span
+            class="ph-mark product-card__ph-mark"
             aria-hidden="true"
-            width="224"
-            height="280"
-            loading="lazy"
-            class="product-card__image product-card__image--placeholder"
-          />
+            style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+          ></span>
         </div>
       </div>
       <div class="product-card__notch" aria-hidden="true">
@@ -157,15 +153,11 @@
                     class="product-card__image"
                   />
                 {% else %}
-                  <img
-                    src="{{ 'images/product-placeholder.svg' | asset_url }}"
-                    alt=""
+                  <span
+                    class="ph-mark product-card__ph-mark"
                     aria-hidden="true"
-                    width="224"
-                    height="280"
-                    loading="lazy"
-                    class="product-card__image product-card__image--placeholder"
-                  />
+                    style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+                  ></span>
                 {% endif %}
               </a>
             </div>
@@ -193,15 +185,11 @@
                   class="product-card__image"
                 />
               {% else %}
-                <img
-                  src="{{ 'images/product-placeholder.svg' | asset_url }}"
-                  alt=""
+                <span
+                  class="ph-mark product-card__ph-mark"
                   aria-hidden="true"
-                  width="224"
-                  height="280"
-                  loading="lazy"
-                  class="product-card__image product-card__image--placeholder"
-                />
+                  style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+                ></span>
               {% endif %}
             </a>
           </div>
@@ -212,15 +200,11 @@
               class="product-card__media-link"
               aria-label="{{ card_product.name }}"
             >
-              <img
-                src="{{ 'images/product-placeholder.svg' | asset_url }}"
-                alt=""
+              <span
+                class="ph-mark product-card__ph-mark"
                 aria-hidden="true"
-                width="224"
-                height="280"
-                loading="lazy"
-                class="product-card__image product-card__image--placeholder"
-              />
+                style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+              ></span>
             </a>
           </div>
         {% endif %}

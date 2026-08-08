@@ -5,6 +5,47 @@
 
   .editorial__panel {
     contain: layout paint;
+    background: radial-gradient(
+      120% 82% at 50% 0%,
+      var(--vit-stage-lit),
+      var(--vit-stage) 58%,
+      var(--vit-ink) 100%
+    );
+  }
+
+  .editorial__journey {
+    --vit-ink: #12000e;
+    --vit-stage: color-mix(in srgb, var(--color-primary) 18%, var(--vit-ink));
+    --vit-stage-lit: color-mix(in srgb, var(--color-primary) 30%, var(--vit-ink));
+    --vit-light: 255 247 236;
+    --vit-rim: color-mix(in srgb, var(--gold) 34%, transparent);
+    --vit-level: 1;
+  }
+
+  .editorial__journey .editorial__row-heading {
+    color: rgb(var(--vit-light) / 0.95);
+  }
+
+  .editorial__journey .editorial__row-eyebrow {
+    color: var(--gold);
+  }
+
+  .editorial__journey .editorial__eyebrow-pip {
+    background: var(--gold);
+  }
+
+  .editorial__journey .editorial__text-content {
+    color: rgb(var(--vit-light) / 0.62);
+  }
+
+  .editorial__journey .editorial__footer {
+    color: rgb(var(--vit-light) / 0.5);
+    font-family: var(--font-body);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .editorial__journey .editorial__chapter {
+    color: rgb(var(--vit-light) / 0.9);
   }
 
   .editorial__row--rose {
@@ -31,30 +72,115 @@
     --ed-c3: 0, 160, 100;
   }
 
-  .editorial__stage {
-    left: 0;
+  .editorial__row {
+    box-shadow: var(--shadow-lg);
   }
 
-  .editorial__card {
-    position: absolute;
-    inset: 0;
-    border-radius: 28px;
-    background: var(--ed-c1);
-    box-shadow: 0 40px 90px rgba(var(--ed-c3), 0.28);
-    animation: ed-card-glow 5.2s ease-in-out infinite;
+  .editorial__ph-mark {
+    width: 26%;
+    aspect-ratio: 1;
+  }
+
+  .editorial__case {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px solid color-mix(in srgb, var(--vit-rim) calc(var(--vit-level) * 100%), transparent);
+    border-radius: 20px;
+    background: linear-gradient(
+      180deg,
+      rgb(var(--vit-light) / calc(0.06 * var(--vit-level))),
+      rgb(var(--vit-light) / calc(0.015 * var(--vit-level))) 46%,
+      transparent 70%
+    );
+    box-shadow:
+      inset 0 1px 0 color-mix(in srgb, var(--gold) calc(22% * var(--vit-level)), transparent),
+      0 2px 8px rgba(6, 0, 5, calc(0.4 * var(--vit-level))),
+      0 24px 60px rgba(6, 0, 5, calc(0.55 * var(--vit-level)));
     overflow: hidden;
   }
 
-  .editorial__card.is-dormant {
-    animation-play-state: paused;
+  .editorial__pool {
+    position: absolute;
+    inset-inline: 8%;
+    inset-block-end: 6%;
+    height: 30%;
+    background: radial-gradient(50% 50% at 50% 50%, rgb(var(--vit-light) / 0.14), transparent 70%);
+    filter: blur(20px);
+    opacity: var(--vit-level);
+    pointer-events: none;
   }
 
-  .editorial__placeholder {
-    display: block;
-    width: auto;
+  .editorial__contact {
+    position: absolute;
+    inset-inline-start: 50%;
+    inset-block-end: 12%;
+    margin-inline-start: -23%;
+    width: 46%;
+    height: 4%;
+    border-radius: 50%;
+    background: radial-gradient(50% 50% at 50% 50%, rgba(6, 0, 5, 0.55), transparent 72%);
+    filter: blur(7px);
+    pointer-events: none;
+  }
+
+  .editorial__object-item {
+    position: relative;
     height: 62%;
-    max-width: min(62%, 300px);
-    object-fit: contain;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .editorial__reflection {
+    position: absolute;
+    inset-inline: 0;
+    top: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    scale: 1 -1;
+    opacity: 0.16;
+    filter: blur(2px);
+    -webkit-mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 58%);
+    mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.6), transparent 58%);
+    pointer-events: none;
+  }
+
+  .editorial__sweep {
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(
+      105deg,
+      transparent 36%,
+      rgb(var(--vit-light) / 0.13) 47%,
+      rgb(var(--vit-light) / 0.04) 53%,
+      transparent 64%
+    );
+    translate: -150% 0;
+    pointer-events: none;
+  }
+
+  .editorial__chapter::before {
+    counter-reset: vit-ch var(--vit-i);
+    content: counter(vit-ch, arabic-indic);
+  }
+
+  .editorial__chapter::after {
+    counter-reset: vit-n var(--vit-n);
+    content: counter(vit-n, arabic-indic);
+  }
+
+  html[lang="en"] .editorial__chapter::before {
+    content: counter(vit-ch, decimal);
+  }
+
+  html[lang="en"] .editorial__chapter::after {
+    content: counter(vit-n, decimal);
   }
 
   .ed-card-frame {
@@ -74,10 +200,6 @@
     height: 114%;
     object-fit: cover;
     display: block;
-  }
-
-  .editorial__card.is-active .ed-card-img {
-    animation: ed-ken-burns 10s ease-in-out infinite;
   }
 
   .editorial__row-eyebrow {
@@ -114,51 +236,6 @@
     color: var(--color-foreground);
   }
 
-  .editorial__text-panel[data-layout="image_first"] {
-    text-align: end;
-  }
-
-  .editorial__text-panel[data-layout="image_first"] .editorial__row-eyebrow {
-    flex-direction: row-reverse;
-  }
-
-  .editorial__text-panel[data-layout="image_first"] .editorial__text-content {
-    margin-inline-start: auto;
-  }
-
-  @keyframes ed-ken-burns {
-    0% {
-      transform: scale(1.07) translate(0%, 0%);
-    }
-    30% {
-      transform: scale(1.1) translate(-0.7%, 0.4%);
-    }
-    65% {
-      transform: scale(1.08) translate(0.5%, -0.4%);
-    }
-    100% {
-      transform: scale(1.07) translate(0%, 0%);
-    }
-  }
-
-  @keyframes ed-card-glow {
-    0%,
-    100% {
-      box-shadow:
-        0 40px 90px rgba(var(--ed-c3), 0.28),
-        0 12px 32px rgba(var(--ed-c3), 0.14),
-        inset 0 1px 0 rgba(255, 255, 255, 0.7),
-        inset 0 -4px 20px rgba(var(--ed-c3), 0.18);
-    }
-    55% {
-      box-shadow:
-        0 52px 110px rgba(var(--ed-c3), 0.44),
-        0 18px 42px rgba(var(--ed-c3), 0.24),
-        inset 0 1px 0 rgba(255, 255, 255, 0.84),
-        inset 0 -4px 20px rgba(var(--ed-c3), 0.28);
-    }
-  }
-
   @media (prefers-reduced-motion: reduce) {
     .editorial__journey {
       display: none !important;
@@ -166,11 +243,6 @@
 
     .editorial__mobile-stack {
       display: flex !important;
-    }
-
-    .editorial__card,
-    .editorial__card.is-active .ed-card-img {
-      animation: none !important;
     }
   }
 }

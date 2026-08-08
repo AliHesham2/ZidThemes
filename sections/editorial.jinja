@@ -35,7 +35,7 @@
             {% set has_product = r.product_image or r.product_image_mobile %}
             {% set has_bg = r.image or r.image_mobile %}
             <div
-              class="editorial__row editorial__row--{{ acc }} flex flex-col gap-6 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6 shadow-sm"
+              class="editorial__row editorial__row--{{ acc }} flex flex-col gap-6 rounded-[var(--radius-xl)] border border-[var(--color-border)] bg-[var(--color-surface)] p-6"
               data-reveal-item="card"
               style="--i: {{ loop.index0 }}"
               data-layout="{{ lay }}"
@@ -62,15 +62,11 @@
                         {% include 'components/shared/responsive-image.jinja' %}
                       {% endwith %}
                     {% else %}
-                      <img
-                        src="{{ 'images/product-placeholder.svg' | asset_url }}"
-                        alt=""
+                      <span
+                        class="ph-mark editorial__ph-mark"
                         aria-hidden="true"
-                        width="224"
-                        height="280"
-                        loading="lazy"
-                        class="editorial__placeholder"
-                      />
+                        style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+                      ></span>
                     {% endif %}
                   </div>
                 {% endif %}
@@ -115,67 +111,17 @@
             data-editorial-panel
           >
             <div
-              class="editorial__inner theme-container relative h-[82vh] w-full"
+              class="editorial__inner theme-container flex h-[82vh] w-full items-center justify-between gap-12"
               data-editorial-inner
             >
               <div
-                class="editorial__stage absolute top-1/2 aspect-[1/1.28] h-[78vh] w-auto"
-                data-editorial-stage
-              >
-                {% for r in valid_rows %}
-                  {% set acc = safeget(r, "accent", "rose") %}
-                  {% set lay = safeget(r, "layout", "image_first") %}
-                  {% set has_product = r.product_image or r.product_image_mobile %}
-                  {% set has_bg = r.image or r.image_mobile %}
-                  <div
-                    class="editorial__card editorial__row--{{ acc }} {{ 'is-active' if loop.first }}"
-                    data-editorial-card="{{ loop.index0 }}"
-                    data-layout="{{ lay }}"
-                  >
-                    <div
-                      class="editorial__circle absolute top-1/2 left-1/2 h-64 w-64 -translate-x-1/2 -translate-y-1/2 rounded-full bg-[var(--ed-c2)] opacity-40 blur-2xl"
-                    ></div>
-                    <div class="ed-card-frame">
-                      {% if has_bg %}
-                        {% with image=r.image, image_mobile=r.image_mobile, alt=r.image_alt, class="ed-card-img w-full h-full object-cover", sizes="50vw", is_priority=loop.first %}
-                          {% include 'components/shared/responsive-image.jinja' %}
-                        {% endwith %}
-                      {% endif %}
-                    </div>
-
-                    {% if has_product or not has_bg %}
-                      <div
-                        class="editorial__product-overlay absolute inset-0 z-[3] flex items-center justify-center p-8"
-                      >
-                        {% if has_product %}
-                          {% with image=r.product_image, image_mobile=r.product_image_mobile, alt=r.heading, class="max-h-full max-w-full object-contain drop-shadow-2xl", sizes="30vw", width=800, height=800 %}
-                            {% include 'components/shared/responsive-image.jinja' %}
-                          {% endwith %}
-                        {% else %}
-                          <img
-                            src="{{ 'images/product-placeholder.svg' | asset_url }}"
-                            alt=""
-                            aria-hidden="true"
-                            width="224"
-                            height="280"
-                            loading="lazy"
-                            class="editorial__placeholder"
-                          />
-                        {% endif %}
-                      </div>
-                    {% endif %}
-                  </div>
-                {% endfor %}
-              </div>
-
-              <div
-                class="editorial__text-container pointer-events-none absolute inset-0"
+                class="editorial__text-container relative flex flex-1 flex-col justify-center"
                 data-editorial-texts
               >
                 {% for r in valid_rows %}
                   {% set lay = safeget(r, "layout", "image_first") %}
                   <div
-                    class="editorial__text-panel pointer-events-auto absolute top-1/2 flex flex-col gap-4 p-4"
+                    class="editorial__text-panel absolute inset-x-0 flex flex-col gap-4"
                     data-editorial-text="{{ loop.index0 }}"
                     data-layout="{{ lay }}"
                     {% if not loop.first %}inert{% endif %}
@@ -190,9 +136,7 @@
                       <h3 class="editorial__row-heading">{{ r.heading }}</h3>
                     {% endif %}
                     {% if r.text %}
-                      <div
-                        class="editorial__text-content text-base leading-relaxed text-[var(--color-muted)]"
-                      >
+                      <div class="editorial__text-content text-base leading-relaxed">
                         {{ r.text }}
                       </div>
                     {% endif %}
@@ -205,6 +149,88 @@
                     {% endif %}
                   </div>
                 {% endfor %}
+
+                <div
+                  class="editorial__footer absolute inset-x-0 bottom-0 flex items-center justify-between border-t border-[var(--vit-rim)] pt-4 text-xs"
+                >
+                  <div
+                    class="editorial__chapter font-semibold"
+                    data-editorial-chapter
+                    style="--vit-n: {{ valid_rows | length }};"
+                  >
+                    <span class="px-1 text-[var(--gold)] opacity-60">⁄</span>
+                  </div>
+                </div>
+              </div>
+
+              <div
+                class="editorial__stage relative aspect-[1/1.28] h-[78vh] w-auto flex-shrink-0"
+                data-editorial-stage
+              >
+                <div class="editorial__case">
+                  <div class="editorial__pool" data-editorial-pool></div>
+                  <div class="editorial__contact" data-editorial-contact></div>
+
+                  <div
+                    class="editorial__objects-stack absolute inset-0 flex items-center justify-center p-8"
+                  >
+                    {% for r in valid_rows %}
+                      {% set acc = safeget(r, "accent", "rose") %}
+                      {% set lay = safeget(r, "layout", "image_first") %}
+                      {% set has_product = r.product_image or r.product_image_mobile %}
+                      {% set has_bg = r.image or r.image_mobile %}
+                      <div
+                        class="editorial__card absolute inset-0 flex items-center justify-center"
+                        data-editorial-card="{{ loop.index0 }}"
+                        data-layout="{{ lay }}"
+                      >
+                        {% if has_product or not has_bg %}
+                          <div
+                            class="editorial__object-item flex flex-col items-center justify-center"
+                          >
+                            {% if has_product %}
+                              {% with image=r.product_image, image_mobile=r.product_image_mobile, alt=r.heading, class="max-h-full max-w-full object-contain drop-shadow-2xl", sizes="30vw", width=800, height=800 %}
+                                {% include 'components/shared/responsive-image.jinja' %}
+                              {% endwith %}
+                              <div
+                                class="editorial__reflection pointer-events-none"
+                                aria-hidden="true"
+                              >
+                                {% with image=r.product_image, image_mobile=r.product_image_mobile, alt="", class="max-h-full max-w-full object-contain", sizes="30vw", width=800, height=800 %}
+                                  {% include 'components/shared/responsive-image.jinja' %}
+                                {% endwith %}
+                              </div>
+                            {% else %}
+                              <span
+                                class="ph-mark editorial__ph-mark"
+                                aria-hidden="true"
+                                style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+                              ></span>
+                              <div
+                                class="editorial__reflection pointer-events-none"
+                                aria-hidden="true"
+                              >
+                                <span
+                                  class="ph-mark editorial__ph-mark"
+                                  aria-hidden="true"
+                                  style="-webkit-mask-image: url('{{ 'images/place-holder.webp' | asset_url }}'); mask-image: url('{{ 'images/place-holder.webp' | asset_url }}');"
+                                ></span>
+                              </div>
+                            {% endif %}
+                          </div>
+                        {% elif has_bg %}
+                          <div class="ed-card-frame">
+                            {% with image=r.image, image_mobile=r.image_mobile, alt=r.image_alt, class="ed-card-img w-full h-full object-cover", sizes="50vw", is_priority=loop.first %}
+                              {% include 'components/shared/responsive-image.jinja' %}
+                            {% endwith %}
+                          </div>
+                        {% endif %}
+                      </div>
+                    {% endfor %}
+                  </div>
+
+                  <div class="editorial__sweep" data-editorial-sweep></div>
+                </div>
               </div>
             </div>
           </div>
