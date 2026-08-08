@@ -283,4 +283,60 @@ msgstr "تعذّر إضافة المنتج إلى السلة."
 msgid "From"
 msgstr "من"
 
+#: components/products/product-card.jinja
+msgid "Sale"
+msgstr "تخفيض"
+
+#: components/products/product-card.jinja
+msgid "Sold out"
+msgstr "نفدت الكمية"
+
+#: components/products/product-card.jinja
+msgid "View Product"
+msgstr "عرض المنتج"
+
+#: components/products/product-card.jinja
+msgid "Select options"
+msgstr "اختر الخيارات"
+
+#: components/products/product-card.jinja
+msgid "Image"
+msgstr "صورة"
+
+#: components/products/product-card.jinja
+msgid "Product title"
+msgstr "اسم المنتج"
+
+#: components/products/product-card.jinja
+msgid "A short product description appears here."
+msgstr "يظهر هنا وصف مختصر للمنتج."
+
+#: components/products/wishlist-button.jinja
+msgid "Add to wishlist"
+msgstr "إضافة إلى المفضلة"
+
+#: components/products/wishlist-button.jinja
+msgid "Remove from wishlist"
+msgstr "إزالة من المفضلة"
+
+#: components/products/wishlist-button.jinja
+msgid "Loading"
+msgstr "جاري التحميل"
+
+#: components/products/product-card.jinja
+msgid "Close dialog"
+msgstr "إغلاق النافذة"
+
+#: components/products/product-card.jinja
+msgid "Add to cart"
+msgstr "إضافة إلى السلة"
+
+#: components/products/product-card.jinja
+msgid "Failed to add item to cart."
+msgstr "تعذر إضافة المنتج إلى السلة."
+
+
+
+
+
 

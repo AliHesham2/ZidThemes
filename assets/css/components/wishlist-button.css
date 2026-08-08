@@ -1,0 +1,93 @@
+@layer components {
+  .wishlist-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border: none;
+    border-radius: 999px;
+    background: transparent;
+    color: color-mix(in srgb, var(--color-foreground) 60%, transparent);
+    cursor: pointer;
+    transition:
+      color var(--transition-fast),
+      background-color var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .wishlist-btn::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+    z-index: 1;
+  }
+
+  @media (hover: hover) {
+    .wishlist-btn:hover {
+      color: var(--color-primary);
+      background-color: color-mix(in srgb, var(--color-primary) 10%, transparent);
+    }
+  }
+
+  .wishlist-btn__icon {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition:
+      opacity var(--transition-fast),
+      transform var(--transition-fast);
+  }
+
+  .wishlist-btn__icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .wishlist-btn__icon--empty {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .wishlist-btn__icon--filled {
+    opacity: 0;
+    transform: scale(0.6);
+    color: var(--color-primary);
+  }
+
+  .wishlist-btn__icon--spinner {
+    opacity: 0;
+  }
+
+  .wishlist-btn.is-active .wishlist-btn__icon--empty,
+  .wishlist-btn[aria-pressed="true"] .wishlist-btn__icon--empty {
+    opacity: 0;
+    transform: scale(0.6);
+  }
+
+  .wishlist-btn.is-active .wishlist-btn__icon--filled,
+  .wishlist-btn[aria-pressed="true"] .wishlist-btn__icon--filled {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  .wishlist-btn.is-loading .wishlist-btn__icon--empty,
+  .wishlist-btn.is-loading .wishlist-btn__icon--filled {
+    opacity: 0;
+  }
+
+  .wishlist-btn.is-loading .wishlist-btn__icon--spinner {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wishlist-btn,
+    .wishlist-btn__icon {
+      transition: none;
+    }
+  }
+}

@@ -3,14 +3,35 @@
 
 {% set eye = safeget(settings, "eyebrow", "") %}
 {% set head = safeget(settings, "heading", "") %}
+
 {% set prods_obj = safeget(settings, "products", none) %}
-{% set prods_list = prods_obj.results if (prods_obj and prods_obj.results is defined and prods_obj.results) else [] %}
-{% set view_all_url = prods_obj.url if (prods_obj and prods_obj.url is defined and prods_obj.url) else url_for('list_products') %}
-{% set cols_dt = safeget(settings, "columns_desktop", 4) | int %}
-{% set show_va = safeget(settings, "show_view_all", true) %}
+{% set all_prods = [] %}
+{% set view_all_url = url_for('list_products') %}
+{% if prods_obj %}
+  {% if prods_obj.results is defined and prods_obj.results %}
+    {% set all_prods = prods_obj.results %}
+    {% if prods_obj.url is defined and prods_obj.url %}{% set view_all_url = prods_obj.url %}{% endif %}
+  {% elif prods_obj is iterable and prods_obj is not string and prods_obj is not mapping %}
+    {% set all_prods = prods_obj %}
+  {% endif %}
+{% endif %}
+
+{% set to_show_raw = safeget(settings, "products_to_show", 4) | int %}
+{% set to_show = 2 if to_show_raw < 2 else (12 if to_show_raw > 12 else to_show_raw) %}
+
+{% set cols_dt_raw = safeget(settings, "columns_desktop", 4) | int %}
+{% set cols_dt = 2 if cols_dt_raw < 2 else (4 if cols_dt_raw > 4 else cols_dt_raw) %}
+
+{% set layout_setting = safeget(settings, "layout", "grid") %}
+{% set layout = "carousel" if layout_setting == "carousel" else "grid" %}
+
+{% set total = all_prods | length %}
+{% set shown = all_prods[:to_show] %}
+{% set count = shown | length %}
+{% set has_more = total > count %}
+
 {% set va_label = safeget(settings, "view_all_label", "") %}
-{% set va_text = va_label if va_label else _("View all") %}
-{% set prod_count = prods_list | length %}
+{% set show_va = safeget(settings, "show_view_all", true) and has_more %}
 
 <section
   section-id="{{ sectionId }}"
@@ -18,30 +39,41 @@
   data-reveal
 >
   <div class="theme-container flex flex-col gap-[var(--section-py)]">
-    {% with eyebrow=eye, heading=head, align="center", link_label=(va_text if show_va else ""), link_url=(view_all_url if show_va else ""), link_placement="below" %}
+    {% with eyebrow=eye, heading=head, align="center", eyebrow_style="pill", ornament="star" %}
       {% include 'components/shared/section-header.jinja' %}
     {% endwith %}
 
-    {% if prod_count > 0 %}
-      <div class="slider" data-slider>
-        <ul
-          class="slider__track featured-collection__grid fc-grid--cols-{{ cols_dt }}"
-          data-slider-track
-          data-count="{{ prod_count }}"
-        >
-          {% for p in prods_list %}
-            <li class="slider__item featured-collection__item">
+    {% if count > 0 %}
+      {% if layout == 'grid' %}
+        <ul class="featured-collection__list featured-collection__list--grid fc-cols-{{ cols_dt }}">
+          {% for p in shown %}
+            <li class="featured-collection__item">
               {% with product=p, index=loop.index0 %}
                 {% include 'components/products/product-card.jinja' %}
               {% endwith %}
             </li>
           {% endfor %}
         </ul>
-        {% include 'components/ui/slider-controls.jinja' %}
-      </div>
+      {% else %}
+        <div class="slider" data-slider>
+          <ul
+            class="slider__track featured-collection__list featured-collection__list--track fc-cols-{{ cols_dt }}"
+            data-slider-track
+          >
+            {% for p in shown %}
+              <li class="slider__item featured-collection__item">
+                {% with product=p, index=loop.index0 %}
+                  {% include 'components/products/product-card.jinja' %}
+                {% endwith %}
+              </li>
+            {% endfor %}
+          </ul>
+          {% include 'components/ui/slider-controls.jinja' %}
+        </div>
+      {% endif %}
     {% else %}
       <div class="featured-collection__placeholders pointer-events-none" aria-hidden="true">
-        <ul class="featured-collection__grid fc-grid--cols-{{ cols_dt }}">
+        <ul class="featured-collection__list featured-collection__list--grid fc-cols-{{ cols_dt }}">
           {% for i in range(cols_dt) %}
             <li class="featured-collection__item">
               {% with product=none, index=loop.index0 %}
@@ -50,6 +82,14 @@
             </li>
           {% endfor %}
         </ul>
+      </div>
+    {% endif %}
+
+    {% if show_va %}
+      <div class="featured-collection__view-all">
+        {% with link_label=(va_label or _("View all")), link_url=view_all_url %}
+          {% include 'components/shared/section-link.jinja' %}
+        {% endwith %}
       </div>
     {% endif %}
   </div>

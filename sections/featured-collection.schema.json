@@ -24,24 +24,46 @@
       "label": { "ar": "المنتجات", "en": "Products" }
     },
     {
+      "id": "products_to_show",
+      "type": "range",
+      "min": 2,
+      "max": 12,
+      "step": 1,
+      "default": 4,
+      "label": { "ar": "أقصى عدد للمنتجات المعروضة", "en": "Maximum products to show" }
+    },
+    {
+      "id": "layout",
+      "type": "select",
+      "options": [
+        { "value": "grid", "label": { "ar": "شبكة", "en": "Grid" } },
+        { "value": "carousel", "label": { "ar": "شريط أفقي", "en": "Horizontal carousel" } }
+      ],
+      "default": "grid",
+      "label": { "ar": "نمط العرض", "en": "Layout pattern" }
+    },
+    {
       "id": "columns_desktop",
       "type": "range",
-      "label": { "ar": "عدد الأعمدة (سطح المكتب)", "en": "Desktop columns" },
       "min": 2,
-      "max": 5,
+      "max": 4,
       "step": 1,
-      "default": 4
+      "default": 4,
+      "label": { "ar": "عدد الأعمدة على سطح المكتب", "en": "Number of columns on desktop" }
     },
     {
       "id": "show_view_all",
       "type": "checkbox",
-      "label": { "ar": "إظهار زر عرض الكل", "en": "Show view all link" },
+      "label": {
+        "ar": "إظهار رابط \"عرض الكل\" عند وجود منتجات إضافية",
+        "en": "Show \"View all\" link when there are more products"
+      },
       "default": true
     },
     {
       "id": "view_all_label",
       "type": "text",
-      "label": { "ar": "نص زر عرض الكل", "en": "View all label" },
+      "label": { "ar": "نص رابط عرض الكل", "en": "View all label" },
       "default": ""
     },
     {

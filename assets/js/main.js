@@ -15,3 +15,6 @@ import "./features/media-banner.js";
 import "./features/newsletter.js";
 import "./cart/add-to-cart.js";
 import "./product/gallery.js";
+import "./features/wishlist.js";
+import "./features/dialog.js";
+import "./features/card-add-to-cart.js";

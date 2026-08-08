@@ -1,6 +1,7 @@
 {% set eye = eyebrow | default('', true) %}
 {% set head = heading | default('', true) %}
 {% set orn = ornament | default('star', true) %}
+{% set eye_style = eyebrow_style | default('plain', true) %}
 {% set alignment = align | default('center', true) %}
 {% set show_deco = deco if deco is defined else true %}
 {% set link_lbl = link_label | default('', true) %}
@@ -16,7 +17,10 @@
       class="section-header__main {{ 'items-start text-start' if alignment == 'start' else 'items-center text-center' }} flex flex-col gap-2.5"
     >
       {% if eye %}
-        <span class="section-header__eyebrow" data-reveal-item="eyebrow">
+        <span
+          class="section-header__eyebrow{{ ' section-header__eyebrow--pill' if eye_style == 'pill' }}"
+          data-reveal-item="eyebrow"
+        >
           {% if orn == 'star' %}
             <span class="section-header__eyebrow-ornament" aria-hidden="true">✦</span>
           {% elif orn == 'bar' %}
@@ -46,50 +50,16 @@
       {% endif %}
 
       {% if placement == 'below' and link_lbl and link_href %}
-        <a
-          href="{{ link_href }}"
-          class="section-header__link"
-          data-reveal-item="text"
-          style="--d: 0.32s"
-        >
-          <span>{{ link_lbl }}</span>
-          <svg
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            class="section-header__link-icon rtl:rotate-180"
-            aria-hidden="true"
-          >
-            <path d="M5 12h14M12 5l7 7-7 7" />
-          </svg>
-        </a>
+        {% with link_label=link_lbl, link_url=link_href, delay="0.32s" %}
+          {% include 'components/shared/section-link.jinja' %}
+        {% endwith %}
       {% endif %}
     </div>
 
     {% if placement == 'inline' and link_lbl and link_href %}
-      <a
-        href="{{ link_href }}"
-        class="section-header__link section-header__link--inline"
-        data-reveal-item="text"
-        style="--d: 0.32s"
-      >
-        <span>{{ link_lbl }}</span>
-        <svg
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="section-header__link-icon rtl:rotate-180"
-          aria-hidden="true"
-        >
-          <path d="M5 12h14M12 5l7 7-7 7" />
-        </svg>
-      </a>
+      {% with link_label=link_lbl, link_url=link_href, class="section-header__link--inline", delay="0.32s" %}
+        {% include 'components/shared/section-link.jinja' %}
+      {% endwith %}
     {% endif %}
   </header>
 {% endif %}

@@ -54,6 +54,8 @@
         "settings": {
           "eyebrow": "مختاراتنا لكِ",
           "heading": "المنتجات الأكثر مبيعاً",
+          "products_to_show": 4,
+          "layout": "grid",
           "columns_desktop": 4,
           "show_view_all": true,
           "view_all_label": "عرض جميع المنتجات",
@@ -333,6 +335,8 @@
         "settings": {
           "eyebrow": "Curated Selection",
           "heading": "Bestselling Favorites",
+          "products_to_show": 4,
+          "layout": "grid",
           "columns_desktop": 4,
           "show_view_all": true,
           "view_all_label": "View All Products",

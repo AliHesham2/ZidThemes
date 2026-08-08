@@ -96,4 +96,17 @@
     height: 1.6rem;
     flex-shrink: 0;
   }
+
+  .section-header__eyebrow--pill {
+    padding: 5px 16px;
+    background: color-mix(in srgb, var(--color-surface) 85%, transparent);
+    backdrop-filter: blur(8px);
+    border: 1px solid color-mix(in srgb, var(--gold) 40%, transparent);
+    border-radius: 999px;
+    box-shadow: 0 4px 16px color-mix(in srgb, var(--scrim) 4%, transparent);
+  }
+
+  .section-header__eyebrow--pill .section-header__eyebrow-ornament {
+    color: var(--color-primary);
+  }
 }

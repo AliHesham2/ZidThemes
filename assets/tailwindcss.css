@@ -24,6 +24,8 @@
 @import "./css/components/product-options.css";
 @import "./css/components/buying-box.css";
 @import "./css/components/article-card.css";
+@import "./css/components/wishlist-button.css";
+@import "./css/components/dialog.css";
 
 /* Section Partials */
 @import "./css/sections/hero.css";
