@@ -277,6 +277,7 @@ msgstr "خدمة النشرة البريدية غير متوفرة حالياً.
 msgid "Failed to update subscription."
 msgstr "تعذّر تحديث الاشتراك."
 
+#: components/products/product-card.jinja
 msgid "Failed to add item to cart."
 msgstr "تعذّر إضافة المنتج إلى السلة."
 
@@ -330,10 +331,6 @@ msgstr "إغلاق النافذة"
 #: components/products/product-card.jinja
 msgid "Add to cart"
 msgstr "إضافة إلى السلة"
-
-#: components/products/product-card.jinja
-msgid "Failed to add item to cart."
-msgstr "تعذر إضافة المنتج إلى السلة."
 
 
 
