@@ -28,7 +28,7 @@
   data-reveal
 >
   <div class="theme-container flex flex-col gap-[var(--section-py)]">
-    {% with eyebrow=eye, heading=head, align="start", link_label=(va_text if show_va else ""), link_url=(view_all_url if show_va else ""), link_placement="inline" %}
+    {% with eyebrow=eye, heading=head, align="start", eyebrow_style="pill", ornament="star", link_label=(va_text if show_va else ""), link_url=(view_all_url if show_va else ""), link_placement="inline" %}
       {% include 'components/shared/section-header.jinja' %}
     {% endwith %}
 

@@ -105,10 +105,12 @@ function initEditorialScrub() {
           c.style.transform = "translate3d(0%, 0, 0) scale(1)";
           c.style.opacity = "1";
           c.classList.add("is-active");
+          c.classList.remove("is-dormant");
         } else {
           c.style.transform = "translate3d(85%, 0, 0) scale(0.95)";
           c.style.opacity = "0";
           c.classList.remove("is-active");
+          c.classList.add("is-dormant");
         }
       });
 
@@ -170,25 +172,31 @@ function initEditorialScrub() {
           texts[0].style.opacity = `${entryOpacity}`;
           texts[0].style.transform = `translate3d(0, -50%, 0) translateY(${28 * (1 - entryFactor)}px)`;
         } else {
-          const totalUnits = 0.8 + (n - 1) * 3.2;
+          const totalUnits = 0.8 + (n - 1) * 3.2 + 0.2;
           const currentUnit = p * totalUnits;
 
           let activeIdx = 0;
-          let transProgress = 0;
+          let blockProgress = 0;
 
           if (currentUnit < 0.8) {
             activeIdx = 0;
-            transProgress = 0;
+            blockProgress = 0;
           } else {
             const rawIdx = (currentUnit - 0.8) / 3.2;
             activeIdx = Math.min(Math.floor(rawIdx), n - 2);
-            transProgress = Math.min(Math.max(rawIdx - activeIdx, 0), 1);
+            blockProgress = currentUnit - (0.8 + activeIdx * 3.2);
           }
 
-          const tStage =
-            transProgress < 0.5
-              ? 2 * transProgress * transProgress
-              : 1 - Math.pow(-2 * transProgress + 2, 2) / 2;
+          const local = (start, dur) => Math.min(Math.max((blockProgress - start) / dur, 0), 1);
+
+          const uStage = local(0.2, 1.8);
+          const tStage = uStage < 0.5 ? 2 * uStage * uStage : 1 - Math.pow(-2 * uStage + 2, 2) / 2;
+
+          const uTextOut = local(0.0, 0.5);
+          const tTextOut = uTextOut;
+
+          const uTextIn = local(1.5, 0.7);
+          const tTextIn = 1 - Math.pow(1 - uTextIn, 3);
 
           const currentStageX =
             stageX[activeIdx] + (stageX[activeIdx + 1] - stageX[activeIdx]) * tStage;
@@ -204,6 +212,7 @@ function initEditorialScrub() {
               c.style.transform = `translate3d(${cardX}%, 0, 0) scale(${cardScale})`;
               c.style.opacity = `${cardOpacity}`;
               c.classList.toggle("is-active", tStage < 0.5);
+              c.classList.remove("is-dormant");
             } else if (idx === activeIdx + 1) {
               const cardX = 85 * (1 - tStage);
               const cardOpacity = tStage;
@@ -211,14 +220,17 @@ function initEditorialScrub() {
               c.style.transform = `translate3d(${cardX}%, 0, 0) scale(${cardScale})`;
               c.style.opacity = `${cardOpacity}`;
               c.classList.toggle("is-active", tStage >= 0.5);
+              c.classList.remove("is-dormant");
             } else if (idx < activeIdx) {
               c.style.transform = "translate3d(-85%, 0, 0) scale(0.94)";
               c.style.opacity = "0";
               c.classList.remove("is-active");
+              c.classList.add("is-dormant");
             } else {
               c.style.transform = "translate3d(85%, 0, 0) scale(0.95)";
               c.style.opacity = "0";
               c.classList.remove("is-active");
+              c.classList.add("is-dormant");
             }
           });
 
@@ -231,13 +243,13 @@ function initEditorialScrub() {
             }
 
             if (idx === activeIdx) {
-              const textOpacity = Math.max(0, 1 - transProgress * 2);
-              const textY = -24 * transProgress;
+              const textOpacity = 1 - tTextOut;
+              const textY = -24 * tTextOut;
               t.style.opacity = `${textOpacity * entryOpacity}`;
               t.style.transform = `translate3d(0, -50%, 0) translateY(${textY}px)`;
             } else if (idx === activeIdx + 1) {
-              const textOpacity = Math.max(0, (transProgress - 0.5) * 2);
-              const textY = 28 * (1 - textOpacity);
+              const textOpacity = tTextIn;
+              const textY = 28 * (1 - tTextIn);
               t.style.opacity = `${textOpacity * entryOpacity}`;
               t.style.transform = `translate3d(0, -50%, 0) translateY(${textY}px)`;
             } else {

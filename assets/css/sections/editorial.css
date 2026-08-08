@@ -45,6 +45,10 @@
     overflow: hidden;
   }
 
+  .editorial__card.is-dormant {
+    animation-play-state: paused;
+  }
+
   .ed-card-frame {
     position: absolute;
     inset: 0;
