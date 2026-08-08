@@ -6,6 +6,7 @@
 
   /* Drawer Base Container */
   .drawer {
+    visibility: hidden;
     transition: visibility 300ms ease;
   }
 
